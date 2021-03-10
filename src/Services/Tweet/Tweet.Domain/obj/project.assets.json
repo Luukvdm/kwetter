@@ -1,0 +1,88 @@
+{
+  "version": 3,
+  "targets": {
+    "net5.0": {
+      "Kwetter.Services.Core.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/Kwetter.Services.Core.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Kwetter.Services.Core.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Kwetter.Services.Core.Domain/1.0.0": {
+      "type": "project",
+      "path": "../../Core/Core.Domain/Core.Domain.csproj",
+      "msbuildProject": "../../Core/Core.Domain/Core.Domain.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net5.0": [
+      "Kwetter.Services.Core.Domain >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/pengu/.cache/NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj",
+      "projectName": "Kwetter.Services.Tweet.Domain",
+      "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj",
+      "packagesPath": "/home/pengu/.cache/NuGetPackages",
+      "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net5.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj": {
+              "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net5.0": {
+        "targetAlias": "net5.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

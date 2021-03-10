@@ -1,0 +1,17 @@
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Infrastructure.deps.json
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Infrastructure.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/ref/Kwetter.Services.Core.Infrastructure.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Infrastructure.pdb
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Application.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Domain.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Application.pdb
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/bin/Debug/net5.0/Kwetter.Services.Core.Domain.pdb
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Core.Infrastructure.csprojAssemblyReference.cache
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Core.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Core.Infrastructure.AssemblyInfoInputs.cache
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Core.Infrastructure.AssemblyInfo.cs
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Core.Infrastructure.csproj.CoreCompileInputs.cache
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Core.Infrastructure.csproj.CopyComplete
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Kwetter.Services.Core.Infrastructure.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/ref/Kwetter.Services.Core.Infrastructure.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/Debug/net5.0/Kwetter.Services.Core.Infrastructure.pdb

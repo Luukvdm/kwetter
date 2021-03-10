@@ -1,0 +1,33 @@
+{
+  "Serilog": {
+    "Using": [],
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      }
+    ],
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithProcessId",
+      "WithThreadId"
+    ],
+    "Properties": {
+      "ApplicationName": "EnergyGrid"
+    }
+  },
+  "Urls": {
+    "ApiGateway": "http://localhost:5000",
+    "IdentityServer": "http://localhost:5001",
+    "EnvironmentService": "http://localhost:5002",
+    "EnergyProductionService": "http://localhost:5003",
+    "EnergyUsageService": "http://localhost:5004"
+  }
+}

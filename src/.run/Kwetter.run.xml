@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Kwetter" type="CompoundRunConfigurationType">
+    <toRun name="Tweet.Api" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>

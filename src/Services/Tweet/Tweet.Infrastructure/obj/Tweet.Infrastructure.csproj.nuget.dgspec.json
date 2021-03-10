@@ -1,0 +1,429 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Infrastructure/Tweet.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj",
+        "projectName": "Kwetter.Services.Core.Application",
+        "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj",
+        "packagesPath": "/home/pengu/.cache/NuGetPackages",
+        "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[9.5.1, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[9.5.1, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj",
+        "projectName": "Kwetter.Services.Core.Domain",
+        "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj",
+        "packagesPath": "/home/pengu/.cache/NuGetPackages",
+        "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/Core.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/Core.Infrastructure.csproj",
+        "projectName": "Kwetter.Services.Core.Infrastructure",
+        "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/Core.Infrastructure.csproj",
+        "packagesPath": "/home/pengu/.cache/NuGetPackages",
+        "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj"
+              },
+              "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "IdentityModel.AspNetCore": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "IdentityModel.AspNetCore.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[1.0.0-preview.3, )"
+            },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Application/Tweet.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Application/Tweet.Application.csproj",
+        "projectName": "Kwetter.Services.Core.Tweet.Application",
+        "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Application/Tweet.Application.csproj",
+        "packagesPath": "/home/pengu/.cache/NuGetPackages",
+        "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj"
+              },
+              "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj",
+        "projectName": "Kwetter.Services.Tweet.Domain",
+        "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/Tweet.Domain.csproj",
+        "packagesPath": "/home/pengu/.cache/NuGetPackages",
+        "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Domain/Core.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Infrastructure/Tweet.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Infrastructure/Tweet.Infrastructure.csproj",
+        "projectName": "Kwetter.Services.Tweet.Infrastructure",
+        "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Infrastructure/Tweet.Infrastructure.csproj",
+        "packagesPath": "/home/pengu/.cache/NuGetPackages",
+        "outputPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/pengu/.config/dotnet/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/Core.Infrastructure.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Infrastructure/Core.Infrastructure.csproj"
+              },
+              "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Application/Tweet.Application.csproj": {
+                "projectPath": "/home/pengu/code/personal/kwetter/src/Services/Tweet/Tweet.Application/Tweet.Application.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.200/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

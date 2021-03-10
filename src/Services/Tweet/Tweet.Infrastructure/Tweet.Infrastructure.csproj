@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.Services.Tweet.Infrastructure</RootNamespace>
+        <AssemblyName>Kwetter.Services.Tweet.Infrastructure</AssemblyName>
+    </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.3" />
+    <PackageReference Include="Npgsql" Version="5.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
+  </ItemGroup>
+ 
+  <ItemGroup>
+    <ProjectReference Include="../Tweet.Application/Tweet.Application.csproj" />
+    <ProjectReference Include="../../Core/Core.Infrastructure/Core.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

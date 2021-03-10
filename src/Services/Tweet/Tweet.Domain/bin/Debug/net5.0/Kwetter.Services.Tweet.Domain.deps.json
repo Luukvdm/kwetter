@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Kwetter.Services.Tweet.Domain/1.0.0": {
+        "dependencies": {
+          "Kwetter.Services.Core.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Kwetter.Services.Tweet.Domain.dll": {}
+        }
+      },
+      "Kwetter.Services.Core.Domain/1.0.0": {
+        "runtime": {
+          "Kwetter.Services.Core.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Kwetter.Services.Tweet.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Kwetter.Services.Core.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

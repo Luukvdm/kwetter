@@ -1,0 +1,15 @@
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/bin/Debug/net5.0/Kwetter.Services.Core.Application.deps.json
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/bin/Debug/net5.0/Kwetter.Services.Core.Application.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/bin/Debug/net5.0/ref/Kwetter.Services.Core.Application.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/bin/Debug/net5.0/Kwetter.Services.Core.Application.pdb
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/bin/Debug/net5.0/Kwetter.Services.Core.Domain.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/bin/Debug/net5.0/Kwetter.Services.Core.Domain.pdb
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Core.Application.csprojAssemblyReference.cache
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Core.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Core.Application.AssemblyInfoInputs.cache
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Core.Application.AssemblyInfo.cs
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Core.Application.csproj.CoreCompileInputs.cache
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Core.Application.csproj.CopyComplete
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Kwetter.Services.Core.Application.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/ref/Kwetter.Services.Core.Application.dll
+/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/obj/Debug/net5.0/Kwetter.Services.Core.Application.pdb

@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "HirVTwmrhmhbOrx9HmP8ZDNOvQbuZ5q43Iwb+wKR56v5keboK9eCfAUTiUX5cbQ2vUlbiP/Mza4qRdlnW0MEbg==",
+  "success": true,
+  "projectFilePath": "/home/pengu/code/personal/kwetter/src/Services/Core/Core.Application/Core.Application.csproj",
+  "expectedPackageFiles": [
+    "/home/pengu/.cache/NuGetPackages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/fluentvalidation/9.5.1/fluentvalidation.9.5.1.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/fluentvalidation.dependencyinjectionextensions/9.5.1/fluentvalidation.dependencyinjectionextensions.9.5.1.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/mediatr/9.0.0/mediatr.9.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/mediatr.extensions.microsoft.dependencyinjection/9.0.0/mediatr.extensions.microsoft.dependencyinjection.9.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.entityframeworkcore/5.0.3/microsoft.entityframeworkcore.5.0.3.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.entityframeworkcore.abstractions/5.0.3/microsoft.entityframeworkcore.abstractions.5.0.3.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.entityframeworkcore.analyzers/5.0.3/microsoft.entityframeworkcore.analyzers.5.0.3.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.caching.abstractions/5.0.0/microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.caching.memory/5.0.0/microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.dependencyinjection/5.0.1/microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.dependencyinjection.abstractions/5.0.0/microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.logging/5.0.0/microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.logging.abstractions/5.0.0/microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/system.collections.immutable/5.0.0/system.collections.immutable.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/system.diagnostics.diagnosticsource/5.0.1/system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
+    "/home/pengu/.cache/NuGetPackages/system.reflection.emit/4.7.0/system.reflection.emit.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

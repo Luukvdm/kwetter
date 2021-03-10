@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/pengu/.dotnet/store/|arch|/|tfm|",
+      "/home/pengu/.cache/NuGetPackages"
+    ]
+  }
+}

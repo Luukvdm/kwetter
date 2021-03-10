@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Kwetter.Services.Core.Tweet.Application</RootNamespace>
+    <AssemblyName>Kwetter.Services.Core.Tweet.Application</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tweet.Domain\Tweet.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\Core.Application\Core.Application.csproj" />
+  </ItemGroup>
+</Project>
