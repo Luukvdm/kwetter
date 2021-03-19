@@ -2,6 +2,7 @@
 
 using System;
 using Kwetter.Services.Identity.Api.Infrastructure;
+using Kwetter.Services.Identity.Api.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;

@@ -24,10 +24,8 @@
     }
   },
   "Urls": {
+    "WebSpaClient": "http://localhost:8080",
     "ApiGateway": "http://localhost:5000",
-    "IdentityServer": "http://localhost:5001",
-    "EnvironmentService": "http://localhost:5002",
-    "EnergyProductionService": "http://localhost:5003",
-    "EnergyUsageService": "http://localhost:5004"
+    "IdentityServer": "http://localhost:5001"
   }
 }

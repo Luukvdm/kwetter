@@ -16,7 +16,7 @@ namespace Kwetter.Services.Core.Infrastructure.Identity
                 {
                     options.Authority = authority;
                     options.TokenValidationParameters.ValidateAudience = false;
-                    
+
                     options.RequireHttpsMetadata = !environment.IsDevelopment() &&
                                                    authority.StartsWith("https");
 
@@ -34,7 +34,7 @@ namespace Kwetter.Services.Core.Infrastructure.Identity
                     options.ClientId = clientId;
                     options.ClientSecret = secret;
 
-                    // options.RoleClaimType = IdentityApiResources.RoleResource;
+                    options.RoleClaimType = JwtClaimTypes.Role;
 
                     // options.EnableCaching = true;
                     // options.CacheDuration = TimeSpan.FromMinutes(10);

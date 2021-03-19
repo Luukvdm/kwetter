@@ -1,5 +1,7 @@
 using Kwetter.Services.Core.Api;
+using Kwetter.Services.Core.Application.Common.Models;
 using Kwetter.Services.Identity.Api.Infrastructure;
+using Kwetter.Services.Identity.Api.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -23,8 +25,11 @@ namespace Kwetter.Services.Identity.Api
             services.AddCoreConfigurations(Configuration);
             services.AddCoreServices();
 
+            services.AddControllersWithViews();
+            
             services.AddPersistence(Configuration);
-            services.AddIdentityServer(Configuration);
+            var configUrls = services.BuildServiceProvider().GetService<ConfigUrls>();
+            services.AddIdentityServer(Configuration, configUrls);
 
             services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
             services.AddRazorPages();

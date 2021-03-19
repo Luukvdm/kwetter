@@ -12,5 +12,9 @@
         "Name": "Console"
       }
     ]
+  },
+  "Urls": {
+    "ApiGateway": "http://localhost:5000",
+    "IdentityServer": "http://localhost:5001"
   }
 }

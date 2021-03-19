@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BqMjZXDPTX6ot3m90WrXM8h7PIRRvVqoUwL3lHoTy4SJSGr+/TD4cYTSPlqevVRuCuqV6LjedWx+rrplGc4vfA==",
+  "dgSpecHash": "C5OoeiA+Ho16Lf7Gkj4Tv6uKoVxqzosdZ3V/ohHCoTYW3OOGhE/+d0Cke1SwMHmJTLn78P1Y8fD8q1lkFl5MhA==",
   "success": true,
   "projectFilePath": "/home/pengu/code/personal/kwetter/src/Services/Identity/Identity.Api/Identity.Api.csproj",
   "expectedPackageFiles": [

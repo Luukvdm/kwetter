@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Interfaces;
 using Kwetter.Services.Core.Api;
+using Kwetter.Services.Core.Application.Common.Models;
 using Kwetter.Services.Identity.Api.Infrastructure;
+using Kwetter.Services.Identity.Api.Infrastructure.Identity;
+using Kwetter.Services.Identity.Api.Infrastructure.Persistence;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,16 +30,23 @@ namespace Kwetter.Services.Identity.Api
 
                 try
                 {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    /* var context = services.GetRequiredService<ApplicationDbContext>(); */
+                    //var configContext = services.GetRequiredService<ConfigurationDbContext>();
+                    // var opContext = services.GetRequiredService<PersistedGrantDbContext>();
 
-                    if (context.Database.IsNpgsql())
+                    /* if (context.Database.IsNpgsql())
                     {
                         await context.Database.MigrateAsync();
-                    }
-
+                        await configContext.Database.MigrateAsync();
+                        await opContext.Database.MigrateAsync();
+                    } */
+                    
                     // Seed the database with a default account
-                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
-                    await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager);
+                    var configUrls = services.GetRequiredService<ConfigUrls>();
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+                    await ApplicationDbContextSeed.SeedDefaultUserAsync(userManager, roleManager, null, configUrls);
                 }
                 catch (Exception ex)
                 {
