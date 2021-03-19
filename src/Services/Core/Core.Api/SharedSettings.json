@@ -24,6 +24,7 @@
     }
   },
   "Urls": {
+    "WebSpaClient": "http://localhost:8080",
     "ApiGateway": "http://localhost:5000",
     "IdentityServer": "http://localhost:5001"
   }
