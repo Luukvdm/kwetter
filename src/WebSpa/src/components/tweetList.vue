@@ -2,23 +2,35 @@
 import Tweet from "./tweet.vue";
 export default {
   components: {
-    Tweet,
+    Tweet
   },
   props: {
-    tweets: Array,
+    tweets: Array
   },
+  data() {
+    return {
+      poster: Object
+    };
+  }
 };
 </script>
 
 <template>
   <div>
     <ul class="tweet-list container">
-      <li
-        class="tweet-list-item tweet bordered"
-        v-for="(tweet, key) in tweets"
-        v-bind:key="key"
-      >
-        <Tweet class="tweet" :tweet="tweet" :poster="tweet.poster" />
+      <li class="item bordered" v-for="(tweet, key) in tweets" v-bind:key="key">
+        <Tweet
+          class="tweet"
+          :tweetId="tweet.id"
+          :tweetMessage="tweet.message"
+          :tweetPostTime="tweet.postTime"
+          :tweetHearts="tweet.hearts"
+          :posterId="tweet.poster.id"
+          :posterName="tweet.poster.firstName"
+          :posterUsername="tweet.poster.userName"
+          :posterIsVerified="tweet.poster.isVerifified"
+          :posterProfilePicture="tweet.poster.profilePicture"
+        />
       </li>
     </ul>
   </div>
@@ -28,11 +40,14 @@ export default {
 .tweet-list {
   display: flex;
   flex-direction: column;
-  margin-top: 25px;
   margin-bottom: 25px;
 }
 
-.tweet-list .tweet-list-item:first-child {
+.tweet-list .item:first-child {
   border-top-width: 1px;
+}
+
+.tweet-list .item {
+  border-top-width: 0;
 }
 </style>

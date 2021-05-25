@@ -1,6 +1,7 @@
+@using Kwetter.Services.Identity.Api.Infrastructure.Identity
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     string returnUrl = null;

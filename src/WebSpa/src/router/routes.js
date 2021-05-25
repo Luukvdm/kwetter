@@ -1,7 +1,6 @@
 import { RouterView } from "vue-router";
 
 import Home from "@/views/home.vue";
-import About from "@/views/about.vue";
 
 import MyAccount from "@/views/account/myAccount.vue";
 
@@ -16,16 +15,7 @@ const routes = [
     component: Home,
     meta: {
       title: "Home Page",
-      isPublic: true
-    }
-  },
-  {
-    path: "/about",
-    name: "About",
-    component: About,
-    meta: {
-      title: "About Page",
-      isPublic: true
+      isPublic: false
     }
   },
   {
@@ -34,6 +24,7 @@ const routes = [
     children: [
       {
         path: "my",
+        alias: "",
         name: "My Account",
         component: MyAccount,
         meta: {

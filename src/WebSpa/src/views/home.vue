@@ -1,5 +1,6 @@
 <script>
 import Layout from "@/layouts/default.vue";
+import TweetForm from "@/components/tweetForm.vue";
 import Timeline from "@/components/timeline.vue";
 import SearchBox from "@/components/search.vue";
 import VerticalHeader from "@/components/vertical-header.vue";
@@ -7,10 +8,11 @@ import VerticalHeader from "@/components/vertical-header.vue";
 export default {
   components: {
     Layout,
+    TweetForm,
     Timeline,
     SearchBox,
-    VerticalHeader,
-  },
+    VerticalHeader
+  }
 };
 </script>
 
@@ -20,6 +22,10 @@ export default {
       <div class="hor-container">
         <VerticalHeader class="sub-item" />
         <div class="main-item">
+          <div class="main-header bordered">
+            <h2>Home</h2>
+          </div>
+          <TweetForm class="tweet-form" />
           <Timeline class="tweet-timeline" />
         </div>
         <div class="sub-item">
@@ -58,6 +64,15 @@ export default {
 .main-item {
   width: 600px;
   height: 100%;
+}
+
+.main-item .main-header {
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.main-item .tweet-form {
+  border-bottom: 0;
 }
 
 .tweet-timeline {

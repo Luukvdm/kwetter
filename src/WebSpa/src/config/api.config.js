@@ -4,6 +4,6 @@ const api = {
   authTokenHeader: "Authorization",
   authTokenPrefix: "Bearer ",
   messageDuration: 3000,
-  requestTimeout: 5000
+  requestTimeout: 50000
 };
 module.exports = api;

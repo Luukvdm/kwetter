@@ -1,13 +1,18 @@
-using Kwetter.Services.Core.Api;
-using Kwetter.Services.Core.Application.Common.Models;
-using Kwetter.Services.Identity.Api.Infrastructure;
+using System.IO.Compression;
+using System.Reflection;
+using Kwetter.BuildingBlocks.Configurations.Extensions;
+using Kwetter.BuildingBlocks.KwetterLogger;
+using Kwetter.BuildingBlocks.KwetterSwagger;
 using Kwetter.Services.Identity.Api.Infrastructure.Persistence;
+using Kwetter.Services.Identity.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProtoBuf.Grpc.Server;
 
 namespace Kwetter.Services.Identity.Api
 {
@@ -22,22 +27,26 @@ namespace Kwetter.Services.Identity.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCoreConfigurations(Configuration);
-            services.AddCoreServices();
+            var urlConfig = services.AddUrlConfig(Configuration);
 
-            services.AddControllersWithViews();
-            
+            services.ConfigureKwetterLogger(Configuration);
+            services.AddHttpContextAccessor();
+
             services.AddPersistence(Configuration);
-            var configUrls = services.BuildServiceProvider().GetService<ConfigUrls>();
-            services.AddIdentityServer(Configuration, configUrls);
+            services.AddKwetterIdentityServer(Configuration);
+            services.AddLocalApiAuthentication();
+            services.AddKwetterSwagger(Assembly.GetExecutingAssembly(), useAnnotations: false);
+            
+            // Grpc
+            services.AddCodeFirstGrpc(config =>
+            {
+                config.ResponseCompressionLevel = CompressionLevel.Optimal;
+            });
 
             services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
             services.AddRazorPages();
 
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,19 +56,22 @@ namespace Kwetter.Services.Identity.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseLogger();
+            app.UseKwetterLogger(env);
+            app.UseKwetterSwagger("Identity Server");
 
             app.UseHealthChecks("/health");
-            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseIdentityServer();
+            app.UseCookiePolicy(new CookiePolicyOptions {MinimumSameSitePolicy = SameSiteMode.Lax});
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGrpcService<AccountInformationService>();
+                
                 endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });

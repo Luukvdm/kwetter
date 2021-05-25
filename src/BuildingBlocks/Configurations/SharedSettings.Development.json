@@ -1,0 +1,25 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Verbose",
+      "Override": {
+        "Microsoft": "Information",
+        "System": "Information"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      }
+    ]
+  },
+  "Urls": {
+    "ApiGateway": "http://localhost:5000",
+    "WebSpaAggregator": "http://localhost:5002",
+    "IdentityServerApi": "http://localhost:5001",
+    "IdentityServerGrpc": "http://localhost:10041",
+    "TweetApi": "http://localhost:5003",
+    "TweetGrpc": "http://localhost:10043",
+    "TweetHub": "http://localhost:5004"
+  }
+}

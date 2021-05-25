@@ -1,19 +1,42 @@
 <script>
 export default {
   props: {
-    tweet: {
-      id: Number,
-      message: String,
-      postTime: String,
-      hearts: Number,
+    tweetId: {
+      type: Number
     },
-    poster: {
-      name: String,
-      username: String,
-      isVerifified: Boolean,
-      picture: String,
+    tweetMessage: {
+      type: String
     },
-  },
+    tweetPostTime: {
+      type: String,
+      default: "00-00-00"
+    },
+    tweetHearts: {
+      type: Number,
+      default: 0
+    },
+
+    posterId: {
+      type: String,
+      default: ""
+    },
+    posterName: {
+      type: String,
+      default: "-"
+    },
+    posterUsername: {
+      type: String,
+      default: ""
+    },
+    posterIsVerified: {
+      type: Boolean,
+      default: false
+    },
+    posterProfilePicture: {
+      type: String,
+      default: ""
+    }
+  }
 };
 </script>
 
@@ -27,19 +50,19 @@ export default {
       </div>
       <div class="message-container">
         <div class="poster-container">
-          <b class="poster-name">{{ poster.name }}</b>
-          <span class="poster-username">@{{ poster.username }}</span>
+          <b class="poster-name">{{ posterName }}</b>
+          <span class="poster-username">@{{ posterUsername }}</span>
         </div>
         <div class="tweet-content-container">
           <span class="tweet-content">
-            {{ tweet.message }}
+            {{ tweetMessage }}
           </span>
         </div>
         <div class="symbols-container">
           <div class="symbols-wrapper">
             <BaseGlowyButton text="0" symbol="comment" color="" />
             <BaseGlowyButton text="0" symbol="retweet" color="" />
-            <BaseGlowyButton :text="tweet.hearts" symbol="heart" color="" />
+            <BaseGlowyButton :text="tweetHearts" symbol="heart" color="" />
             <BaseGlowyButton text="" symbol="share-square" color="" />
           </div>
         </div>
@@ -75,29 +98,6 @@ export default {
 .message-container {
   float: left;
 }
-.tweet-container .profile-pic-container {
-  flex-basis: 49px;
-  flex-grow: 0;
-  flex-shrink: 1;
-  margin-right: 12px;
-}
-
-.profile-pic-container .profile-pic-cast {
-  position: relative;
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-  border-radius: 50%;
-  border-width: 2px;
-  border-style: solid;
-  border-color: var(--c0);
-}
-
-.profile-pic-container .profile-pic-cast .profile-pic-img {
-  width: 100%;
-  height: auto;
-  background: var(--c0_hard);
-}
 
 .poster-container {
   text-align: left;
@@ -115,6 +115,7 @@ export default {
 
 .tweet-container .tweet-content {
   color: var(--text-color-bright);
+  overflow-wrap: anywhere;
 }
 
 .symbols-container {

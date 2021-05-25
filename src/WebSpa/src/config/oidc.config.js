@@ -8,7 +8,7 @@ const oidcConfig = {
   redirectUri: baseUrl + "/oidc/callback",
   popupRedirectUri: baseUrl + "/oidc/popup-callback",
   responseType: "code",
-  scope: "openid profile",
+  scope: "openid profile tweet",
   automaticSilentRenew: true,
   automaticSilentSignin: false,
   silentRedirectUri: baseUrl + "/oidc/silent-renew.html"

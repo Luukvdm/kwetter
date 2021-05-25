@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.BuildingBlocks.EventBus.EventBus</RootNamespace>
+        <AssemblyName>Kwetter.BuildingBlocks.EventBus.EventBus</AssemblyName>
+    </PropertyGroup>
+
+</Project>

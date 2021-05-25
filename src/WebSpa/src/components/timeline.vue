@@ -1,13 +1,16 @@
 <script>
 import TweetList from "./tweetList.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: {
-    TweetList,
+    TweetList
   },
   data() {
     return {
-      tweets: [
+      timeline: Array
+      /*
+	[
         {
           id: 1,
           message: "Hello World!",
@@ -18,8 +21,8 @@ export default {
             username: "alice1337",
             isVerifified: true,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
         },
         {
           id: 2,
@@ -31,8 +34,8 @@ export default {
             username: "king-bob",
             isVerifified: false,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
         },
         {
           id: 3,
@@ -45,8 +48,8 @@ export default {
             username: "charly007",
             isVerifified: false,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
         },
         {
           id: 4,
@@ -59,8 +62,8 @@ export default {
             username: "don-don",
             isVerifified: false,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
         },
         {
           id: 5,
@@ -73,8 +76,8 @@ export default {
             username: "erik123",
             isVerifified: false,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
         },
         {
           id: 6,
@@ -87,8 +90,8 @@ export default {
             username: "ffffffffffff",
             isVerifified: false,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
         },
         {
           id: 7,
@@ -101,17 +104,25 @@ export default {
             username: "gary",
             isVerifified: false,
             picture:
-              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg",
-          },
-        },
-      ],
+              "https://pbs.twimg.com/profile_images/1323327102813413380/3sH2E9Yt_200x200.jpg"
+          }
+        }
+      ]*/
     };
   },
+  methods: {
+    ...mapActions("tweet", ["getTimeline"])
+  },
+  async mounted() {
+    this.timeline = await this.getTimeline();
+  }
 };
 </script>
 
 <template>
-  <TweetList :tweets="tweets" />
+  <div>
+    <TweetList :tweets="timeline.tweets" />
+  </div>
 </template>
 
 <style scoped></style>

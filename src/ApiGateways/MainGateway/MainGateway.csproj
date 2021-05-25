@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.ApiGateways.MainGateway</RootNamespace>
+        <AssemblyName>Kwetter.ApiGateways.MainGateway</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.6" />
+        <PackageReference Include="MMLib.SwaggerForOcelot" Version="4.4.1" />
+        <PackageReference Include="Ocelot" Version="17.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\Configurations\Configurations.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\Core\Core.Api\Core.Api.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\Core\Core.Infrastructure\Core.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\KwetterLogger\KwetterLogger.csproj" />
+    </ItemGroup>
+</Project>

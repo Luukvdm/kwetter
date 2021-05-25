@@ -14,15 +14,23 @@ export default {};
         <BaseGlowyButton
           text="Explore"
           symbol="hashtag"
-          includeTextInHover="true"
+          :includeTextInHover="true"
         />
       </div>
       <div class="nav-item">
         <BaseGlowyButton
           text="Settings"
           symbol="cog"
-          includeTextInHover="true"
+          :includeTextInHover="true"
         />
+      </div>
+      <div class="nav-item">
+        <router-link to="/account">
+          <BaseGlowyButton
+            text="Profile"
+            symbol="user"
+            :includeTextInHover="true"
+        /></router-link>
       </div>
     </nav>
   </header>
@@ -40,7 +48,7 @@ header {
 .logo-container {
   max-width: 48px;
   max-height: 48px;
-  margin: 5px;
+  margin: 5px 12px;
   padding: 2px 0;
 }
 

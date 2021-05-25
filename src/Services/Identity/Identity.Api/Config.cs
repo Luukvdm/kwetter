@@ -1,42 +1,55 @@
 using System.Collections.Generic;
-using System.Security.Claims;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
-using Kwetter.Services.Core.Application.Common.Models;
+using Kwetter.BuildingBlocks.Configurations.Models;
+using Kwetter.BuildingBlocks.IdentityBlocks.Constants;
 
 namespace Kwetter.Services.Identity.Api
 {
     public static class Config
     {
-        private const string TweetApiScope = "tweets";
-        private const string MediaApiScope = "media";
-
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             {
-                new IdentityResources.OpenId(), new IdentityResources.Profile(),
-                new IdentityResources.Email()
-                /* new(name: RolesScope,
-                    displayName: "Roles",
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile(),
+                new IdentityResources.Email(),
+                new(
+                    name: "roles",
                     userClaims: new List<string> {JwtClaimTypes.Role}
-                )
-                {
-                    Required = true
-                } */
+                ) {Required = true}
             };
 
-        public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[] {new(TweetApiScope, "Kwetter Api scope")};
+        // TODO: ??
+        public static IEnumerable<ApiScope> ApiScopes => new ApiScope[]
+        {
+            new(IdentityKeys.IdentityLocalApiScope),
+            new(IdentityKeys.TweetApiScope),
+            new(IdentityKeys.MediaApiScope)
+        };
 
         public static IEnumerable<ApiResource> ApiResources =>
             new ApiResource[]
             {
-                new(TweetApiScope, "Kwetter tweet API"),
-                new(MediaApiScope, "Kwetter media API")
+                new(IdentityServerConstants.LocalApi.ScopeName),
+                new(IdentityKeys.TweetApiResource, "Kwetter tweet API")
+                {
+                    Scopes = new[] {JwtClaimTypes.Role, IdentityKeys.TweetApiScope}
+                },
+                new(IdentityKeys.WebSpaGatewayResource, "Kwetter WebSpa API")
+                {
+                    Scopes = new[] {IdentityKeys.TweetApiScope, IdentityKeys.IdentityLocalApiScope}
+                },
+                new(IdentityKeys.TweetHubResource, "Kweeter tweet Hub")
+                {
+                    Scopes = new[] {JwtClaimTypes.Role, IdentityKeys.TweetApiScope}
+                }
+                // new(IdentityKeys.TweetSignalRHubResource, "Kwetter tweet signalr hub")
+                // new(MediaApiScope, "Kwetter media API")
             };
 
-        public static IEnumerable<Client> Clients(ConfigUrls uris) =>
+        public static IEnumerable<Client> Clients(UrlConfig uris) =>
             new List<Client>
             {
                 new()
@@ -44,24 +57,36 @@ namespace Kwetter.Services.Identity.Api
                     ClientId = "Kwetter.WebSpa",
                     ClientName = "Kwetter SPA web app",
                     AllowedGrantTypes = GrantTypes.Code,
-                    RequireClientSecret = false,
                     AllowAccessTokensViaBrowser = true,
-                    RequirePkce = true,
+                    RequireClientSecret = false,
+                    // RequirePkce = true,
                     // AccessTokenType = AccessTokenType.Reference,
-                    // AlwaysIncludeUserClaimsInIdToken = true, -> Is nuttig om extra claims in token te krijgen
 
                     ClientUri = uris.WebSpaClient,
                     RedirectUris =
                         {uris.WebSpaClient + "/oidc/callback", uris.WebSpaClient + "/oidc/silent-renew.html"},
                     PostLogoutRedirectUris = {uris.WebSpaClient},
                     AllowedCorsOrigins = {uris.WebSpaClient},
-                    
+
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        TweetApiScope,
-                        MediaApiScope
+                        IdentityServerConstants.LocalApi.ScopeName,
+                        IdentityKeys.TweetApiScope,
+                        IdentityKeys.TweetSignalRHubResource,
+                        IdentityKeys.MediaApiScope
+                    }
+                },
+                new()
+                {
+                    ClientId = "gateway.webspa",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.LocalApi.ScopeName,
+                        IdentityKeys.TweetApiScope,
                     }
                 },
                 /* new()

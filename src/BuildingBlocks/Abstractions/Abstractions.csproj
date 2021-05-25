@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.BuildingBlocks.Abstractions</RootNamespace>
+        <AssemblyName>Kwetter.BuildingBlocks.Abstractions</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core\Core.Domain\Core.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

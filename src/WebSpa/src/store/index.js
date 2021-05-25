@@ -1,13 +1,19 @@
 import { createStore } from "vuex";
 import modules from "./modules";
 import oidcModule from "./oidcModule.js";
+import createWebSocketPlugin from "./plugins/tweetHubPlugin.js";
 
 modules.oidcStore = oidcModule;
+// console.log(oidcModule.state.oidcStore.access_token);
 
-export default createStore({
+const websocketPlugin = createWebSocketPlugin();
+
+const store = createStore({
   state: {},
   mutations: {},
   actions: {},
   modules: modules,
-  plugins: []
+  plugins: [websocketPlugin]
 });
+
+export default store;

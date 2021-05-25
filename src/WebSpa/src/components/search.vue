@@ -6,16 +6,16 @@ export default {
       results: [
         {
           content: "test result",
-          category: "trending",
+          category: "trending"
         },
         {
-          content: "Also test result",
+          content: "Also test result"
         },
         {
           content: "Test Person",
-          category: "a person",
-        },
-      ],
+          category: "a person"
+        }
+      ]
     };
   },
   methods: {
@@ -41,8 +41,8 @@ export default {
     showHints(event) {
       console.log("Show Hints");
       console.log(event.target.value);
-    },
-  },
+    }
+  }
 };
 </script>
 

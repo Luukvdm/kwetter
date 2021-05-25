@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.BuildingBlocks.KwetterGrpc</RootNamespace>
+        <AssemblyName>Kwetter.BuildingBlocks.KwetterGrpc</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.Net.Client" Version="2.37.0" />
+        <PackageReference Include="Grpc.Net.ClientFactory" Version="2.37.0" />
+        <PackageReference Include="IdentityModel.AspNetCore" Version="4.0.0-preview.3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+        <PackageReference Include="protobuf-net.Grpc" Version="1.0.152" />
+        <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Configurations\Configurations.csproj" />
+    </ItemGroup>
+
+</Project>

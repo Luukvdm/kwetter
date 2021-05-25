@@ -20,7 +20,8 @@ instance.interceptors.request.use(
   config => {
     if (store.state.oidcStore.access_token) {
       config.headers[authTokenHeader] =
-        authTokenPrefix + store.state.oidcStore.id_token;
+        authTokenPrefix + store.state.oidcStore.access_token;
+      // Or id_token ... id_token contains more info about the use and the api wont have to make a trip to the identity server
     }
 
     // if (config.data) config.data = Vue.prototype.$baseLodash.pickBy(config.data, Vue.prototype.$baseLodash.identity)

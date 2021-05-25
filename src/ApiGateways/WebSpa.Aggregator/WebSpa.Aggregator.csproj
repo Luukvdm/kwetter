@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.ApiGateways.WebSpa.Aggregator</RootNamespace>
+        <AssemblyName>Kwetter.ApiGateways.WebSpa.Aggregator</AssemblyName>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\BuildingBlocks\Configurations\Configurations.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\IdentityBlocks\IdentityBlocks.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\KwetterGrpc\KwetterGrpc.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\KwetterLogger\KwetterLogger.csproj" />
+      <ProjectReference Include="..\..\BuildingBlocks\KwetterSwagger\KwetterSwagger.csproj" />
+      <ProjectReference Include="..\..\Services\Identity\Identity.GrpcContract\Identity.GrpcContract.csproj" />
+      <ProjectReference Include="..\..\Services\Tweet\Tweet.GrpcContracts\Tweet.GrpcContracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="IdentityModel" Version="5.1.0" />
+      <PackageReference Include="IdentityModel.AspNetCore" Version="4.0.0-preview.3" />
+      <PackageReference Include="IdentityModel.AspNetCore.AccessTokenValidation" Version="1.0.0-preview.3" />
+    </ItemGroup>
+
+</Project>

@@ -6,8 +6,8 @@ export default {
     symbol: String,
     includeTextInHover: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     hoverSymbolStart(event) {
@@ -18,8 +18,8 @@ export default {
     hoverSymbolEnd(event) {
       let symbolBox = event.target.closest(".symbol-box");
       symbolBox.classList.toggle("highlited");
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -56,6 +56,7 @@ export default {
 
 .symbol {
   position: relative;
+  min-width: 1.4em;
 }
 
 .symbol .symbol-highlighter {
