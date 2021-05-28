@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 
-namespace Kwetter.Services.Identity.Api.Infrastructure.Identity
+namespace Kwetter.Services.Identity.Api.Services
 {
     public interface ILoginService<T>
     {

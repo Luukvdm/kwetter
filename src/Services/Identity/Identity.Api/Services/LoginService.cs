@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Kwetter.Services.Identity.Api.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace Kwetter.Services.Identity.Api.Infrastructure.Identity
+namespace Kwetter.Services.Identity.Api.Services
 {
     public class LoginService : ILoginService<ApplicationUser>
     {

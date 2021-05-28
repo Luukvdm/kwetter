@@ -1,7 +1,7 @@
 using System.Reflection;
 using IdentityServer4.EntityFramework.Options;
-using Kwetter.Services.Identity.Api.Infrastructure.Identity;
 using Kwetter.Services.Identity.Api.Interfaces;
+using Kwetter.Services.Identity.Api.Models;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

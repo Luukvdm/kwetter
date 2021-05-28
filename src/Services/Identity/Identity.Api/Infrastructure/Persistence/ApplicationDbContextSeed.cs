@@ -5,7 +5,7 @@ using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Kwetter.BuildingBlocks.Configurations.Models;
 using Kwetter.BuildingBlocks.IdentityBlocks.Constants;
-using Kwetter.Services.Identity.Api.Infrastructure.Identity;
+using Kwetter.Services.Identity.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

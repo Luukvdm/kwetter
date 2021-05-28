@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using IdentityServer4.Services;
 using Kwetter.BuildingBlocks.Abstractions.Exceptions;
-using Kwetter.Services.Identity.Api.Infrastructure.Identity;
+using Kwetter.Services.Identity.Api.Models;
 using Kwetter.Services.Identity.GrpcContracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

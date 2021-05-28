@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
+using Kwetter.Services.Identity.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.JsonWebTokens;
 
-namespace Kwetter.Services.Identity.Api.Infrastructure.Identity
+namespace Kwetter.Services.Identity.Api.Services
 {
     public class ProfileService : IProfileService
     {
@@ -38,7 +39,7 @@ namespace Kwetter.Services.Identity.Api.Infrastructure.Identity
         {
             var subject = context.Subject ?? throw new ArgumentNullException(nameof(context.Subject));
 
-            var subjectId = subject.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+            string subjectId = subject.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
             var user = await _userManager.FindByIdAsync(subjectId);
 
             context.IsActive = false;

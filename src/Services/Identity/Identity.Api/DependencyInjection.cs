@@ -1,14 +1,13 @@
 ﻿using IdentityServer4.Services;
-using Kwetter.Services.Identity.Api.Infrastructure.Identity;
 using Kwetter.Services.Identity.Api.Infrastructure.Persistence;
 using Kwetter.Services.Identity.Api.Interfaces;
+using Kwetter.Services.Identity.Api.Models;
+using Kwetter.Services.Identity.Api.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ApplicationUser = Kwetter.Services.Identity.Api.Infrastructure.Identity.ApplicationUser;
-
 namespace Kwetter.Services.Identity.Api
 {
     public static class DependencyInjection
