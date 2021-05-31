@@ -22,15 +22,12 @@ namespace Kwetter.Services.Identity.GrpcContracts
         public string Id { get; set; }
 
         [DataMember(Order = 2)]
-        public string FirstName { get; set; }
+        public string DisplayName { get; set; }
 
         [DataMember(Order = 3)]
-        public string LastName { get; set; }
-
-        [DataMember(Order = 4)]
         public string UserName { get; set; }
 
-        [DataMember(Order = 5)]
+        [DataMember(Order = 4)]
         public string ProfilePicture { get; set; }
     }
 }

@@ -40,7 +40,7 @@ COPY "docker-compose.dcproj" "docker-compose.dcproj"
 RUN dotnet restore "Kwetter.sln"
 
 COPY . .
-WORKDIR /src/Services/Identity/Identity.Api
+WORKDIR /src/ApiGateways/WebSpa.Aggregator
 RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
@@ -49,4 +49,5 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Kwetter.Services.Identity.Api.dll"] 
+ENTRYPOINT ["dotnet", "Kwetter.ApiGateways.WebSpa.Aggregator.dll"] 
+

@@ -1,24 +1,11 @@
 {
-  "Serilog": {
-    "MinimumLevel": {
-      "Default": "Information",
-      "Override": {
-        "Microsoft": "Warning",
-        "System": "Information"
-      }
-    },
-    "WriteTo": [
-      {
-        "Name": "Console"
-      },
-      {
-        "Name": "File",
-        "Args": {
-          "path": "logs/log.txt",
-          "rollingInterval": "Day",
-          "formatter": "Serilog.Formatting.Json.JsonFormatter, Serilog"
-        }
-      }
-    ]
+  "Urls": {
+    "ApiGateway": "http://kwetter-gateway",
+    "WebSpaAggregator": "http://kwetter-webspa-agg",
+    "IdentityServerApi": "http://kwetter-ids",
+    "IdentityServerGrpc": "http://kwetter-ids:10041",
+    "TweetApi": "http://kwetter-tweet",
+    "TweetGrpc": "http://kwetter-tweet:10043",
+    "TweetHub": "http://kwetter-tweet-hub"
   }
 }

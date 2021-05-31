@@ -13,7 +13,7 @@
       <ProjectReference Include="..\..\BuildingBlocks\KwetterGrpc\KwetterGrpc.csproj" />
       <ProjectReference Include="..\..\BuildingBlocks\KwetterLogger\KwetterLogger.csproj" />
       <ProjectReference Include="..\..\BuildingBlocks\KwetterSwagger\KwetterSwagger.csproj" />
-      <ProjectReference Include="..\..\Services\Identity\Identity.GrpcContract\Identity.GrpcContract.csproj" />
+      <ProjectReference Include="..\..\Services\Identity\Identity.GrpcContracts\Identity.GrpcContracts.csproj" />
       <ProjectReference Include="..\..\Services\Tweet\Tweet.GrpcContracts\Tweet.GrpcContracts.csproj" />
     </ItemGroup>
 

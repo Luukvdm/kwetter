@@ -1,18 +1,4 @@
 {
-  "Serilog": {
-    "MinimumLevel": {
-      "Default": "Verbose",
-      "Override": {
-        "Microsoft": "Information",
-        "System": "Information"
-      }
-    },
-    "WriteTo": [
-      {
-        "Name": "Console"
-      }
-    ]
-  },
   "Urls": {
     "ApiGateway": "http://localhost:5000",
     "WebSpaAggregator": "http://localhost:5002",

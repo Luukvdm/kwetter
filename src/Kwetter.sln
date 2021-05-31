@@ -2,12 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tweet", "Tweet", "{1B7CD17F-AC9D-4476-A49F-373BEACC33CF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E324A083-7523-4EF0-88DD-2B18048052E6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Api", "BuildingBlocks\Core\Core.Api\Core.Api.csproj", "{F34DF623-576B-419C-8BFC-E6B363833289}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Domain", "BuildingBlocks\Core\Core.Domain\Core.Domain.csproj", "{30848089-0F8B-408D-918D-988968F92830}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Application", "Services\Tweet\Processor\Tweet.Application\Tweet.Application.csproj", "{A6ECB704-D895-4116-85BF-C4A0CE7CBB29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Infrastructure", "Services\Tweet\Processor\Tweet.Infrastructure\Tweet.Infrastructure.csproj", "{A7447F91-4D41-473D-8853-E8D8880B3344}"
@@ -52,7 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwetterSwagger", "BuildingBlocks\KwetterSwagger\KwetterSwagger.csproj", "{9CF1505F-77E6-48B2-AAB7-A422B6DE5A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.GrpcContract", "Services\Identity\Identity.GrpcContract\Identity.GrpcContract.csproj", "{9CD621AB-2791-465D-8A3B-F0AB9990275F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.GrpcContracts", "Services\Identity\Identity.GrpcContracts\Identity.GrpcContracts.csproj", "{9CD621AB-2791-465D-8A3B-F0AB9990275F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwetterGrpc", "BuildingBlocks\KwetterGrpc\KwetterGrpc.csproj", "{C9F31F6F-A17F-4A38-8745-A2F1A6945873}"
 EndProject
@@ -60,20 +54,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.GrpcContracts", "Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Hub", "Services\Tweet\Tweet.Hub\Tweet.Hub.csproj", "{534EDCB5-C923-4D05-854D-00E7F72BFBC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwetterDomain", "BuildingBlocks\KwetterDomain\KwetterDomain.csproj", "{78AE274F-173C-4848-881B-CB76364D40F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F34DF623-576B-419C-8BFC-E6B363833289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F34DF623-576B-419C-8BFC-E6B363833289}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F34DF623-576B-419C-8BFC-E6B363833289}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F34DF623-576B-419C-8BFC-E6B363833289}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30848089-0F8B-408D-918D-988968F92830}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30848089-0F8B-408D-918D-988968F92830}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30848089-0F8B-408D-918D-988968F92830}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30848089-0F8B-408D-918D-988968F92830}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6ECB704-D895-4116-85BF-C4A0CE7CBB29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6ECB704-D895-4116-85BF-C4A0CE7CBB29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6ECB704-D895-4116-85BF-C4A0CE7CBB29}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -158,10 +146,12 @@ Global
 		{534EDCB5-C923-4D05-854D-00E7F72BFBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{534EDCB5-C923-4D05-854D-00E7F72BFBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{534EDCB5-C923-4D05-854D-00E7F72BFBC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78AE274F-173C-4848-881B-CB76364D40F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78AE274F-173C-4848-881B-CB76364D40F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78AE274F-173C-4848-881B-CB76364D40F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78AE274F-173C-4848-881B-CB76364D40F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F34DF623-576B-419C-8BFC-E6B363833289} = {E324A083-7523-4EF0-88DD-2B18048052E6}
-		{30848089-0F8B-408D-918D-988968F92830} = {E324A083-7523-4EF0-88DD-2B18048052E6}
 		{C62CA635-10E1-4C48-9ECF-C0A71DCA1F3C} = {96CC04A1-18F2-4F7F-8D26-33F08D96989A}
 		{A3262FC8-047F-459E-B685-16F76DE3CEA9} = {F0B1E359-EAE3-40F8-99BC-DD932D737199}
 		{2EB3D604-3301-495D-B96C-376421590BBB} = {F0B1E359-EAE3-40F8-99BC-DD932D737199}
@@ -184,5 +174,6 @@ Global
 		{C9F31F6F-A17F-4A38-8745-A2F1A6945873} = {C32D03A5-5AD3-4CCA-8AE2-93B13E4C3675}
 		{B7D91DC4-0213-4032-BB8A-11F9406D8170} = {1B7CD17F-AC9D-4476-A49F-373BEACC33CF}
 		{534EDCB5-C923-4D05-854D-00E7F72BFBC7} = {1B7CD17F-AC9D-4476-A49F-373BEACC33CF}
+		{78AE274F-173C-4848-881B-CB76364D40F8} = {C32D03A5-5AD3-4CCA-8AE2-93B13E4C3675}
 	EndGlobalSection
 EndGlobal
