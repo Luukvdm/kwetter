@@ -18,4 +18,16 @@ namespace Kwetter.Services.Tweet.Events.Notifications
         public string CreatorId { get; }
         public DateTime PostTime { get; }
     }
+    
+    public record CreateTweetMessageFailedNotification : IntegrationEvent
+    {
+        public string Message { get; set; }
+        public string UserId { get; set; }
+
+        public CreateTweetMessageFailedNotification(string message, string userId)
+        {
+            Message = message;
+            UserId = userId;
+        }
+    }
 }

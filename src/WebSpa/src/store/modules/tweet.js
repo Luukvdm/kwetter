@@ -1,4 +1,4 @@
-import { get, getTimeline, create } from "@/api/tweet.js";
+import { get, getTimeline, create, like } from "@/api/tweet.js";
 
 export const state = {
   hubConnectionIsOpen: false,
@@ -26,9 +26,15 @@ export const actions = {
     commit("CACHE_TIMELINE", data);
     return data;
   },
-  async createTweet({}, entity) {
+  async createTweet({ commit }, entity) {
     const response = await create(entity);
+    commit("START_CREATE_TWEET", response);
     return response.data;
+  },
+  async likeTweet({ commit }, tweetId) {
+    const { data } = await like(tweetId);
+    commit("START_LIKE_TWEET", tweetId);
+    console.log(data);
   },
   async addTweetToTimeLine({ commit }, entity) {
     const { data } = await get(entity.id);

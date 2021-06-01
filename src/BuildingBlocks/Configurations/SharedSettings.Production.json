@@ -1,11 +1,11 @@
 {
   "Urls": {
-    "ApiGateway": "http://kwetter-gateway",
-    "WebSpaAggregator": "http://kwetter-webspa-agg",
-    "IdentityServerApi": "http://kwetter-ids",
-    "IdentityServerGrpc": "http://kwetter-ids:10041",
-    "TweetApi": "http://kwetter-tweet",
-    "TweetGrpc": "http://kwetter-tweet:10043",
-    "TweetHub": "http://kwetter-tweet-hub"
+    "ApiGateway": "http://main-gateway",
+    "WebSpaAggregator": "http://webspa-agg",
+    "IdentityServerApi": "http://identity-api",
+    "IdentityServerGrpc": "http://identity-api:10041",
+    "TweetApi": "http://tweet-api",
+    "TweetGrpc": "http://tweet-api:10043",
+    "TweetHub": "http://tweet-hub"
   }
 }

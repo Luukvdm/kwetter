@@ -28,7 +28,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
             var tweetResult = await tweetService.GetTweet(id.ToString());
             var accountResult = await accInfoService.GetBasicAccountInformation(tweetResult.CreatorId);
 
-            return new Tweet(tweetResult.Id, tweetResult.Message, tweetResult.PostTime, tweetResult.CreatorId)
+            return new Tweet(tweetResult)
             {
                 Poster = new User(accountResult)
             };
@@ -40,6 +40,14 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
             var tweetService = tweetChannel.CreateGrpcService<ITweetService>();
             
             await tweetService.CreateTweet(tweetObject);
+        }
+
+        public async Task Like(CreateLike likeObject)
+        {
+            var tweetChannel = await _grpcChannelService.CreateTweetChannel();
+            var tweetService = tweetChannel.CreateGrpcService<ITweetService>();
+
+            await tweetService.LikeTweet(likeObject);
         }
     }
 }

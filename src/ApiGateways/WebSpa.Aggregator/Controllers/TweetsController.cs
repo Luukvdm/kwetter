@@ -18,15 +18,16 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Controllers
     {
         private readonly ICurrentUserService _currentUser;
         private readonly IDateTime _dateTime;
-        
+
         private readonly TimeLineService _timeLineService;
         private readonly TweetService _tweetService;
 
-        public TweetsController(ICurrentUserService currentUser, IDateTime dateTime, TimeLineService timeLineService, TweetService tweetService)
+        public TweetsController(ICurrentUserService currentUser, IDateTime dateTime, TimeLineService timeLineService,
+            TweetService tweetService)
         {
             _currentUser = currentUser;
             _dateTime = dateTime;
-            
+
             _timeLineService = timeLineService;
             _tweetService = tweetService;
         }
@@ -61,16 +62,34 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Controllers
         /// <returns>Post result</returns>
         [HttpPost]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(Status200OK)]
+        [ProducesResponseType(Status201Created)]
         public async Task Create([FromBody] CreateTweetVm tweet)
         {
-            var tweetObject = new CreateTweet()
+            var tweetObject = new CreateTweet
             {
                 Message = tweet.Message,
                 UserId = _currentUser.UserId,
                 PostTime = _dateTime.Now
             };
             await _tweetService.Create(tweetObject);
+        }
+
+        /// <summary>
+        /// Like a tweet
+        /// </summary>
+        /// <param name="tweetId">Id of the tweet</param>
+        [HttpPost("like/{tweetId:int}")]
+        [ProducesResponseType(Status204NoContent)]
+        [ProducesResponseType(Status201Created)]
+        public async Task Like([FromRoute] int tweetId)
+        {
+            var likeObject = new CreateLike
+            {
+                LikeTime = _dateTime.Now,
+                TweetId = tweetId,
+                UserId = _currentUser.UserId
+            };
+            await _tweetService.Like(likeObject);
         }
     }
 }

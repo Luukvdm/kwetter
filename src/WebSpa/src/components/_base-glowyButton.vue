@@ -3,10 +3,20 @@ export default {
   props: {
     text: String,
     color: String,
+    hoverColor: String,
     symbol: String,
     includeTextInHover: {
       type: Boolean,
       default: false
+    }
+  },
+  emits: ["glowyClick:event,text"],
+  computed: {
+    cssProps() {
+      return {
+        "--highlight-color": this.color || "#ffa930",
+        "--highlight-hover-color": this.hoverColor || "rgba(255, 169, 48, 0.1)"
+      };
     }
   },
   methods: {
@@ -28,6 +38,8 @@ export default {
     class="symbol-box"
     @mouseover="hoverSymbolStart"
     @mouseleave="hoverSymbolEnd"
+    @click="$emit('glowyClick:event,text', $event, text)"
+    :style="cssProps"
   >
     <div class="symbol">
       <div class="symbol-highlighter" />
@@ -42,7 +54,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .symbol-box {
   display: flex;
   justify-content: flex-start;
@@ -51,7 +63,7 @@ export default {
 }
 
 .symbol-box.highlited {
-  color: var(--main-highlight-color) !important;
+  color: var(--highlight-color) !important;
 }
 
 .symbol {
@@ -72,7 +84,8 @@ export default {
   border-radius: 999px;
 }
 .symbol-box.highlited .symbol .symbol-highlighter {
-  background-color: rgba(255, 169, 48, 0.1);
+  /* background-color: rgba(255, 169, 48, 0.1); */
+  background-color: var(--highlight-hover-color);
 }
 .symbol-val {
   min-width: calc(1em + 5px);

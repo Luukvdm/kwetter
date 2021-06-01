@@ -3,7 +3,7 @@ using Kwetter.BuildingBlocks.EventBus.EventBus.Events;
 
 namespace Kwetter.Services.Tweet.Events.Events
 {
-    public record CreateTweetMessageEvent: IntegrationEvent
+    public record CreateTweetMessageEvent : IntegrationEvent
     {
         public string Message { get; }
         public string CreatorId { get; }

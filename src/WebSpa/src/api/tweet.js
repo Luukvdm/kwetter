@@ -23,6 +23,13 @@ export function create(entity) {
   });
 }
 
+export function like(tweetId) {
+  return request({
+    url: "/tweets/like/" + tweetId.toString(),
+    method: "post"
+  });
+}
+
 export function createHubConnection() {
   return hubConnectionBuilder("/hub/tweet");
 }

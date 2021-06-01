@@ -1,4 +1,6 @@
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     tweetId: {
@@ -11,7 +13,7 @@ export default {
       type: String,
       default: "00-00-00"
     },
-    tweetHearts: {
+    tweetLikes: {
       type: Number,
       default: 0
     },
@@ -36,6 +38,48 @@ export default {
       type: String,
       default: ""
     }
+  },
+  data() {
+    return {
+      tweet: {
+        id: null,
+        message: "",
+        postTime: null,
+        hearts: 0
+      },
+      poster: {
+        id: null,
+        name: "",
+        username: "",
+        isVerified: false,
+        profilePicture: ""
+      }
+    };
+  },
+  mounted() {
+    this.tweet = {
+      id: this.tweetId,
+      message: this.tweetMessage,
+      postTime: this.tweetPostTime,
+      hearts: this.tweetLikes
+    };
+    this.poster = {
+      id: this.posterId,
+      name: this.posterName,
+      username: this.posterUsername,
+      isVerified: this.posterIsVerified,
+      profilePicture: this.posterProfilePicture
+    };
+  },
+  methods: {
+    ...mapActions("tweet", ["likeTweet"]),
+    like(event, text) {
+      // this.tweet.hearts += 1;
+      console.log(event);
+      console.log(text);
+      console.log(this.tweet.id);
+      this.likeTweet(this.tweet.id);
+    }
   }
 };
 </script>
@@ -50,20 +94,41 @@ export default {
       </div>
       <div class="message-container">
         <div class="poster-container">
-          <b class="poster-name">{{ posterName }}</b>
-          <span class="poster-username">@{{ posterUsername }}</span>
+          <b class="poster-name">{{ poster.name }}</b>
+          <span class="poster-username">@{{ poster.username }}</span>
         </div>
         <div class="tweet-content-container">
           <span class="tweet-content">
-            {{ tweetMessage }}
+            {{ tweet.message }}
           </span>
         </div>
         <div class="symbols-container">
           <div class="symbols-wrapper">
-            <BaseGlowyButton text="0" symbol="comment" color="" />
-            <BaseGlowyButton text="0" symbol="retweet" color="" />
-            <BaseGlowyButton :text="tweetHearts" symbol="heart" color="" />
-            <BaseGlowyButton text="" symbol="share-square" color="" />
+            <BaseGlowyButton
+              text="0"
+              symbol="comment"
+              color="#1da1f2"
+              hoverColor="rgba(29, 161, 242, 0.1)"
+            />
+            <BaseGlowyButton
+              text="0"
+              symbol="retweet"
+              color="#17bf63"
+              hoverColor="rgba(23, 191, 99, 0.1)"
+            />
+            <BaseGlowyButton
+              :text="tweet.hearts.toString()"
+              @glowyClick:event,text="like"
+              symbol="heart"
+              color="#e0245e"
+              hoverColor="rgba(224, 36, 94, 0.1)"
+            />
+            <BaseGlowyButton
+              text=""
+              symbol="share-square"
+              color="#1da1f2"
+              hoverColor="rgba(29, 161, 242, 0.1)"
+            />
           </div>
         </div>
       </div>
@@ -106,7 +171,7 @@ export default {
 
 .poster-container .poster-name {
   color: var(--text-color-bright);
-  margin-right: 8px;
+  margin-right: 3px;
 }
 
 .poster-container .poster-username {

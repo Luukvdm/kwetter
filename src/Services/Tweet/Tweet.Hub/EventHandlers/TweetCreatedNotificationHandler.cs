@@ -10,9 +10,9 @@ namespace Kwetter.Services.Tweet.Hub.EventHandlers
     public class TweetCreatedNotificationHandler : IIntegrationEventHandler<TweetCreatedNotification>
     {
         private readonly IHubContext<TweetHub> _tweetHub;
-        private readonly ILogger<CreateTweetMessageFailedEvent> _logger;
+        private readonly ILogger<CreateTweetMessageFailedNotification> _logger;
 
-        public TweetCreatedNotificationHandler(IHubContext<TweetHub> tweetHub, ILogger<CreateTweetMessageFailedEvent> logger)
+        public TweetCreatedNotificationHandler(IHubContext<TweetHub> tweetHub, ILogger<CreateTweetMessageFailedNotification> logger)
         {
             _tweetHub = tweetHub;
             _logger = logger;

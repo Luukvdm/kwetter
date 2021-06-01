@@ -6,6 +6,7 @@
     "IdentityServerGrpc": "http://localhost:10041",
     "TweetApi": "http://localhost:5003",
     "TweetGrpc": "http://localhost:10043",
-    "TweetHub": "http://localhost:5004"
+    "TweetHub": "http://localhost:5004",
+    "WebSpaClient": "http://localhost:8080"
   }
 }

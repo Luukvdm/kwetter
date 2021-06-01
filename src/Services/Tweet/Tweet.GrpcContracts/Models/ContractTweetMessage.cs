@@ -10,9 +10,11 @@ namespace Kwetter.Services.Tweet.GrpcContracts.Models
         public int Id { get; set; }
         [DataMember(Order = 2)]
         public string Message { get; set; }
-        [DataMember(Order = 3)]
-        public string PosterId { get; set; }
-        [DataMember(Order = 4)]
+        [DataMember(Order = 3)] 
+        public int Likes { get; set; }
+        [DataMember(Order = 4)] 
+        public string CreatorId { get; set; }
+        [DataMember(Order = 5)]
         public DateTime PostTime { get; set; }
     }
 }
