@@ -20,10 +20,10 @@ COPY "BuildingBlocks/KwetterGrpc/KwetterGrpc.csproj" "BuildingBlocks/KwetterGrpc
 COPY "BuildingBlocks/KwetterLogger/KwetterLogger.csproj" "BuildingBlocks/KwetterLogger/KwetterLogger.csproj"
 COPY "BuildingBlocks/KwetterSwagger/KwetterSwagger.csproj" "BuildingBlocks/KwetterSwagger/KwetterSwagger.csproj"
 
-COPY "Services/Tweet/Processor/Tweet.Application/Tweet.Application.csproj" "Services/Tweet/Processor/Tweet.Application/Tweet.Application.csproj"
-COPY "Services/Tweet/Processor/Tweet.Domain/Tweet.Domain.csproj" "Services/Tweet/Processor/Tweet.Domain/Tweet.Domain.csproj"
-COPY "Services/Tweet/Processor/Tweet.Infrastructure/Tweet.Infrastructure.csproj" "Services/Tweet/Processor/Tweet.Infrastructure/Tweet.Infrastructure.csproj"
-COPY "Services/Tweet/Processor/Tweet.Processor/Tweet.Processor.csproj" "Services/Tweet/Processor/Tweet.Processor/Tweet.Processor.csproj"
+COPY "Services/Tweet/Api/Tweet.Application/Tweet.Application.csproj" "Services/Tweet/Api/Tweet.Application/Tweet.Application.csproj"
+COPY "Services/Tweet/Api/Tweet.Domain/Tweet.Domain.csproj" "Services/Tweet/Api/Tweet.Domain/Tweet.Domain.csproj"
+COPY "Services/Tweet/Api/Tweet.Infrastructure/Tweet.Infrastructure.csproj" "Services/Tweet/Api/Tweet.Infrastructure/Tweet.Infrastructure.csproj"
+COPY "Services/Tweet/Api/Tweet.Api/Tweet.Api.csproj" "Services/Tweet/Api/Tweet.Api/Tweet.Api.csproj"
 
 COPY "Services/Tweet/Tweet.Events/Tweet.Events.csproj" "Services/Tweet/Tweet.Events/Tweet.Events.csproj"
 COPY "Services/Tweet/Tweet.GrpcContracts/Tweet.GrpcContracts.csproj" "Services/Tweet/Tweet.GrpcContracts/Tweet.GrpcContracts.csproj"

@@ -1,9 +1,6 @@
 version: '3.4'
 
 services:
-  tweetcache:
-    image: redis:alpine
-
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:
@@ -12,4 +9,54 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=@Welkom1
+
+  main-gateway:
+    image: ${REGISTRY:-luukvdm}/kwetter-main-gateway:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/MainGateway/Dockerfile
+    depends_on:
+      - webspa-agg
+      - identity-api
+
+  webspa-agg:
+    image: ${REGISTRY:-luukvdm}/kwetter-webspa-agg:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/WebSpa.Aggregator/Dockerfile
+    depends_on:
+      - identity-api
+      - tweet-api
+
+  identity-api:
+    image: ${REGISTRY:-luukvdm}/kwetter-identity-api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Identity/Identity.Api/Dockerfile
+
+  tweet-api:
+    image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Tweet/Api/Tweet.Api/Dockerfile
+    depends_on:
+      - rabbitmq
+      - tweet-hub
+
+  tweet-hub:
+    image: ${REGISTRY:-luukvdm}/kwetter-tweet-hub:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Tweet/Tweet.Hub/Dockerfile
+    depends_on:
+      - rabbitmq
+
+  webspa:
+    image: ${REGISTRY:-luukvdm}/kwetter-webspa:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: WebSpa/Dockerfile
+    depends_on:
+      - webspa-agg
+      - main-gateway
 

@@ -2,11 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tweet", "Tweet", "{1B7CD17F-AC9D-4476-A49F-373BEACC33CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Application", "Services\Tweet\Processor\Tweet.Application\Tweet.Application.csproj", "{A6ECB704-D895-4116-85BF-C4A0CE7CBB29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Application", "Services\Tweet\Api\Tweet.Application\Tweet.Application.csproj", "{A6ECB704-D895-4116-85BF-C4A0CE7CBB29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Infrastructure", "Services\Tweet\Processor\Tweet.Infrastructure\Tweet.Infrastructure.csproj", "{A7447F91-4D41-473D-8853-E8D8880B3344}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Infrastructure", "Services\Tweet\Api\Tweet.Infrastructure\Tweet.Infrastructure.csproj", "{A7447F91-4D41-473D-8853-E8D8880B3344}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Domain", "Services\Tweet\Processor\Tweet.Domain\Tweet.Domain.csproj", "{C8796D06-9658-4965-9C41-11CF4643C46E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Domain", "Services\Tweet\Api\Tweet.Domain\Tweet.Domain.csproj", "{C8796D06-9658-4965-9C41-11CF4643C46E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{96CC04A1-18F2-4F7F-8D26-33F08D96989A}"
 EndProject
@@ -20,11 +20,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "BuildingBlocks\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBusRabbitMQ", "BuildingBlocks\EventBus\EventBusRabbitMQ\EventBusRabbitMQ.csproj", "{2EB3D604-3301-495D-B96C-376421590BBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Processor", "Services\Tweet\Processor\Tweet.Processor\Tweet.Processor.csproj", "{6491A628-D8A8-4D9B-B928-E49513648B7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Api", "Services\Tweet\Api\Tweet.Api\Tweet.Api.csproj", "{6491A628-D8A8-4D9B-B928-E49513648B7B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tweet.Events", "Services\Tweet\Tweet.Events\Tweet.Events.csproj", "{BDE83229-6EF0-46DF-8953-687C655174CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Processor", "Processor", "{B767A251-E0C5-4868-AB7C-A35C5F44E713}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{B767A251-E0C5-4868-AB7C-A35C5F44E713}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{7DAD868C-56A2-4DFB-B825-F7B6CB107A2C}"
 EndProject
