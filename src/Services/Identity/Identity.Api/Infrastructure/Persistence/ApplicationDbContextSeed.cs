@@ -52,7 +52,7 @@ namespace Kwetter.Services.Identity.Api.Infrastructure.Persistence
             await configContext.SaveChangesAsync(default);
 
             // Add a admin user to test with
-            var defaultAdmin = new ApplicationUser {UserName = "admin@kwetter.com", Email = "admin@kwetter.com"};
+            var defaultAdmin = new ApplicationUser {UserName = "admin", DisplayName = "Je Favoriete Admin", Email = "admin@kwetter.com"};
 
             if (userManager.Users.All(u => u.UserName != defaultAdmin.UserName))
             {

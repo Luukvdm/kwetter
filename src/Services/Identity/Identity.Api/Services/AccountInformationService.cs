@@ -33,8 +33,7 @@ namespace Kwetter.Services.Identity.Api.Services
             var account = new BasicAccountInformation
             {
                 Id = acc.Id,
-                FirstName = "placeholder",
-                LastName = "Placeholderson",
+                DisplayName = acc.DisplayName,
                 UserName = acc.UserName
             };
             return account;
@@ -52,8 +51,7 @@ namespace Kwetter.Services.Identity.Api.Services
                     var empty = new BasicAccountInformation
                     {
                         Id = userId,
-                        FirstName = "[Unavailable]",
-                        LastName = "[Unavailable]",
+                        DisplayName = "[Unavailable]",
                         UserName = "[Unavailable]"
                     };
                     accounts.Add(empty);
@@ -63,8 +61,7 @@ namespace Kwetter.Services.Identity.Api.Services
                 var dto = new BasicAccountInformation
                 {
                     Id = acc.Id,
-                    FirstName = "Placeholder",
-                    LastName = "Placeholderson",
+                    DisplayName = acc.DisplayName,
                     UserName = acc.UserName
                 };
                 accounts.Add(dto);
