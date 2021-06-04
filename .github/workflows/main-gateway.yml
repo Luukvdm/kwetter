@@ -1,0 +1,86 @@
+
+name: main-gateway
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - src/BuildingBlocks/**
+      - src/ApiGateways/MainGateway/**
+      - .github/workflows/main-gateway.yml
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - src/BuildingBlocks/**
+      - src/ApiGateways/MainGateway/**
+      - .github/workflows/main-gateway.yml
+
+  workflow_dispatch:
+  
+env:
+  SERVICE: main-gateway
+  IMAGE: main-gateway
+  DOTNET_VERSION: 5.0.x
+
+jobs:
+  BuildForPR:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@main
+    
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        
+    - name: Compose build ${{ env.SERVICE }}
+      run: sudo -E docker-compose build ${{ env.SERVICE }}
+      working-directory: ./src
+      shell: bash
+      env:
+        TAG: latest
+        REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
+      
+  Build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
+    steps:
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@main
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Login to Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ secrets.REGISTRY_HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+
+    - name: Set branch name as env variable
+      run: |
+        currentbranch=$(echo ${GITHUB_REF##*/})
+        echo "running on $currentbranch"
+        echo "BRANCH=$currentbranch" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Compose build ${{ env.SERVICE }}
+      run: sudo -E docker-compose build ${{ env.SERVICE }}
+      working-directory: ./src
+      shell: bash
+      env:
+        TAG: ${{ env.BRANCH }}
+        REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
+
+    - name: Compose push ${{ env.SERVICE }}
+      run: sudo -E docker-compose push ${{ env.SERVICE }}
+      working-directory: ./src
+      shell: bash
+      env:
+        TAG: ${{ env.BRANCH }}
+        REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
