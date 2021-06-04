@@ -9,6 +9,7 @@ using Kwetter.Services.Identity.Api.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -65,6 +66,8 @@ namespace Kwetter.Services.Identity.Api
                 {
                     config.AddSharedJson(hostingContext.HostingEnvironment);
                     config.AddKwetterLoggerConfiguration(hostingContext.HostingEnvironment);
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

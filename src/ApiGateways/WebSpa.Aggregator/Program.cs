@@ -1,6 +1,7 @@
 using Kwetter.BuildingBlocks.Configurations.Extensions;
 using Kwetter.BuildingBlocks.KwetterLogger;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Kwetter.ApiGateways.WebSpa.Aggregator
@@ -20,6 +21,8 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator
                 {
                     config.AddSharedJson(hostingContext.HostingEnvironment);
                     config.AddKwetterLoggerConfiguration(hostingContext.HostingEnvironment);
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

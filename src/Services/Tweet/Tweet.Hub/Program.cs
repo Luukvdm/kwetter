@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.Configurations.Extensions;
 using Kwetter.BuildingBlocks.KwetterLogger;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Kwetter.Services.Tweet.Hub
@@ -21,6 +22,8 @@ namespace Kwetter.Services.Tweet.Hub
                 {
                     config.AddSharedJson(hostingContext.HostingEnvironment);
                     config.AddKwetterLoggerConfiguration(hostingContext.HostingEnvironment);
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }

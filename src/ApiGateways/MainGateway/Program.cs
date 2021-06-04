@@ -35,7 +35,8 @@ namespace Kwetter.ApiGateways.MainGateway
                             true)
                         .AddJsonFile("ocelot.json", true, true)
                         // .AddJsonFile($"configuration.{hostingContext.HostingEnvironment.EnvironmentName}.json")
-                        .AddEnvironmentVariables();
+                        .AddEnvironmentVariables()
+                        .AddCommandLine(args);
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }
