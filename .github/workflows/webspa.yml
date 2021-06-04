@@ -9,10 +9,7 @@ on:
   pull_request:
     branches: [ main ]
     paths:
-      - src/BuildingBlocks/**
-      - src/ApiGateways/WebSpa.Aggregator/**
-      - src/Services/Tweet/Tweet.GrpcContracts/**
-      - src/Services/Identity/Identity.GrpcContracts/**
+      - src/WebSpa/**
       - .github/workflows/webspa.yml
 
   workflow_dispatch:
