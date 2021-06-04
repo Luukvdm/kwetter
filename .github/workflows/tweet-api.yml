@@ -2,7 +2,7 @@ name: tweet-api
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/Services/Tweet/Api/**
@@ -10,7 +10,7 @@ on:
       - src/Services/Tweet/Tweet.GrpcContracts/**
       - .github/workflows/tweet-api.yml
   pull_request:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/Services/Tweet/Api/**
@@ -23,7 +23,6 @@ on:
   
 env:
   SERVICE: tweet-api
-  IMAGE: tweet.api
   DOTNET_VERSION: 5.0.x
 
 jobs:

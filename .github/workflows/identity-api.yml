@@ -2,13 +2,13 @@ name: identity-api
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/Services/identity/**
       - .github/workflows/identity-api.yml
   pull_request:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/Services/identity/**
@@ -18,7 +18,6 @@ on:
   
 env:
   SERVICE: identity-api
-  IMAGE: identity.api
   DOTNET_VERSION: 5.0.x
 
 jobs:
