@@ -1,29 +1,29 @@
-name: tweet-api
+name: tweet-hub
 
 on:
   push:
     branches: [ dev ]
     paths:
       - src/BuildingBlocks/**
-      - src/Services/Tweet/Api/**
+      - src/Services/Tweet/Tweet.Hub/**
       - src/Services/Tweet/Tweet.Events/**
       - src/Services/Tweet/Tweet.GrpcContracts/**
-      - .github/workflows/tweet-api.yml
+      - .github/workflows/tweet-hub.yml
   pull_request:
     branches: [ dev ]
     paths:
       - src/BuildingBlocks/**
-      - src/Services/Tweet/Api/**
+      - src/Services/Tweet/Tweet.Hub/**
       - src/Services/Tweet/Tweet.Events/**
       - src/Services/Tweet/Tweet.GrpcContracts/**
-      - .github/workflows/tweet-api.yml
+      - .github/workflows/tweet-hub.yml
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
 env:
-  SERVICE: tweet-api
-  IMAGE: tweet.api
+  SERVICE: tweet-hub
+  IMAGE: tweet.hub
   DOTNET_VERSION: 5.0.x
 
 jobs:
@@ -43,7 +43,7 @@ jobs:
       # run: |
       #  cd src
       #  dotnet restore "Kwetter.sln"
-      #  cd Services/Tweet/Tweet.Api
+      #  cd Services/Tweet/Tweet.Hub
       #  dotnet build --no-restore
       # cd -
       # cd Services/Tweet/Tweet.UnitTests
@@ -69,12 +69,12 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
-   # - name: Build and run unit tests
-     # run: |
-      # cd src
-      # dotnet restore "Kwetter.sln"
-      # cd Services/Tweet/Tweet.Api
-      # dotnet build --no-restore
+    # - name: Build and run unit tests
+      # run: |
+      #  cd src
+      #  dotnet restore "Kwetter.sln"
+      #  cd Services/Tweet/Tweet.hub
+      #  dotnet build --no-restore
       # cd -
       # cd Services/Tweet/Tweet.UnitTests
       # dotnet build --no-restore

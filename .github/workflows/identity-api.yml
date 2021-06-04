@@ -1,29 +1,24 @@
-name: tweet-api
+name: identity-api
 
 on:
   push:
     branches: [ dev ]
     paths:
       - src/BuildingBlocks/**
-      - src/Services/Tweet/Api/**
-      - src/Services/Tweet/Tweet.Events/**
-      - src/Services/Tweet/Tweet.GrpcContracts/**
-      - .github/workflows/tweet-api.yml
+      - src/Services/identity/**
+      - .github/workflows/identity-api.yml
   pull_request:
     branches: [ dev ]
     paths:
       - src/BuildingBlocks/**
-      - src/Services/Tweet/Api/**
-      - src/Services/Tweet/Tweet.Events/**
-      - src/Services/Tweet/Tweet.GrpcContracts/**
-      - .github/workflows/tweet-api.yml
+      - src/Services/identity/**
+      - .github/workflows/identity-api.yml
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
 env:
-  SERVICE: tweet-api
-  IMAGE: tweet.api
+  SERVICE: identity-api
+  IMAGE: identity.api
   DOTNET_VERSION: 5.0.x
 
 jobs:
@@ -43,10 +38,10 @@ jobs:
       # run: |
       #  cd src
       #  dotnet restore "Kwetter.sln"
-      #  cd Services/Tweet/Tweet.Api
+      #  cd Services/Identity/Identity.Api
       #  dotnet build --no-restore
       # cd -
-      # cd Services/Tweet/Tweet.UnitTests
+      # cd Services/Identity/Identity.Api
       # dotnet build --no-restore
       # dotnet test --no-build -v=normal
     - name: Compose build ${{ env.SERVICE }}
@@ -68,15 +63,15 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-
-   # - name: Build and run unit tests
-     # run: |
-      # cd src
-      # dotnet restore "Kwetter.sln"
-      # cd Services/Tweet/Tweet.Api
-      # dotnet build --no-restore
+        
+    # - name: Build and run unit tests
+      # run: |
+      #  cd src
+      #  dotnet restore "Kwetter.sln"
+      #  cd Services/Identity/Identity.Api
+      #  dotnet build --no-restore
       # cd -
-      # cd Services/Tweet/Tweet.UnitTests
+      # cd Services/Identity/Identity.Api
       # dotnet build --no-restore
       # dotnet test --no-build -v=normal
     - name: Login to Container Registry
