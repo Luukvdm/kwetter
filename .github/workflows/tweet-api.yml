@@ -76,7 +76,7 @@ jobs:
       # cd Services/Tweet/Tweet.Api
       # dotnet build --no-restore
       # cd -
-      # cd Services/Basket/Basket.UnitTests
+      # cd Services/Tweet/Tweet.UnitTests
       # dotnet build --no-restore
       # dotnet test --no-build -v=normal
     - name: Login to Container Registry
