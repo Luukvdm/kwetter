@@ -2,7 +2,7 @@ name: webspa-agg
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/ApiGateways/WebSpa.Aggregator/**
@@ -10,7 +10,7 @@ on:
       - src/Services/Identity/Identity.GrpcContracts/**
       - .github/workflows/webspa-agg.yml
   pull_request:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/ApiGateways/WebSpa.Aggregator/**
@@ -22,7 +22,6 @@ on:
   
 env:
   SERVICE: webspa-agg
-  IMAGE: webspa-agg
   DOTNET_VERSION: 5.0.x
 
 jobs:

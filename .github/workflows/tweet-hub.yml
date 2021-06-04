@@ -2,7 +2,7 @@ name: tweet-hub
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/Services/Tweet/Tweet.Hub/**
@@ -10,7 +10,7 @@ on:
       - src/Services/Tweet/Tweet.GrpcContracts/**
       - .github/workflows/tweet-hub.yml
   pull_request:
-    branches: [ dev ]
+    branches: [ main ]
     paths:
       - src/BuildingBlocks/**
       - src/Services/Tweet/Tweet.Hub/**
@@ -23,7 +23,6 @@ on:
   
 env:
   SERVICE: tweet-hub
-  IMAGE: tweet.hub
   DOTNET_VERSION: 5.0.x
 
 jobs:
