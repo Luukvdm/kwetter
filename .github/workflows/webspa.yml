@@ -1,0 +1,74 @@
+name: webspa
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - src/WebSpa/**
+      - .github/workflows/webspa.yml
+  pull_request:
+    branches: [ main ]
+    paths:
+      - src/BuildingBlocks/**
+      - src/ApiGateways/WebSpa.Aggregator/**
+      - src/Services/Tweet/Tweet.GrpcContracts/**
+      - src/Services/Identity/Identity.GrpcContracts/**
+      - .github/workflows/webspa.yml
+
+  workflow_dispatch:
+  
+env:
+  SERVICE: webspa
+
+jobs:
+  BuildForPR:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@main
+        
+    - name: Compose build ${{ env.SERVICE }}
+      run: sudo -E docker-compose build ${{ env.SERVICE }}
+      working-directory: ./src
+      shell: bash
+      env:
+        TAG: latest
+        REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
+      
+  Build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
+    steps:
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@main
+
+    - name: Login to Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ secrets.REGISTRY_HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+
+    - name: Set branch name as env variable
+      run: |
+        currentbranch=$(echo ${GITHUB_REF##*/})
+        echo "running on $currentbranch"
+        echo "BRANCH=$currentbranch" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Compose build ${{ env.SERVICE }}
+      run: sudo -E docker-compose build ${{ env.SERVICE }}
+      working-directory: ./src
+      shell: bash
+      env:
+        TAG: ${{ env.BRANCH }}
+        REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
+
+    - name: Compose push ${{ env.SERVICE }}
+      run: sudo -E docker-compose push ${{ env.SERVICE }}
+      working-directory: ./src
+      shell: bash
+      env:
+        TAG: ${{ env.BRANCH }}
+        REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
