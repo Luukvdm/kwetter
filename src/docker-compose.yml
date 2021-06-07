@@ -80,12 +80,13 @@ services:
       - EventBus__HostName=rabbitmq
       - Identity__authority=http://identity-api
 
-  #webspa:
-  #  image: ${REGISTRY:-luukvdm}/kwetter-webspa:${PLATFORM:-linux}-${TAG:-latest}
-  #  build:
-  #    context: .
-  #    dockerfile: WebSpa/Dockerfile
-  #  depends_on:
-  #    - webspa-agg
-  #    - main-gateway
-
+  webspa:
+    image: ${REGISTRY:-luukvdm}/kwetter-webspa:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: WebSpa/Dockerfile
+    depends_on:
+      - webspa-agg
+      - main-gateway
+    ports:
+      - "8080:80"
