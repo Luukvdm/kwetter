@@ -88,4 +88,6 @@ services:
     depends_on:
       - webspa-agg
       - main-gateway
+    ports:
+      - "8080:80"
 
