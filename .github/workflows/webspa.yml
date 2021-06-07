@@ -55,11 +55,12 @@ jobs:
       shell: bash
       
     - name: Create env file
+      working-directory: ./src/WebSpa
       run: |
-        echo VUE_APP_BASE_URL="${{ secrets.WEBSPA_BASE_URL }}" >> WebSpa/.env.production
-        echo VUE_APP_PUBLIC_PATH="${{ secrets.WEBSPA_PUBLIC_PATH }}" >> WebSpa/.env.production
-        echo VUE_APP_BASE_API_URL="${{ secrets.API_BASE_URL }}" >> WebSpa/.env.production
-        echo VUE_APP_BASE_IDENTITY_SERVER_URL="${{ secrets.IDS_BASE_URL }}" >> WebSpa/.env.production
+        echo VUE_APP_BASE_URL="${{ secrets.WEBSPA_BASE_URL }}" >> .env.production
+        echo VUE_APP_PUBLIC_PATH="${{ secrets.WEBSPA_PUBLIC_PATH }}" >> .env.production
+        echo VUE_APP_BASE_API_URL="${{ secrets.API_BASE_URL }}" >> .env.production
+        echo VUE_APP_BASE_IDENTITY_SERVER_URL="${{ secrets.IDS_BASE_URL }}" >> .env.production
 
     - name: Compose build ${{ env.SERVICE }}
       run: sudo -E docker-compose build ${{ env.SERVICE }}
