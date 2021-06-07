@@ -61,6 +61,10 @@ jobs:
       env:
         TAG: ${{ env.BRANCH }}
         REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
+        VUE_APP_BASE_URL: ${{ secrets.WEBSPA_BASE_URL }}
+        VUE_APP_PUBLIC_PATH: ${{ secrets.WEBSPA_PUBLIC_PATH }}
+        VUE_APP_BASE_API_URL: ${{ secrets.API_BASE_URL }}
+        VUE_APP_BASE_IDENTITY_SERVER_URL: ${{ secrets.IDS_BASE_URL }}
 
     - name: Compose push ${{ env.SERVICE }}
       run: sudo -E docker-compose push ${{ env.SERVICE }}
