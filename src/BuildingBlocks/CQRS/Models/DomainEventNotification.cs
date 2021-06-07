@@ -1,4 +1,4 @@
-using Kwetter.BuildingBlocks.Core.Domain.Common;
+using Kwetter.BuildingBlocks.KwetterDomain;
 using MediatR;
 
 namespace Kwetter.BuildingBlocks.CQRS.Models

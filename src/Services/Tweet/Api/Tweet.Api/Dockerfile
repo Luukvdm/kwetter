@@ -49,4 +49,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Kwetter.Services.Tweet.Processor.dll"] 
+ENTRYPOINT ["dotnet", "Kwetter.Services.Tweet.Api.dll"] 

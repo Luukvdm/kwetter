@@ -10,7 +10,7 @@
         <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.6" />
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
+        <!-- <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" /> -->
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6" PrivateAssets="All" />
@@ -22,7 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../../../BuildingBlocks/Core/Core.Api/Core.Api.csproj" />
         <ProjectReference Include="..\..\..\BuildingBlocks\Configurations\Configurations.csproj" />
         <ProjectReference Include="..\..\..\BuildingBlocks\IdentityBlocks\IdentityBlocks.csproj" />
         <ProjectReference Include="..\..\..\BuildingBlocks\KwetterLogger\KwetterLogger.csproj" />

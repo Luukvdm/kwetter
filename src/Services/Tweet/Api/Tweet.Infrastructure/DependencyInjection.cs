@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Design;
+﻿using System;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.Configurations.Models;
 using Kwetter.BuildingBlocks.EventBus.EventBus;
@@ -7,7 +7,6 @@ using Kwetter.BuildingBlocks.EventBus.EventBusRabbitMQ;
 using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Infrastructure.Persistence;
 using Kwetter.Services.Tweet.Infrastructure.Services;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +22,9 @@ namespace Kwetter.Services.Tweet.Infrastructure
         {
             if (configuration.GetValue<bool>("UseInMemoryDatabase"))
             {
+                Console.WriteLine("Using in memory database");
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("EnvironmentDb"));
+                    options.UseInMemoryDatabase("TweetDb"));
             }
             else
             {

@@ -1,5 +1,4 @@
 using System;
-using Kwetter.Services.Tweet.GrpcContracts;
 using Kwetter.Services.Tweet.GrpcContracts.Models;
 
 namespace Kwetter.ApiGateways.WebSpa.Aggregator.Models

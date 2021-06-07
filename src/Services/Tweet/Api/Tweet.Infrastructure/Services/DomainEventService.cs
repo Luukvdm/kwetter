@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.Abstractions.Services;
-using Kwetter.BuildingBlocks.Core.Domain.Common;
 using Kwetter.BuildingBlocks.CQRS.Models;
+using Kwetter.BuildingBlocks.KwetterDomain;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
