@@ -53,6 +53,13 @@ jobs:
         echo "running on $currentbranch"
         echo "BRANCH=$currentbranch" >> $GITHUB_ENV
       shell: bash
+      
+    - name: Create env file
+      run: |
+        echo VUE_APP_BASE_URL="${{ secrets.WEBSPA_BASE_URL }}" >> WebSpa/.env.production
+        echo VUE_APP_PUBLIC_PATH="${{ secrets.WEBSPA_PUBLIC_PATH }}" >> WebSpa/.env.production
+        echo VUE_APP_BASE_API_URL="${{ secrets.API_BASE_URL }}" >> WebSpa/.env.production
+        echo VUE_APP_BASE_IDENTITY_SERVER_URL="${{ secrets.IDS_BASE_URL }}" >> WebSpa/.env.production
 
     - name: Compose build ${{ env.SERVICE }}
       run: sudo -E docker-compose build ${{ env.SERVICE }}
@@ -61,10 +68,6 @@ jobs:
       env:
         TAG: ${{ env.BRANCH }}
         REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
-        VUE_APP_BASE_URL: ${{ secrets.WEBSPA_BASE_URL }}
-        VUE_APP_PUBLIC_PATH: ${{ secrets.WEBSPA_PUBLIC_PATH }}
-        VUE_APP_BASE_API_URL: ${{ secrets.API_BASE_URL }}
-        VUE_APP_BASE_IDENTITY_SERVER_URL: ${{ secrets.IDS_BASE_URL }}
 
     - name: Compose push ${{ env.SERVICE }}
       run: sudo -E docker-compose push ${{ env.SERVICE }}
