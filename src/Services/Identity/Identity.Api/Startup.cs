@@ -49,6 +49,7 @@ namespace Kwetter.Services.Identity.Api
             services.AddCodeFirstGrpc(config =>
             {
                 config.ResponseCompressionLevel = CompressionLevel.Optimal;
+                config.EnableDetailedErrors = true;
             });
 
             services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
@@ -99,6 +100,10 @@ namespace Kwetter.Services.Identity.Api
                 // endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
                 endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+
+                // endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}");
+                
                 /* endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,

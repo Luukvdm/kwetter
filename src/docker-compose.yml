@@ -18,6 +18,11 @@ services:
     depends_on:
       - webspa-agg
       - identity-api
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:80
 
   webspa-agg:
     image: ${REGISTRY:-luukvdm}/kwetter-webspa-agg:${PLATFORM:-linux}-${TAG:-latest}
@@ -27,12 +32,22 @@ services:
     depends_on:
       - identity-api
       - tweet-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - Identity__authority=http://identity-api
 
   identity-api:
     image: ${REGISTRY:-luukvdm}/kwetter-identity-api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Identity/Identity.Api/Dockerfile
+    ports:
+      - "5001:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - URL_BASE=http://localhost:5001
+      - Urls__WebSpaClient=http://localhost:8080
 
   tweet-api:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
@@ -42,6 +57,13 @@ services:
     depends_on:
       - rabbitmq
       - tweet-hub
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - UseInMemoryDatabase=true
+      - EventBus__Username=admin
+      - EventBus__Password=@Welkom1
+      - EventBus__HostName=rabbitmq
+      - Identity__authority=http://identity-api
 
   tweet-hub:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-hub:${PLATFORM:-linux}-${TAG:-latest}
@@ -50,6 +72,13 @@ services:
       dockerfile: Services/Tweet/Tweet.Hub/Dockerfile
     depends_on:
       - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - EventBus__Username=admin
+      - EventBus__Password=@Welkom1
+      - EventBus__HostName=rabbitmq
+      - Identity__authority=http://identity-api
 
   webspa:
     image: ${REGISTRY:-luukvdm}/kwetter-webspa:${PLATFORM:-linux}-${TAG:-latest}

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using IdentityServer4.Models;
-
-namespace Kwetter.Services.Identity.Api.Models.AccountViewModels
+﻿namespace Kwetter.Services.Identity.Api.Models.AccountViewModels
 {
     public record ConsentViewModel : ConsentInputModel
     {

@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Kwetter.BuildingBlocks.Core.Domain.Common;
+using Kwetter.BuildingBlocks.KwetterDomain;
 
 namespace Kwetter.BuildingBlocks.Abstractions.Services
 {

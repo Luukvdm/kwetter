@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.Configurations.Extensions;
@@ -8,7 +7,6 @@ using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.EventBus.EventBusRabbitMQ;
 using Kwetter.BuildingBlocks.IdentityBlocks;
 using Kwetter.BuildingBlocks.KwetterLogger;
-using Kwetter.Services.Tweet.Events.Events;
 using Kwetter.Services.Tweet.Events.Notifications;
 using Kwetter.Services.Tweet.Hub.EventHandlers;
 using MediatR;

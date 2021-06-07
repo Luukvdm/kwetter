@@ -36,8 +36,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator
             var urlConfig = services.AddUrlConfig(Configuration);
 
             AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-            
-            
+
             services.ConfigureKwetterLogger(Configuration);
 
             services.AddControllers();

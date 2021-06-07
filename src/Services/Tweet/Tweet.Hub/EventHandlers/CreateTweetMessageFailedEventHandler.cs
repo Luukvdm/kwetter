@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
-using Kwetter.Services.Tweet.Events.Events;
 using Kwetter.Services.Tweet.Events.Notifications;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;

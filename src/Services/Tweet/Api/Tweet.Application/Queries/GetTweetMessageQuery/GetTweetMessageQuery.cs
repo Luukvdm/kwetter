@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Domain.Entities;
 using MediatR;

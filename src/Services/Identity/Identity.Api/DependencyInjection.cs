@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 namespace Kwetter.Services.Identity.Api
 {
     public static class DependencyInjection
@@ -36,10 +37,26 @@ namespace Kwetter.Services.Identity.Api
             IConfiguration configuration)
         {
             services.AddTransient<ILoginService<ApplicationUser>, LoginService>();
-            
-            services.AddDefaultIdentity<ApplicationUser>()
+            services.AddTransient<IRedirectService, RedirectService>();
+
+            /* services.AddAuthentication(o =>
+                {
+                    o.DefaultScheme = IdentityConstants.ApplicationScheme;
+                    o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+                })
+                .AddIdentityServerJwt()
+                .AddIdentityCookies(o => { }); */
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(o => { o.Stores.MaxLengthForKeys = 128; })
+                // .AddDefaultUI()
+                .AddDefaultTokenProviders()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+            /*services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();*/
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
@@ -50,7 +67,7 @@ namespace Kwetter.Services.Identity.Api
                         options.ConfigureDbContext = builder => builder.UseInMemoryDatabase("IdentityServerConfDb");
                     else
                         options.ConfigureDbContext = builder => builder.UseNpgsql(connectionString,
-                        b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
+                            b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
                 })
                 .Services.AddTransient<IProfileService, ProfileService>();
 

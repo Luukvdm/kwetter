@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -24,14 +25,22 @@ namespace Kwetter.Services.Identity.Api.Services
             string pathBase = _configuration["PATH_BASE"];
             string urlBase = _configuration["URL_BASE"];
 
-            if(urlBase != null) context.SetIdentityServerOrigin(urlBase);
-            if (pathBase != null)
+            if (!string.IsNullOrEmpty(urlBase)) context.SetIdentityServerOrigin(urlBase);
+            if (!string.IsNullOrEmpty(pathBase))
             {
                 if (!pathBase.StartsWith('/')) pathBase = "/" + pathBase;
-                context.SetIdentityServerBasePath(pathBase/*request.PathBase.Value.TrimEnd('/')*/);
+                context.SetIdentityServerBasePath(pathBase /*request.PathBase.Value.TrimEnd('/')*/);
             }
 
-            await _next(context);
+            try
+            {
+                await _next(context);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw e;
+            }
         }
     }
 }

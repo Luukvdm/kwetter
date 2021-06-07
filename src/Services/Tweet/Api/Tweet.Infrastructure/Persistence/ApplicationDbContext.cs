@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.Abstractions.Services;
-using Kwetter.BuildingBlocks.Core.Domain.Common;
+using Kwetter.BuildingBlocks.KwetterDomain;
 using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Domain.Entities;
 using Microsoft.EntityFrameworkCore;

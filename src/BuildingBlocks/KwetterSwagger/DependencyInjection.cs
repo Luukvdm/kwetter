@@ -53,6 +53,7 @@ namespace Kwetter.BuildingBlocks.KwetterSwagger
                     });
                 }
             });
+            
             return services;
         }
 
