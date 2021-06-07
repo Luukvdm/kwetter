@@ -1,0 +1,21 @@
+:root {
+  --main-color: #eab354;
+  --main-highlight-color: #ffa930;
+  --main-highlight-color-background: rgba(255, 169, 48, 0.1);
+
+  --text-color-bright: #fbf1c7;
+  --text-color: #ebdbb2;
+  --text-color-faded: #bdae93;
+
+  --border-color: #282828;
+  --border-inner-shadow-color: rgba(40, 40, 40, 0.2);
+  --border-outer-shadow-color: rgba(40, 40, 40, 0.15);
+
+  --c0_hard: #1d2021;
+  --c0: #282828;
+  --c0_soft: #32302f;
+  --c1: #3c3836;
+  --c2: #504945;
+  --c3: #665c54;
+  --c4: #7c6f64;
+}

@@ -19,10 +19,6 @@ namespace Kwetter.Services.Identity.Api.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; init; }
-
-        [Required]
-        [Display(Name = "Username")]
-        public string UserName { get; init; }
         
         public ApplicationUser User { get; init; }
     }
