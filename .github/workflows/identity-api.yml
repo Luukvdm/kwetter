@@ -5,13 +5,13 @@ on:
     branches: [ main ]
     paths:
       - src/BuildingBlocks/**
-      - src/Services/identity/**
+      - src/Services/Identity/**
       - .github/workflows/identity-api.yml
   pull_request:
     branches: [ main ]
     paths:
       - src/BuildingBlocks/**
-      - src/Services/identity/**
+      - src/Services/Identity/**
       - .github/workflows/identity-api.yml
 
   workflow_dispatch:

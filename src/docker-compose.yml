@@ -90,4 +90,3 @@ services:
       - main-gateway
     ports:
       - "8080:80"
-
