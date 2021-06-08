@@ -47,7 +47,6 @@ export default {
   justify-content: center;
 
   height: 100%;
-  background: var(--c1);
 }
 
 .sub-item,
