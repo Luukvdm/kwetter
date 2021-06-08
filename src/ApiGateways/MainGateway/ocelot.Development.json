@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/hub/{catchAll}",
       "DownstreamScheme": "ws",
       "DownstreamHostAndPorts": [
         {
@@ -9,7 +9,7 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/hub/web/{everything}",
+      "UpstreamPathTemplate": "/hub/tweet/{catchAll}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
       "Priority": 10
     },

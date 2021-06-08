@@ -93,7 +93,7 @@ namespace Kwetter.ApiGateways.MainGateway
             }
 
             app.UseKwetterLogger(env);
-
+            
             app.UseSwaggerForOcelotUI(opt =>
             {
                 opt.PathToSwaggerGenerator = "/swagger/docs";
