@@ -1,11 +1,11 @@
 const signalr = require("@microsoft/signalr");
-// import { baseUrl } from "@/config/api.config.js";
+import { baseUrl } from "@/config/api.config.js";
 import store from "@/store";
 
 export function hubConnectionBuilder(endpoint) {
   // const url = new URL(endpoint, baseUrl);
   // const url = baseUrl + endpoint;
-  const url = "http://localhost:5004" + endpoint;
+  const url = baseUrl + endpoint;
   let connection = new signalr.HubConnectionBuilder()
     .withUrl(url.toString(), {
       accessTokenFactory: () => {
