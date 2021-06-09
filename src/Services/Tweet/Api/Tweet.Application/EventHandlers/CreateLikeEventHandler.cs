@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using FluentValidation;
+using Kwetter.BuildingBlocks.CQRS.Exceptions;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.Services.Core.Tweet.Application.Commands.CreateLike;
 using Kwetter.Services.Tweet.Events.Events;
@@ -31,7 +31,7 @@ namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
             }
             catch (ValidationException validationException)
             {
-                _eventBus.Publish(new TweetLikedFailedNotification(@event.TweetId, @event.LikerId));
+                _eventBus.Publish(new FailureNotification(validationException.Message, @event.LikerId));
             }
         }
     }

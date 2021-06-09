@@ -8,11 +8,14 @@ function registerHandlers(socket, store) {
       store.dispatch("tweet/connectionClosed");
     else store.dispatch("tweet/connectionOpened");
   });
-  socket.on("createTweetMessageFailure", function(failure) {
+  socket.on("failureNotification", function(failure) {
     store.dispatch("tweet/showError", failure.message);
   });
   socket.on("tweetMessageCreated", function(tweetMessage) {
     store.dispatch("tweet/addTweetToTimeLine", tweetMessage);
+  });
+  socket.on("tweetMessageLiked", function(notification) {
+    store.dispatch("tweet/addLikeToTweet", notification);
   });
 }
 

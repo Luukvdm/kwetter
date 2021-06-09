@@ -8,9 +8,9 @@ export function get(id) {
   });
 }
 
-export function getTimeline() {
+export function getTimeline(username) {
   return request({
-    url: "/api/web/tweets/timeline",
+    url: "/api/web/tweets/timeline/" + username,
     method: "get"
   });
 }

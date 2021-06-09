@@ -16,16 +16,4 @@ namespace Kwetter.Services.Tweet.Events.Notifications
         public DateTime PostTime { get; }
         public int TweetMessageId { get; set; }
     }
-
-    public record TweetLikedFailedNotification : IntegrationEvent
-    {
-        public TweetLikedFailedNotification(int messageId, string userId)
-        {
-            MessageId = messageId;
-            UserId = userId;
-        }
-
-        public int MessageId { get; set; }
-        public string UserId { get; set; }
-    }
 }

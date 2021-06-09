@@ -9,14 +9,17 @@ namespace Kwetter.Services.Identity.GrpcContracts
     public interface IAccountInformationService
     {
         [OperationContract]
-        ValueTask<BasicAccountInformation> GetBasicAccountInformation(string userId);
+        ValueTask<PublicAccount> GetAccount(string userId);
         
         [OperationContract]
-        ValueTask<IList<BasicAccountInformation>> GetBasicAccountsInformation(string[] userIds);
+        ValueTask<PublicAccount> GetAccountByUsername(string username);
+        
+        [OperationContract]
+        ValueTask<IList<PublicAccount>> GetAccounts(string[] userIds);
     }
 
     [DataContract]
-    public class BasicAccountInformation
+    public class PublicAccount
     {
         [DataMember(Order = 1)]
         public string Id { get; set; }
@@ -25,7 +28,7 @@ namespace Kwetter.Services.Identity.GrpcContracts
         public string DisplayName { get; set; }
 
         [DataMember(Order = 3)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [DataMember(Order = 4)]
         public string ProfilePicture { get; set; }

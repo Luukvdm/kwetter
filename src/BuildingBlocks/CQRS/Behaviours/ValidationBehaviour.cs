@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
+using ValidationException = Kwetter.BuildingBlocks.CQRS.Exceptions.ValidationException;
 
 namespace Kwetter.BuildingBlocks.CQRS.Behaviours
 {

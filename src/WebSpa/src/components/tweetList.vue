@@ -18,7 +18,11 @@ export default {
 <template>
   <div>
     <ul class="tweet-list container">
-      <li class="item bordered" v-for="(tweet, key) in tweets" v-bind:key="key">
+      <li
+        class="item bordered"
+        v-for="tweet in tweets"
+        :key="`${tweet.id}-${tweet.likes}`"
+      >
         <Tweet
           class="tweet"
           :tweetId="tweet.id"
@@ -27,7 +31,7 @@ export default {
           :tweetLikes="tweet.likes"
           :posterId="tweet.poster.id"
           :posterName="tweet.poster.displayName"
-          :posterUsername="tweet.poster.userName"
+          :posterUsername="tweet.poster.username"
           :posterIsVerified="tweet.poster.isVerifified"
           :posterProfilePicture="tweet.poster.profilePicture"
         />

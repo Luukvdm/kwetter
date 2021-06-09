@@ -32,13 +32,13 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Controllers
             _tweetService = tweetService;
         }
 
-        [HttpGet("timeline")]
+        [HttpGet("timeline/{username}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(TimeLine), Status200OK)]
+        [ProducesResponseType(typeof(Timeline), Status200OK)]
         [ProducesResponseType(Status204NoContent)]
-        public async Task<TimeLine> GetTimeLine()
+        public async Task<Timeline> GetTimeLine(string username)
         {
-            return await _timeLineService.GetTimeLine(_currentUser.UserId);
+            return await _timeLineService.GetTimeLine(username);
         }
 
         /// <summary>

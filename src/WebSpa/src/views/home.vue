@@ -1,44 +1,36 @@
 <script>
-import Layout from "@/layouts/default.vue";
+import { mapGetters } from "vuex";
+
+import VerticalLayout from "@/layouts/verticalLayout.vue";
 import TweetForm from "@/components/tweetForm.vue";
 import Timeline from "@/components/timeline.vue";
-import SearchBox from "@/components/search.vue";
-import VerticalHeader from "@/components/vertical-header.vue";
 
 export default {
   components: {
-    Layout,
+    VerticalLayout,
     TweetForm,
-    Timeline,
-    SearchBox,
-    VerticalHeader
+    Timeline
+  },
+  computed: {
+    ...mapGetters("oidcStore", ["oidcUser"])
   }
 };
 </script>
 
 <template>
-  <Layout>
-    <div class="page-wrapper">
-      <div class="hor-container">
-        <VerticalHeader class="sub-item" />
-        <div class="main-item">
-          <div class="main-header bordered">
-            <h2>Home</h2>
-          </div>
-          <TweetForm class="tweet-form" />
-          <Timeline class="tweet-timeline" />
-        </div>
-        <div class="sub-item">
-          <SearchBox />
-        </div>
-      </div>
+  <VerticalLayout>
+    <div class="main-header bordered">
+      <h2>Home</h2>
     </div>
-  </Layout>
+    <TweetForm class="tweet-form" />
+    <Timeline :username="oidcUser.preferred_username" class="tweet-timeline" />
+  </VerticalLayout>
 </template>
 
 <style scoped>
 .page-wrapper {
   width: 100%;
+  height: 100%;
 }
 
 .hor-container {
@@ -75,6 +67,6 @@ export default {
 }
 
 .tweet-timeline {
-  border: 0px solid black;
+  border: 1px solid var(--border-color);
 }
 </style>

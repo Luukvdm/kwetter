@@ -73,11 +73,8 @@ export default {
   },
   methods: {
     ...mapActions("tweet", ["likeTweet"]),
-    like(event, text) {
-      // this.tweet.hearts += 1;
-      console.log(event);
-      console.log(text);
-      console.log(this.tweet.id);
+    like() {
+      // event, text
       this.likeTweet(this.tweet.id);
     }
   }
@@ -94,7 +91,11 @@ export default {
       </div>
       <div class="message-container">
         <div class="poster-container">
-          <b class="poster-name">{{ poster.name }}</b>
+          <router-link
+            :to="`/profile/${poster.username}`"
+            class="poster-name"
+            >{{ poster.name }}</router-link
+          >
           <span class="poster-username">@{{ poster.username }}</span>
         </div>
         <div class="tweet-content-container">
@@ -171,6 +172,7 @@ export default {
 
 .poster-container .poster-name {
   color: var(--text-color-bright);
+  font-weight: bold;
   margin-right: 3px;
 }
 
