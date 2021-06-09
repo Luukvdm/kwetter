@@ -1,4 +1,7 @@
 import { get, getTimeline, create, like } from "@/api/tweet.js";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 export const state = {
   hubConnectionIsOpen: false,
@@ -62,8 +65,7 @@ export const actions = {
     });
   },
   showError(_, message) {
-    console.log("Received tweet exception:");
-    console.log(message);
+    toast.error(message);
   },
   connectionOpened({ commit }) {
     commit("SET_CONNECTION_STATE", true);

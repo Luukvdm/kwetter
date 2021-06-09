@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.Services.Tweet.Events.Notifications;
@@ -20,6 +21,7 @@ namespace Kwetter.Services.Tweet.Hub.EventHandlers
         public async Task Handle(FailureNotification notification)
         {
             _logger.LogInformation("Sending failure notification to the client: {clientId}", notification.UserId);
+            Console.WriteLine(notification.Message);
 
             await _tweetHub.Clients
                 .Group(notification.UserId)

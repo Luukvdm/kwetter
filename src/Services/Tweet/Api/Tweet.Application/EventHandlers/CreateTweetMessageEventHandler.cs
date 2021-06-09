@@ -31,11 +31,19 @@ namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
                 var entity =
                     await _mediator.Send(new CreateTweetMessageCommand(@event.Message, @event.CreatorId,
                         @event.PostTime));
-                _eventBus.Publish(new TweetCreatedNotification(entity.Id, entity.Message, entity.CreatorId, entity.PostTime));
+                _eventBus.Publish(new TweetCreatedNotification(entity.Id, entity.Message, entity.CreatorId,
+                    entity.PostTime));
             }
             catch (ValidationException validationException)
             {
-                _eventBus.Publish(new FailureNotification(validationException.Message, @event.CreatorId));
+                // This looks dramatic but most of the time its just one notification
+                foreach (var error in validationException.Errors)
+                {
+                    foreach (string message in error.Value)
+                    {
+                        _eventBus.Publish(new FailureNotification(message, @event.CreatorId));
+                    }
+                }
             }
             catch (Exception miscException)
             {
