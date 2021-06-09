@@ -26,43 +26,56 @@ namespace Kwetter.Services.Identity.Api.Services
         }
 
         // [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
-        public async ValueTask<BasicAccountInformation> GetBasicAccountInformation(string userId)
+        public async ValueTask<PublicAccount> GetAccount(string userId)
         {
             var acc = await _userManager.FindByIdAsync(userId);
             if (acc == null) throw new NotFoundException("Unknown user");
-            var account = new BasicAccountInformation
+            var account = new PublicAccount
             {
                 Id = acc.Id,
                 DisplayName = acc.DisplayName,
-                UserName = acc.UserName
+                Username = acc.UserName
             };
             return account;
         }
 
-        public async ValueTask<IList<BasicAccountInformation>> GetBasicAccountsInformation(string[] userIds)
+        public async ValueTask<PublicAccount> GetAccountByUsername(string username)
         {
-            var accounts = new List<BasicAccountInformation>();
+            var acc = await _userManager.FindByNameAsync(username);
+            if (acc == null) throw new NotFoundException("Unknown user");
+            var account = new PublicAccount
+            {
+                Id = acc.Id,
+                DisplayName = acc.DisplayName,
+                Username = acc.UserName
+            };
+            return account;
+        }
+
+        public async ValueTask<IList<PublicAccount>> GetAccounts(string[] userIds)
+        {
+            var accounts = new List<PublicAccount>();
 
             foreach (string userId in userIds)
             {
                 var acc = await _userManager.FindByIdAsync(userId);
                 if (acc == null)
                 {
-                    var empty = new BasicAccountInformation
+                    var empty = new PublicAccount
                     {
                         Id = userId,
                         DisplayName = "[Unavailable]",
-                        UserName = "[Unavailable]"
+                        Username = "[Unavailable]"
                     };
                     accounts.Add(empty);
                     continue;
                 }
 
-                var dto = new BasicAccountInformation
+                var dto = new PublicAccount
                 {
                     Id = acc.Id,
                     DisplayName = acc.DisplayName,
-                    UserName = acc.UserName
+                    Username = acc.UserName
                 };
                 accounts.Add(dto);
             }

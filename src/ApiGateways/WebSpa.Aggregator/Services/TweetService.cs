@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Kwetter.ApiGateways.WebSpa.Aggregator.Models;
 using Kwetter.BuildingBlocks.KwetterGrpc;
-using Kwetter.Services.Identity.GrpcContracts;
 using Kwetter.Services.Tweet.GrpcContracts;
 using ProtoBuf.Grpc.Client;
 
@@ -11,26 +10,26 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
     {
         private readonly GrpcChannelService _grpcChannelService;
 
-        public TweetService(GrpcChannelService grpcChannelService)
+        private readonly UserService _userService;
+
+        public TweetService(GrpcChannelService grpcChannelService, UserService userService)
         {
             _grpcChannelService = grpcChannelService;
+            _userService = userService;
         }
 
         public async Task<Tweet> Get(int id)
         {
             var tweetChannel = await _grpcChannelService.CreateTweetChannel();
             var tweetService = tweetChannel.CreateGrpcService<ITweetService>();
-
-            var identityChannel = await _grpcChannelService.CreateIdentityChannel();
-            var accInfoService = identityChannel.CreateGrpcService<IAccountInformationService>();
             
             // TODO check for empty result
             var tweetResult = await tweetService.GetTweet(id.ToString());
-            var accountResult = await accInfoService.GetBasicAccountInformation(tweetResult.CreatorId);
+            var user = await _userService.GetUser(tweetResult.CreatorId);
 
             return new Tweet(tweetResult)
             {
-                Poster = new User(accountResult)
+                Poster = user
             };
         }
 

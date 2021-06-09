@@ -37,9 +37,8 @@ namespace Kwetter.Services.Tweet.Hub
             var urlConfig = services.AddUrlConfig(Configuration);
             var eventBusConfig = services.AddEventBusConfig(Configuration);
 
-            services.AddTransient<CreateTweetMessageFailedEventHandler>();
+            services.AddTransient<FailureNotificationHandler>();
             services.AddTransient<TweetCreatedNotificationHandler>();
-            services.AddTransient<TweetLikedFailedEventHandler>();
             services.AddTransient<TweetLikedEventHandler>();
 
             services.AddHttpContextAccessor();
@@ -73,10 +72,9 @@ namespace Kwetter.Services.Tweet.Hub
 
             app.UseKwetterLogger(env);
             
-            eventBus.Subscribe<CreateTweetMessageFailedNotification, CreateTweetMessageFailedEventHandler>();
+            eventBus.Subscribe<FailureNotification, FailureNotificationHandler>();
             eventBus.Subscribe<TweetCreatedNotification, TweetCreatedNotificationHandler>();
             eventBus.Subscribe<TweetLikedNotification, TweetLikedEventHandler>();
-            eventBus.Subscribe<TweetLikedFailedNotification, TweetLikedFailedEventHandler>();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");

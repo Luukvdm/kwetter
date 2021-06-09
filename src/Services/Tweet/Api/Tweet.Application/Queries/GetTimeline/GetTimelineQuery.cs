@@ -33,6 +33,7 @@ namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline
                 .Include(e => e.Likes)
                 // TODO also search for following persons tweets
                 .Where(e => e.CreatorId == request.UserId)
+                .OrderByDescending(e => e.PostTime)
                 .ToListAsync(cancellationToken);
 
             return tweets;

@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using FluentValidation;
+using Kwetter.BuildingBlocks.CQRS.Exceptions;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.Services.Core.Tweet.Application.Commands.CreateTweetMessage;
 using Kwetter.Services.Tweet.Events.Events;
@@ -35,14 +35,11 @@ namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
             }
             catch (ValidationException validationException)
             {
-                _eventBus.Publish(new CreateTweetMessageFailedNotification(validationException.Message, @event.CreatorId));
-                // await _tweetClientService.SendValidationException(notification.CreatorId, validationException);
+                _eventBus.Publish(new FailureNotification(validationException.Message, @event.CreatorId));
             }
-            // TODO replace with more precise exceptions
             catch (Exception miscException)
             {
-                _logger.LogError(miscException, "Some create tweet message exception");
-                // await _tweetClientService.SendException(notification.CreatorId, miscException);
+                _eventBus.Publish(new FailureNotification(miscException.Message, @event.CreatorId));
             }
         }
     }

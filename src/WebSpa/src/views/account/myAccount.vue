@@ -1,42 +1,3 @@
-<template>
-  <Layout>
-    <div class="myaccount">
-      <div class="page-main-section">
-        <div class="content">
-          <div class="textblock">
-            <h1>{{ oidcUser.preferred_username }}</h1>
-            <p>
-              You are logged in as {{ oidcUser.name }}. Your session started at
-              {{ uDateToString(oidcUser.auth_time * 1000) }} and will end at
-              {{ uDateToString(oidcIdTokenExp) }}.
-            </p>
-            <div class="list-row">
-              <div class="list-col">
-                <h2>Access</h2>
-                <ul class="access-list">
-                  <li v-for="(val, key) in oidcScopes" v-bind:key="key">
-                    {{ val }}
-                  </li>
-                </ul>
-              </div>
-              <div class="account-tree list-col">
-                <h2 class="caret" @click="expand">Advanced information</h2>
-                <ul class="nested">
-                  <template v-for="(val, key) in oidcUser" v-bind:key="key">
-                    <li>
-                      <b>{{ key }}:</b> {{ val }}
-                    </li>
-                  </template>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Layout>
-</template>
-
 <script>
 import Layout from "@/layouts/default.vue";
 import { mapGetters } from "vuex";
@@ -80,6 +41,45 @@ export default {
   }
 };
 </script>
+
+<template>
+  <Layout>
+    <div class="myaccount">
+      <div class="page-main-section">
+        <div class="content">
+          <div class="textblock">
+            <h1>{{ oidcUser.preferred_username }}</h1>
+            <p>
+              You are logged in as {{ oidcUser.name }}. Your session started at
+              {{ uDateToString(oidcUser.auth_time * 1000) }} and will end at
+              {{ uDateToString(oidcIdTokenExp) }}.
+            </p>
+            <div class="list-row">
+              <div class="list-col">
+                <h2>Access</h2>
+                <ul class="access-list">
+                  <li v-for="(val, key) in oidcScopes" v-bind:key="key">
+                    {{ val }}
+                  </li>
+                </ul>
+              </div>
+              <div class="account-tree list-col">
+                <h2 class="caret" @click="expand">Advanced information</h2>
+                <ul class="nested">
+                  <template v-for="(val, key) in oidcUser" v-bind:key="key">
+                    <li>
+                      <b>{{ key }}:</b> {{ val }}
+                    </li>
+                  </template>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Layout>
+</template>
 
 <style scoped>
 .list-row {

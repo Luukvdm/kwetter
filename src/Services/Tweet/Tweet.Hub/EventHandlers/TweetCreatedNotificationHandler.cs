@@ -9,9 +9,9 @@ namespace Kwetter.Services.Tweet.Hub.EventHandlers
     public class TweetCreatedNotificationHandler : IIntegrationEventHandler<TweetCreatedNotification>
     {
         private readonly IHubContext<TweetHub> _tweetHub;
-        private readonly ILogger<CreateTweetMessageFailedNotification> _logger;
+        private readonly ILogger<TweetCreatedNotificationHandler> _logger;
 
-        public TweetCreatedNotificationHandler(IHubContext<TweetHub> tweetHub, ILogger<CreateTweetMessageFailedNotification> logger)
+        public TweetCreatedNotificationHandler(IHubContext<TweetHub> tweetHub, ILogger<TweetCreatedNotificationHandler> logger)
         {
             _tweetHub = tweetHub;
             _logger = logger;
@@ -19,7 +19,7 @@ namespace Kwetter.Services.Tweet.Hub.EventHandlers
 
         public async Task Handle(TweetCreatedNotification @event)
         {
-            _logger.LogInformation("Sending validationException to the client");
+            _logger.LogInformation("Sending tweet created notification to the client");
             
             await _tweetHub.Clients
                     // TODO Add friends and stuff

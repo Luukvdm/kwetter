@@ -2,7 +2,7 @@ import { get, getTimeline, create, like } from "@/api/tweet.js";
 
 export const state = {
   hubConnectionIsOpen: false,
-  cachedTimeline: []
+  cachedTimelines: []
 };
 
 export const getters = {};
@@ -13,16 +13,27 @@ export const mutations = {
     state.hubConnectionIsOpen = isOpen;
   },
   CACHE_TIMELINE(state, timeline) {
-    state.cachedTimeline = timeline;
+    // Remove possible already cached timelines
+    state.cachedTimelines = state.cachedTimelines.filter(
+      tl => tl.username !== timeline.username
+    );
+
+    state.cachedTimelines.push(timeline);
   },
   CREATE_TWEET(state, tweet) {
-    state.cachedTimeline.tweets.push(tweet);
+    const tl = state.cachedTimelines.find(
+      e => e.username === tweet.poster.username
+    );
+    if (tl) state.cachedTimelines[0].tweets.unshift(tweet);
   }
 };
 
 export const actions = {
-  async getTimeline({ commit /*, state*/ }) {
-    const { data } = await getTimeline();
+  async getTimeline({ commit, state }, username) {
+    const cached = state.cachedTimelines.find(e => e.username === username);
+    if (cached) return cached;
+
+    const { data } = await getTimeline(username);
     commit("CACHE_TIMELINE", data);
     return data;
   },
@@ -31,16 +42,26 @@ export const actions = {
     commit("START_CREATE_TWEET", response);
     return response.data;
   },
-  async likeTweet({ commit }, tweetId) {
+  async likeTweet(_, tweetId) {
     const { data } = await like(tweetId);
-    commit("START_LIKE_TWEET", tweetId);
-    console.log(data);
+    return data;
   },
   async addTweetToTimeLine({ commit }, entity) {
     const { data } = await get(entity.id);
     commit("CREATE_TWEET", data);
   },
-  showError(message) {
+  async addLikeToTweet({ state }, notification) {
+    const timelines = state.cachedTimelines;
+    timelines.forEach(timeline => {
+      const tweet = timeline.tweets.find(
+        t => t.id == notification.tweetMessageId
+      );
+      if (tweet) {
+        tweet.likes += 1;
+      }
+    });
+  },
+  showError(_, message) {
     console.log("Received tweet exception:");
     console.log(message);
   },

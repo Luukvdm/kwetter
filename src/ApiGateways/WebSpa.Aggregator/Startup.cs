@@ -82,6 +82,8 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator
 
             services.AddTransient<TweetService>();
             services.AddTransient<TimeLineService>();
+            services.AddTransient<UserService>();
+            services.AddTransient<ProfileService>();
             
             services.AddKwetterIdentity(Environment, identityConfig);
             services.AddKwetterSwagger(Assembly.GetExecutingAssembly(), identityConfig, false);

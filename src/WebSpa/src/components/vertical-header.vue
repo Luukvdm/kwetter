@@ -5,9 +5,9 @@ export default {};
 <template>
   <header>
     <div class="logo-container">
-      <a class="logo">
+      <router-link to="/" class="logo">
         <img src="@/assets/logo.png" />
-      </a>
+      </router-link>
     </div>
     <nav>
       <div class="nav-item">
@@ -25,7 +25,7 @@ export default {};
         />
       </div>
       <div class="nav-item">
-        <router-link to="/account">
+        <router-link to="/profile/me">
           <BaseGlowyButton
             text="Profile"
             symbol="user"
@@ -40,7 +40,7 @@ export default {};
 header {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   -moz-box-align: start;
   align-items: flex-start;
 }

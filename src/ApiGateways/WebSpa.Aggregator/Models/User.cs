@@ -9,17 +9,22 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Models
             Id = id;
         }
 
-        public User(BasicAccountInformation accInfo)
+        public User(PublicAccount accInfo, bool isCurrentUser, bool isFollowing = false)
         {
             Id = accInfo.Id;
             DisplayName = accInfo.DisplayName;
-            UserName = accInfo.UserName;
+            Username = accInfo.Username;
             ProfilePicture = accInfo.ProfilePicture;
+
+            IsCurrentUser = isCurrentUser;
+            IsFollowing = isFollowing;
         }
         
         public string Id { get; set; }
         public string DisplayName { get; set; }
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public string ProfilePicture { get; set; }
+        public bool IsCurrentUser { get; set; }
+        public bool IsFollowing { get; set; }
     }
 }
