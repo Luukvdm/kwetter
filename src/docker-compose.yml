@@ -42,12 +42,34 @@ services:
     build:
       context: .
       dockerfile: Services/Identity/Identity.Api/Dockerfile
+    depends_on:
+      - identity-db
     ports:
       - "5001:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - ApplicationDb__UseInMemoryDatabase=false
+      - ConnectionStrings__ApplicationDbConnection=Server=identity-db;Port=5432;Database=identity_db;Username=admin;Password=@Welkom1;
       - URL_BASE=http://localhost:5001
       - Urls__WebSpaClient=http://localhost:8080
+
+  identity-db:
+    image: postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=identity_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
 
   tweet-api:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
@@ -55,15 +77,36 @@ services:
       context: .
       dockerfile: Services/Tweet/Api/Tweet.Api/Dockerfile
     depends_on:
+      - tweet-db
+    depends_on:
       - rabbitmq
       - tweet-hub
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - UseInMemoryDatabase=true
+      - UseInMemoryDatabase=false
+      - ConnectionStrings__DefaultConnection=Server=tweet-db;Port=5432;Database=tweet_db;Username=admin;Password=@Welkom1;
       - EventBus__Username=admin
       - EventBus__Password=@Welkom1
       - EventBus__HostName=rabbitmq
       - Identity__authority=http://identity-api
+
+  tweet-db:
+    image: postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=tweet_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
 
   tweet-hub:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-hub:${PLATFORM:-linux}-${TAG:-latest}
