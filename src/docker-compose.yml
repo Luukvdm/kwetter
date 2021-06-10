@@ -42,12 +42,33 @@ services:
     build:
       context: .
       dockerfile: Services/Identity/Identity.Api/Dockerfile
+    depends_on:
+      - identity-db
     ports:
       - "5001:80"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - ApplicationDb__UseInMemoryDatabase=false
+      - ConnectionStrings__ApplicationDbConnection=jdbc:postgresql://identity-db:5432/identity-db
       - URL_BASE=http://localhost:5001
       - Urls__WebSpaClient=http://localhost:8080
+
+  identity-db:
+    image: postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "kwetter-admin" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_DB=identity-db
+      - POSTGRES_USER=kwetter-admin
+      - POSTGRES_PASSWORD=@Welkom1
+    ports:
+      - "5432:5432"
+    #volumes:
+      #- ./db-data/identity/:/var/lib/postgresql/data/
 
   tweet-api:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
