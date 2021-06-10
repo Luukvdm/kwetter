@@ -1,6 +1,5 @@
 ﻿using IdentityServer4.Services;
 using Kwetter.Services.Identity.Api.Infrastructure.Persistence;
-using Kwetter.Services.Identity.Api.Interfaces;
 using Kwetter.Services.Identity.Api.Models;
 using Kwetter.Services.Identity.Api.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -28,7 +27,7 @@ namespace Kwetter.Services.Identity.Api
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }
 
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+            // services.AddScoped<ApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
             return services;
         }
@@ -59,7 +58,28 @@ namespace Kwetter.Services.Identity.Api
                 .AddEntityFrameworkStores<ApplicationDbContext>();*/
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                // .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                .AddAspNetIdentity<ApplicationUser>()
+                // .AddOperationalStore<ApplicationDbContext>()
+                // .ConfigureReplacedServices()
+                .AddIdentityResources()
+                //.AddApiResources()
+                //.AddClients()
+                .AddSigningCredentials()
+                .AddOperationalStore(options =>
+                {
+                    if (configuration.GetValue<bool>("ApplicationDb:UseInMemoryDatabase"))
+                    {
+                        options.ConfigureDbContext = builder => builder.UseInMemoryDatabase("IdentityServerDb");
+                    }
+                    else
+                    {
+                        string connectionString = configuration.GetConnectionString("ApplicationDbConnection");
+
+                        options.ConfigureDbContext = builder => builder.UseNpgsql(connectionString,
+                            b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
+                    }
+                })
                 .AddConfigurationStore(options =>
                 {
                     string connectionString = configuration.GetConnectionString("ConfigurationDbConnection");

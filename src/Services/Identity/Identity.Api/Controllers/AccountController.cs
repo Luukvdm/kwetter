@@ -103,7 +103,7 @@ namespace Kwetter.Services.Identity.Api.Controllers
                         return Redirect(model.ReturnUrl);
                     }
 
-                    return Redirect("~/");
+                    return Redirect("~/home/");
                 }
 
                 ModelState.AddModelError("", "Invalid username or password.");
