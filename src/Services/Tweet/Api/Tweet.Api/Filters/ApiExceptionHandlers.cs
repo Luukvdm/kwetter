@@ -1,8 +1,14 @@
-﻿namespace Kwetter.BuildingBlocks.Core.Api.Filters
+﻿using Kwetter.BuildingBlocks.Abstractions.Exceptions;
+using Kwetter.BuildingBlocks.CQRS.Exceptions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+
+namespace Kwetter.Services.Tweet.Api.Filters
 {
     public static class ApiExceptionHandlers
     {
-        /* public static void HandleValidationException(ExceptionContext context)
+        public static void HandleValidationException(ExceptionContext context)
         {
             var exception = context.Exception as ValidationException;
 
@@ -93,6 +99,6 @@
             };
 
             context.ExceptionHandled = true;
-        } */
+        }
     }
 }

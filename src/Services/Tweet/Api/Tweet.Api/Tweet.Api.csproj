@@ -21,7 +21,6 @@
     <ItemGroup>
         <ProjectReference Include="../Tweet.Application/Tweet.Application.csproj" />
         <ProjectReference Include="../Tweet.Infrastructure/Tweet.Infrastructure.csproj" />
-        <ProjectReference Include="../../../../BuildingBlocks/Core/Core.Api/Core.Api.csproj" />
         <ProjectReference Include="../../../../BuildingBlocks/Abstractions/Abstractions.csproj" />
         <ProjectReference Include="../../../../BuildingBlocks/Configurations/Configurations.csproj" />
         <ProjectReference Include="../../../../BuildingBlocks/IdentityBlocks/IdentityBlocks.csproj" />
