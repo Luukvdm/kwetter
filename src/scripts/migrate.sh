@@ -17,19 +17,22 @@ migrate_tweet() {
 
 migrate_identity() {
     dotnet ef migrations add "$1" \
+	--context PersistedGrantDbContext  \
+	--project Services/Identity/Identity.Api \
+	--startup-project Services/Identity/Identity.Api \
+	--output-dir Infrastructure/Persistence/Migrations/PersistedGrantDb
+
+    dotnet ef migrations add "$1" \
+	--context ConfigurationDbContext  \
+	--project Services/Identity/Identity.Api \
+	--startup-project Services/Identity/Identity.Api \
+	--output-dir Infrastructure/Persistence/Migrations/ConfigurationDb
+
+    dotnet ef migrations add "$1" \
 	--context ApplicationDbContext \
 	--project Services/Identity/Identity.Api \
 	--startup-project Services/Identity/Identity.Api \
-	--output-dir Infrastructure/Persistence/Migrations \
-	# --configuration Release
-
-#    dotnet ef migrations add "$1" \
-#	--context ConfigurationDbContext \
-#	--project Services/Identity/Identity.Api \
-#	--startup-project Services/Identity/Identity.Api \
-#	--output-dir Infrastructure/Persistence/Migrations/ConfigurationDb \
-#	# --configuration Release
-
+	--output-dir Infrastructure/Persistence/Migrations
 }
 
 # migrate_identity "init-migration"

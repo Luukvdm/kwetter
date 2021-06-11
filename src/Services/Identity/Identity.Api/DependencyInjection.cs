@@ -83,6 +83,7 @@ namespace Kwetter.Services.Identity.Api
                 .AddConfigurationStore(options =>
                 {
                     string connectionString = configuration.GetConnectionString("ConfigurationDbConnection");
+                    
                     if (configuration.GetValue<bool>("ConfigurationDb:UseInMemoryDatabase"))
                         options.ConfigureDbContext = builder => builder.UseInMemoryDatabase("IdentityServerConfDb");
                     else
