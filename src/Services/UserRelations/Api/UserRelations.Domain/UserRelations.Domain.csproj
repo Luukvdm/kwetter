@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.Services.UserRelations.Domain</RootNamespace>
+        <AssemblyName>Kwetter.Services.UserRelations.Domain</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../../../../BuildingBlocks/KwetterDomain/KwetterDomain.csproj" />
+    </ItemGroup>
+</Project>

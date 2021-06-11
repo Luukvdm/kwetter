@@ -13,14 +13,12 @@ namespace Kwetter.Services.Tweet.Api.Services
     {
         private readonly IEventBus _eventBus;
         private readonly ISender _mediator;
-        private readonly ICurrentUserService _currentUser;
         private readonly IDateTime _dateTime;
 
-        public TweetService(IEventBus eventBus, ISender mediator, ICurrentUserService currentUser, IDateTime dateTime)
+        public TweetService(IEventBus eventBus, ISender mediator, IDateTime dateTime)
         {
             _eventBus = eventBus;
             _mediator = mediator;
-            _currentUser = currentUser;
             _dateTime = dateTime;
         }
 

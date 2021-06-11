@@ -5,6 +5,7 @@
         <RootNamespace>Kwetter.ApiGateways.WebSpa.Aggregator</RootNamespace>
         <AssemblyName>Kwetter.ApiGateways.WebSpa.Aggregator</AssemblyName>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>

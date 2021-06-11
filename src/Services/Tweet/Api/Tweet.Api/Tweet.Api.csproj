@@ -5,6 +5,7 @@
         <RootNamespace>Kwetter.Services.Tweet.Api</RootNamespace>
         <AssemblyName>Kwetter.Services.Tweet.Api</AssemblyName>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>

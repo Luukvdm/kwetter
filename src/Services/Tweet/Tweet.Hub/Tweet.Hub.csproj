@@ -4,6 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <RootNamespace>Kwetter.Services.Tweet.Hub</RootNamespace>
         <AssemblyName>Kwetter.Services.Tweet.Hub</AssemblyName>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
