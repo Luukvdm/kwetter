@@ -1,4 +1,3 @@
-using System.Reflection;
 using Kwetter.Services.Identity.Api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

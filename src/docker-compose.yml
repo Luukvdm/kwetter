@@ -53,6 +53,27 @@ services:
       - URL_BASE=http://localhost:5001
       - Urls__WebSpaClient=http://localhost:8080
 
+<<<<<<< HEAD
+  identity-db:
+    image: postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=identity_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
+
+||||||| 40a427a
+=======
   identity-db:
     image: postgres
     restart: unless-stopped
@@ -73,6 +94,7 @@ services:
     ports:
       - "5432:5432"
 
+>>>>>>> main
   tweet-api:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
     build:
