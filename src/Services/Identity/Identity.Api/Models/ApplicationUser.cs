@@ -5,7 +5,6 @@ namespace Kwetter.Services.Identity.Api.Models
 {
     public class ApplicationUser : IdentityUser
     {
-       [Required] public string Name { get; set; }
        [Required] public string DisplayName { get; set; }
     }
 }

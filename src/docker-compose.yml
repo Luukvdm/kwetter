@@ -70,6 +70,8 @@ services:
     volumes:
       - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
       #- ./db-data/identity/:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
 
   tweet-api:
     image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
