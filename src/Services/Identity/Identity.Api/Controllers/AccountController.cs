@@ -103,7 +103,7 @@ namespace Kwetter.Services.Identity.Api.Controllers
                         return Redirect(model.ReturnUrl);
                     }
 
-                    return Redirect("~/home/");
+                    return Redirect("~/home");
                 }
 
                 ModelState.AddModelError("", "Invalid username or password.");
@@ -258,8 +258,6 @@ namespace Kwetter.Services.Identity.Api.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    Name = model.User.Name,
-                    PhoneNumber = model.User.PhoneNumber,
                     DisplayName = model.User.DisplayName
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
