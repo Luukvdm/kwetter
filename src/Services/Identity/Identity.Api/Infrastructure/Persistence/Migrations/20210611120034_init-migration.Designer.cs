@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Kwetter.Services.Identity.Api.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210611080558_user-name-fix")]
-    partial class usernamefix
+    [Migration("20210611120034_init-migration")]
+    partial class initmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

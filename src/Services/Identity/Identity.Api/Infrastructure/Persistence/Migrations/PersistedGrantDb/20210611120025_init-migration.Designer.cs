@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Kwetter.Services.Identity.Api.Infrastructure.Persistence.Migrations.PersistedGrantDb
 {
     [DbContext(typeof(PersistedGrantDbContext))]
-    [Migration("20210611093418_init-migration")]
+    [Migration("20210611120025_init-migration")]
     partial class initmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
