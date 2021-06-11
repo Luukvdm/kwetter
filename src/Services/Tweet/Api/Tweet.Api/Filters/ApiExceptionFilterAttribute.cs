@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System;
+using System.Collections.Generic;
+using Kwetter.BuildingBlocks.Abstractions.Exceptions;
+using Kwetter.BuildingBlocks.CQRS.Exceptions;
+using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Kwetter.BuildingBlocks.Core.Api.Filters
+namespace Kwetter.Services.Tweet.Api.Filters
 {
     public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
     {
 
-        /* private readonly IDictionary<Type, Action<ExceptionContext>> _exceptionHandlers;
+        private readonly IDictionary<Type, Action<ExceptionContext>> _exceptionHandlers;
 
         public ApiExceptionFilterAttribute()
         {
@@ -42,6 +46,6 @@ namespace Kwetter.BuildingBlocks.Core.Api.Filters
             }
 
             ApiExceptionHandlers.HandleUnknownException(context);
-        } */
+        }
     }
 }

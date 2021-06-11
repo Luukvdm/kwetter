@@ -30,6 +30,7 @@ namespace Kwetter.Services.Identity.Api
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
                     var configContext = services.GetRequiredService<ConfigurationDbContext>();
+                    var grantsContext = services.GetRequiredService<PersistedGrantDbContext>();
 
                     if (!context.Database.IsInMemory())
                     {
@@ -39,6 +40,11 @@ namespace Kwetter.Services.Identity.Api
                     if (!configContext.Database.IsInMemory())
                     {
                         await configContext.Database.MigrateAsync();
+                    }
+
+                    if (!grantsContext.Database.IsInMemory())
+                    {
+                        await grantsContext.Database.MigrateAsync();
                     }
 
                     // Seed the database with a default account

@@ -14,8 +14,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\BuildingBlocks\Configurations\Configurations.csproj" />
-      <ProjectReference Include="..\..\BuildingBlocks\Core\Core.Api\Core.Api.csproj" />
-      <ProjectReference Include="..\..\BuildingBlocks\Core\Core.Infrastructure\Core.Infrastructure.csproj" />
       <ProjectReference Include="..\..\BuildingBlocks\KwetterLogger\KwetterLogger.csproj" />
     </ItemGroup>
 </Project>
