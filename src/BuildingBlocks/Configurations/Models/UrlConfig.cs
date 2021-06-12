@@ -10,7 +10,7 @@ namespace Kwetter.BuildingBlocks.Configurations.Models
         public string TweetApi { get; set; }
         public string TweetGrpc { get; set; }
         public string UserRelationsApi { get; set; }
-        public string UserRelationsHub { get; set; }
+        public string UserRelationsGrpc { get; set; }
         public string IdentityServerApi { get; set; }
         public string IdentityServerGrpc { get; set; }
     }

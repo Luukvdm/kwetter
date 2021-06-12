@@ -1,6 +1,7 @@
 ﻿using System;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.Configurations.Models;
+using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.EventBus.EventBusRabbitMQ;
@@ -36,6 +37,7 @@ namespace Kwetter.Services.Tweet.Infrastructure
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddTransient<IDateTime, DateTimeService>();
+            services.AddTransient<IExceptionHandler, ExceptionHandler>();
 
             return services;
         }

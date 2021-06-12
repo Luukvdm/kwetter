@@ -23,7 +23,7 @@ namespace Kwetter.Services.UserRelations.Application.EventHandlers
         {
             try
             {
-                await _mediator.Send(new RemoveFollowCommand(@event.FollowerUserId, @event.FollowedUserId));
+                await _mediator.Send(new RemoveFollowCommand(@event.FollowingUserId, @event.FollowedUserId));
                 _eventBus.Publish(new FollowerRemovedNotification(@event.FollowedUserId));
             }
             catch (ValidationException validationException)
@@ -33,7 +33,7 @@ namespace Kwetter.Services.UserRelations.Application.EventHandlers
                 {
                     foreach (string message in error.Value)
                     {
-                        _eventBus.Publish(new FailureNotification(message, @event.FollowerUserId));
+                        _eventBus.Publish(new FailureNotification(message, @event.FollowingUserId));
                     }
                 }
             }

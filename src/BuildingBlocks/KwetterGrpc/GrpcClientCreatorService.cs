@@ -92,5 +92,11 @@ namespace Kwetter.BuildingBlocks.KwetterGrpc
             string url = _urlConfig.TweetGrpc;
             return await CreateChannel(url);
         }
+
+        public async Task<GrpcChannel> CreateUserRelationsChannel()
+        {
+            string url = _urlConfig.UserRelationsGrpc;
+            return await CreateChannel(url);
+        }
     }
 }

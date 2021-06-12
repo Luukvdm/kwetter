@@ -5,14 +5,18 @@ namespace Kwetter.Services.UserRelations.Domain.Entities
 {
     public class Following : BaseEntity
     {
-        public Following(string followerUserId, string followedUserId, DateTime followedSince)
+        private Following()
         {
-            FollowerUserId = followerUserId;
+        }
+
+        public Following(string followingUserId, string followedUserId, DateTime followedSince)
+        {
+            FollowingUserId = followingUserId;
             FollowedUserId = followedUserId;
             FollowedSince = followedSince;
         }
-        public string FollowerUserId { get; }
-        public string FollowedUserId { get; }
-        public DateTime FollowedSince { get; }
+        public string FollowingUserId { get; set; }
+        public string FollowedUserId { get; set; }
+        public DateTime FollowedSince { get; set; }
     }
 }

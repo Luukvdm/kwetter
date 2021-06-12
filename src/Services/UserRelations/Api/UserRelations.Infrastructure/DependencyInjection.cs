@@ -24,7 +24,7 @@ namespace Kwetter.Services.UserRelations.Infrastucture
             {
                 Console.WriteLine("Using in memory database");
                 services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseInMemoryDatabase("TweetDb"));
+                    options.UseInMemoryDatabase("UserRelationsDb"));
             }
             else
             {

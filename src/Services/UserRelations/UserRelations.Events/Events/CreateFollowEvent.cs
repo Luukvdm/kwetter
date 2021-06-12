@@ -5,14 +5,14 @@ namespace Kwetter.Services.UserRelations.Events.Events
 {
     public record CreateFollowEvent : IntegrationEvent
     {
-        public CreateFollowEvent(string followerUserId, string followedUserId, DateTime followedSince)
+        public CreateFollowEvent(string followingUserId, string followedUserId, DateTime followedSince)
         {
-            FollowerUserId = followerUserId;
+            FollowingUserId = followingUserId;
             FollowedUserId = followedUserId;
             FollowedSince = followedSince;
         }
 
-        public string FollowerUserId { get; set; }
+        public string FollowingUserId { get; set; }
         public string FollowedUserId { get; set; }
         public DateTime FollowedSince { get; set; }
     }

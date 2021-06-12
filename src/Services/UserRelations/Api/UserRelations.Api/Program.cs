@@ -1,8 +1,11 @@
 using System;
 using System.Threading.Tasks;
+using Kwetter.BuildingBlocks.Configurations.Extensions;
+using Kwetter.BuildingBlocks.KwetterLogger;
 using Kwetter.Services.UserRelations.Infrastucture.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -23,7 +26,7 @@ namespace Kwetter.Services.UserRelations.Api
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
 
-                    if (context.Database.IsNpgsql())
+                    if (!context.Database.IsInMemory())
                     {
                         await context.Database.MigrateAsync();
                     }
@@ -43,6 +46,14 @@ namespace Kwetter.Services.UserRelations.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseKwetterLogger()
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddSharedJson(hostingContext.HostingEnvironment);
+                    config.AddKwetterLoggerConfiguration(hostingContext.HostingEnvironment);
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
+                })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }

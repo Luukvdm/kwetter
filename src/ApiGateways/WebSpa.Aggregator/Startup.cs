@@ -49,17 +49,23 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
-            
+
             services.AddScopeTransformation();
 
             // Token management for the api
             services.AddKwetterAccessTokenManagement(identityConfig,
-                new[] {IdentityKeys.IdentityLocalApiScope, IdentityKeys.TweetApiScope});
+                new[]
+                {
+                    IdentityKeys.IdentityLocalApiScope,
+                    IdentityKeys.TweetApiScope,
+                    IdentityKeys.UserRelationsApiScope,
+                    IdentityKeys.MediaApiScope
+                });
 
             // Default client
             services.AddClientAccessTokenClient("default-client", "default-client")
                 .AddClientAccessTokenHandler();
-            
+
             // Tweet client
             services.AddClientAccessTokenClient("tweet-client", "default-client",
                 configureClient: client => { client.BaseAddress = new Uri(urlConfig.TweetApi); });
@@ -75,7 +81,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator
             // Grpc
             services.AddTransient<GrpcClientCreatorService>();
             services.AddSingleton<GrpcChannelService>();
-            
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IDateTime, DateTimeService>();
@@ -84,7 +90,8 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator
             services.AddTransient<TimeLineService>();
             services.AddTransient<UserService>();
             services.AddTransient<ProfileService>();
-            
+            services.AddTransient<FollowingService>();
+
             services.AddKwetterIdentity(Environment, identityConfig);
             services.AddKwetterSwagger(Assembly.GetExecutingAssembly(), identityConfig, false);
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Kwetter.ApiGateways.WebSpa.Aggregator.Models;
@@ -19,7 +20,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Controllers
         {
             _profileService = profileService;
         }
-
+        
         [HttpGet("{username}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(Profile), Status200OK)]

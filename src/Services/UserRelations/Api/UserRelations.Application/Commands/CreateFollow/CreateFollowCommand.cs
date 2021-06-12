@@ -9,14 +9,14 @@ namespace Kwetter.Services.UserRelations.Application.Commands.CreateFollow
 {
     public class CreateFollowCommand : IRequest<Following>
     {
-        public CreateFollowCommand(string followerUserId, string followedUserId, DateTime followedSince)
+        public CreateFollowCommand(string followingUserId, string followedUserId, DateTime followedSince)
         {
-            FollowerUserId = followerUserId;
+            FollowingUserId = followingUserId;
             FollowedUserId = followedUserId;
             FollowedSince = followedSince;
         }
 
-        public string FollowerUserId { get; }
+        public string FollowingUserId { get; }
         public string FollowedUserId { get; }
         public DateTime FollowedSince { get; }
     }
@@ -32,7 +32,7 @@ namespace Kwetter.Services.UserRelations.Application.Commands.CreateFollow
 
         public async Task<Following> Handle(CreateFollowCommand request, CancellationToken cancellationToken)
         {
-            var entity = new Following(request.FollowerUserId, request.FollowedUserId, request.FollowedSince);
+            var entity = new Following(request.FollowingUserId, request.FollowedUserId, request.FollowedSince);
             _context.Followings.Add(entity);
             await _context.SaveChangesAsync(cancellationToken);
 

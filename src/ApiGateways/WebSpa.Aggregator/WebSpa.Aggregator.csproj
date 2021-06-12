@@ -16,6 +16,7 @@
       <ProjectReference Include="..\..\BuildingBlocks\KwetterSwagger\KwetterSwagger.csproj" />
       <ProjectReference Include="..\..\Services\Identity\Identity.GrpcContracts\Identity.GrpcContracts.csproj" />
       <ProjectReference Include="..\..\Services\Tweet\Tweet.GrpcContracts\Tweet.GrpcContracts.csproj" />
+      <ProjectReference Include="..\..\Services\UserRelations\UserRelations.GrpcContracts\UserRelations.GrpcContracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>

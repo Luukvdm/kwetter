@@ -9,6 +9,7 @@ namespace Kwetter.BuildingBlocks.KwetterGrpc
 
         private GrpcChannel _tweetChannel;
         private GrpcChannel _identityChannel;
+        private GrpcChannel _userRelationsChannel;
 
         public GrpcChannelService(GrpcClientCreatorService grpcClientCreator)
         {
@@ -25,6 +26,12 @@ namespace Kwetter.BuildingBlocks.KwetterGrpc
         {
             _identityChannel ??= await _grpcClientCreator.CreateIdentityServerChannel();
             return _identityChannel;
+        }
+
+        public async Task<GrpcChannel> CreateUserRelationsChannel()
+        {
+            _userRelationsChannel ??= await _grpcClientCreator.CreateUserRelationsChannel();
+            return _userRelationsChannel;
         }
     }
 }

@@ -20,6 +20,21 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
             _currentUserService = currentUserService;
         }
 
+        public async Task<IList<User>> SearchUsers(string searchTerm)
+        {
+            var identityChannel = await _grpcChannelService.CreateIdentityChannel();
+            var accInfoService = identityChannel.CreateGrpcService<IAccountInformationService>();
+
+            var userDtos = await accInfoService.SearchAccounts(new SearchObject(searchTerm));
+            var users = userDtos.Select(e =>
+            {
+                bool isCurrent = e.Id == _currentUserService.UserId;
+                return new User(e, isCurrent);
+            }).ToList();
+
+            return users;
+        }
+
         public async Task<IList<User>> GetUsers(string[] userIds)
         {
             var identityChannel = await _grpcChannelService.CreateIdentityChannel();

@@ -17,9 +17,9 @@ namespace Kwetter.Services.Tweet.Api.Services
             _mediator = mediator;
         }
 
-        public async ValueTask<IList<ContractTweetMessage>> GetTimeline(string userId)
+        public async ValueTask<IList<ContractTweetMessage>> GetTimeline(GetTimeline getTimeline)
         {
-            var tweets = await _mediator.Send(new GetTimelineQuery(userId));
+            var tweets = await _mediator.Send(new GetTimelineQuery(getTimeline.UserId, getTimeline.FollowedUserIds));
             return tweets.Select(e => new ContractTweetMessage
             {
                 Id = e.Id,

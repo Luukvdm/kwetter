@@ -37,6 +37,8 @@ namespace Kwetter.Services.UserRelations.Application.Commands.RemoveFollow
             if (entity == null) throw new NotFoundException("This person isn't being followed right now");
             
             _context.Followings.Remove(entity);
+            await _context.SaveChangesAsync(cancellationToken);
+            
             return Unit.Value;
         }
     }

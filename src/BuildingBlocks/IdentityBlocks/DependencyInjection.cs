@@ -29,7 +29,7 @@ namespace Kwetter.BuildingBlocks.IdentityBlocks
                                                    identityConfig.Authority.StartsWith("https");
 
                     // options.TokenValidationParameters.ValidateAudience = false;
-                    options.Audience = identityConfig.ClientId;
+                    options.Audience = identityConfig.RequiredAudience;
 
                     options.TokenValidationParameters.ValidTypes = new[] {"at+jwt"};
 

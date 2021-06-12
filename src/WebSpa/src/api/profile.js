@@ -13,3 +13,11 @@ export function me() {
     method: "get"
   });
 }
+
+export function search(searchTerm) {
+  return request({
+    url: "/api/web/search/users",
+    params: { search: searchTerm },
+    method: "get"
+  });
+}

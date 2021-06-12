@@ -11,6 +11,7 @@ namespace Kwetter.BuildingBlocks.Configurations.Models
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
         public string Authority { get; set; }
+        public string RequiredAudience { get; set; }
         public IDictionary<string, string> Scopes { get; set; } = ImmutableDictionary<string, string>.Empty;
         public string[] RequiredPolicies { get; set; } = Array.Empty<string>();
     }

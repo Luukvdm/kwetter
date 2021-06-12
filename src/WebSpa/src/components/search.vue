@@ -1,24 +1,27 @@
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
       isSearching: false,
       results: [
-        {
+        /*{
           content: "test result",
-          category: "trending"
+          category: "trending",
         },
         {
-          content: "Also test result"
+          content: "Also test result",
         },
         {
           content: "Test Person",
-          category: "a person"
-        }
-      ]
+          category: "a person",
+        },*/
+      ],
     };
   },
   methods: {
+    ...mapActions("profile", ["searchUsers"]),
     activateSearch() {
       let sWrapper = document.getElementsByClassName("search-wrapper")[0];
       let sIcon = document.getElementsByClassName("search-icon")[0];
@@ -26,7 +29,14 @@ export default {
       sIcon.classList.toggle("activated");
       this.isSearching = true;
     },
-    deactivateSearch() {
+    deactivateSearch(event) {
+      // If a list item is clicked, don't lose deactivate the search results list
+      if (
+        event.relatedTarget &&
+        event.relatedTarget.classList.contains("list-item")
+      ) {
+        return;
+      }
       let sWrapper = document.getElementsByClassName("search-wrapper")[0];
       let sIcon = document.getElementsByClassName("search-icon")[0];
       sWrapper.classList.toggle("activated");
@@ -34,15 +44,35 @@ export default {
       this.isSearching = false;
     },
 
-    search(event) {
-      console.log("Search");
-      console.log(event.target.value);
+    async search(event) {
+      // console.log("Search");
+      // console.log(event.target.value);
+      const searchTerm = event.target.value;
+      const result = await this.searchUsers(searchTerm);
+      this.results = [];
+      result.forEach((user) => {
+        this.results.push({
+          content: user.displayName,
+          descriptor: "A user",
+          category: "user",
+          routerLink: "/profile/" + user.username,
+        });
+      });
     },
-    showHints(event) {
-      console.log("Show Hints");
-      console.log(event.target.value);
-    }
-  }
+    async showHints(event) {
+      const searchTerm = event.target.value;
+      const result = await this.searchUsers(searchTerm);
+      this.results = [];
+      result.forEach((user) => {
+        this.results.push({
+          content: user.displayName,
+          descriptor: "A user",
+          category: "user",
+          routerLink: "/profile/" + user.username,
+        });
+      });
+    },
+  },
 };
 </script>
 
@@ -63,14 +93,15 @@ export default {
     </div>
     <div v-if="isSearching" class="search-dropdown">
       <div class="list bordered-shadow">
-        <div
+        <router-link
+          :to="result.routerLink"
           class="list-item bordered"
           v-for="(result, key) in results"
           v-bind:key="key"
         >
           <span class="item-content">{{ result.content }}</span>
-          <span class="item-hint">{{ result.category }}</span>
-        </div>
+          <span class="item-hint">{{ result.descriptor }}</span>
+        </router-link>
       </div>
     </div>
   </div>
@@ -84,7 +115,7 @@ export default {
 
 .search-dropdown .list {
   overflow-y: auto;
-  min-height: 100px;
+  /* min-height: 100px; */
   max-height: calc(-53px + 80vh);
 
   position: absolute;

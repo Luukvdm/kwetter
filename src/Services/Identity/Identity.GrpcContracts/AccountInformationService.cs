@@ -9,6 +9,9 @@ namespace Kwetter.Services.Identity.GrpcContracts
     public interface IAccountInformationService
     {
         [OperationContract]
+        ValueTask<IList<PublicAccount>> SearchAccounts(SearchObject searchObject);
+        
+        [OperationContract]
         ValueTask<PublicAccount> GetAccount(string userId);
         
         [OperationContract]
@@ -16,6 +19,25 @@ namespace Kwetter.Services.Identity.GrpcContracts
         
         [OperationContract]
         ValueTask<IList<PublicAccount>> GetAccounts(string[] userIds);
+    }
+
+    [DataContract]
+    public class SearchObject
+    {
+        public SearchObject(string searchTerm, int maxItems = 10)
+        {
+            SearchTerm = searchTerm;
+            MaxItems = maxItems;
+        }
+
+        public SearchObject()
+        {
+        }
+
+        [DataMember(Order = 1)]
+        public string SearchTerm { get; set; }
+        [DataMember(Order = 2)]
+        public int MaxItems { get; set; }
     }
 
     [DataContract]

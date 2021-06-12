@@ -14,7 +14,7 @@ namespace Kwetter.Services.UserRelations.Infrastucture.Persistence
         private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
 
-        public ApplicationDbContext(ICurrentUserService currentUserService, IDateTime dateTime)
+        public ApplicationDbContext(DbContextOptions options, ICurrentUserService currentUserService, IDateTime dateTime) : base(options)
         {
             _currentUserService = currentUserService;
             _dateTime = dateTime;

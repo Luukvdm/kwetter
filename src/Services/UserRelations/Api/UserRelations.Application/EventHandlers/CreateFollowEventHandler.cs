@@ -26,7 +26,9 @@ namespace Kwetter.Services.UserRelations.Application.EventHandlers
         {
             try
             {
-                var entity = await _mediator.Send(new CreateFollowCommand(@event.FollowedUserId, @event.FollowerUserId, @event.CreationDate));
+                var entity = await _mediator.Send(
+                    new CreateFollowCommand(@event.FollowingUserId, @event.FollowedUserId, @event.CreationDate)
+                );
                 _eventBus.Publish(new FollowCreatedNotification(entity.FollowedUserId));
             }
             catch (ValidationException validationException)
@@ -36,7 +38,7 @@ namespace Kwetter.Services.UserRelations.Application.EventHandlers
                 {
                     foreach (string message in error.Value)
                     {
-                        _eventBus.Publish(new FailureNotification(message, @event.FollowerUserId));
+                        _eventBus.Publish(new FailureNotification(message, @event.FollowingUserId));
                     }
                 }
             }

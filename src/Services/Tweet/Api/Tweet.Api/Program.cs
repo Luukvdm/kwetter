@@ -5,6 +5,7 @@ using Kwetter.BuildingBlocks.KwetterLogger;
 using Kwetter.Services.Tweet.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -51,6 +52,8 @@ namespace Kwetter.Services.Tweet.Api
                 {
                     config.AddSharedJson(hostingContext.HostingEnvironment);
                     config.AddKwetterLoggerConfiguration(hostingContext.HostingEnvironment);
+                    config.AddEnvironmentVariables();
+                    config.AddCommandLine(args);
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }

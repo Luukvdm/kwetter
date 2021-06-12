@@ -9,6 +9,6 @@
     "TweetGrpc": "http://localhost:10043",
     "TweetHub": "http://localhost:5004",
     "UserRelationsApi": "http://localhost:5005",
-    "UserRelationsHub": "http://localhost:10045"
+    "UserRelationsGrpc": "http://localhost:10045"
   }
 }

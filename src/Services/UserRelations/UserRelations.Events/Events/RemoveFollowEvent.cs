@@ -4,7 +4,13 @@ namespace Kwetter.Services.UserRelations.Events.Events
 {
     public record RemoveFollowEvent : IntegrationEvent
     {
-        public string FollowerUserId { get; set; }
+        public RemoveFollowEvent(string followingUserId, string followedUserId)
+        {
+            FollowingUserId = followingUserId;
+            FollowedUserId = followedUserId;
+        }
+
+        public string FollowingUserId { get; set; }
         public string FollowedUserId { get; set; }
     }
 }
