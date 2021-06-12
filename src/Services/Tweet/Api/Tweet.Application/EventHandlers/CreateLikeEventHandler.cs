@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.CQRS.Exceptions;
 using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
@@ -36,7 +35,6 @@ namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
             catch (ValidationException validationException)
             {
                 _exceptionHandler?.HandleValidationException(validationException, @event.LikerId);
-                throw;
             }
         }
     }

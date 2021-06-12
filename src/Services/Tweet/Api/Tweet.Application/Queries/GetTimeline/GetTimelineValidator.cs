@@ -1,4 +1,3 @@
-using System.Data;
 using FluentValidation;
 
 namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline

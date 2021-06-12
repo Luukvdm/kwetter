@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.CQRS.Exceptions;
+using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.Services.UserRelations.Application.Commands.CreateFollow;
 using Kwetter.Services.UserRelations.Events.Events;
@@ -13,13 +14,15 @@ namespace Kwetter.Services.UserRelations.Application.EventHandlers
     {
         private readonly ISender _mediator;
         private readonly IEventBus _eventBus;
+        private readonly IExceptionHandler _exceptionHandler;
         private readonly ILogger<CreateFollowEventHandler> _logger;
 
-        public CreateFollowEventHandler(ISender mediator, IEventBus eventBus, ILogger<CreateFollowEventHandler> logger)
+        public CreateFollowEventHandler(ISender mediator, IEventBus eventBus, ILogger<CreateFollowEventHandler> logger, IExceptionHandler exceptionHandler)
         {
             _mediator = mediator;
             _eventBus = eventBus;
             _logger = logger;
+            _exceptionHandler = exceptionHandler;
         }
 
         public async Task Handle(CreateFollowEvent @event)
@@ -33,14 +36,7 @@ namespace Kwetter.Services.UserRelations.Application.EventHandlers
             }
             catch (ValidationException validationException)
             {
-                // This looks dramatic but most of the time its just one notification
-                foreach (var error in validationException.Errors)
-                {
-                    foreach (string message in error.Value)
-                    {
-                        _eventBus.Publish(new FailureNotification(message, @event.FollowingUserId));
-                    }
-                }
+                _exceptionHandler?.HandleValidationException(validationException, @event.FollowingUserId);
             }
         }
     }

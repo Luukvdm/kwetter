@@ -1,7 +1,7 @@
 using FluentValidation.Results;
 using Kwetter.BuildingBlocks.CQRS.Mappings;
 
-namespace Kwetter.Services.Tweet.Api.Services.Dtos
+namespace Kwetter.Services.Tweet.Api.GrpcServices.Dtos
 {
     public class ValidationExceptionErrorDto : IMapFrom<ValidationFailure>
     {

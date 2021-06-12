@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Kwetter.Services.Tweet.Api.Services.Dtos
+namespace Kwetter.Services.Tweet.Api.GrpcServices.Dtos
 {
     public class ValidationExceptionDto 
     {

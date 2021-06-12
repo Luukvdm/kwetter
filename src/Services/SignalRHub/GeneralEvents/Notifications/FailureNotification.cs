@@ -1,6 +1,6 @@
 using Kwetter.BuildingBlocks.EventBus.EventBus.Events;
 
-namespace Kwetter.Services.Tweet.Events.Notifications
+namespace GeneralEvents.Notifications
 {
     public record FailureNotification : IntegrationEvent
     {

@@ -4,7 +4,7 @@ using Kwetter.BuildingBlocks.KwetterLogger;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Kwetter.Services.Tweet.Hub
+namespace Kwetter.Services.SignalRHub.SignalRHub
 {
     public class Program
     {

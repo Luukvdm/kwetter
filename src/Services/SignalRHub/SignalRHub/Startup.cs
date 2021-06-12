@@ -1,4 +1,4 @@
-using System.Reflection;
+using GeneralEvents.Notifications;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.Configurations.Extensions;
 using Kwetter.BuildingBlocks.Configurations.Models;
@@ -7,9 +7,9 @@ using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.EventBus.EventBusRabbitMQ;
 using Kwetter.BuildingBlocks.IdentityBlocks;
 using Kwetter.BuildingBlocks.KwetterLogger;
+using Kwetter.Services.SignalRHub.SignalRHub.EventHandlers;
+using Kwetter.Services.SignalRHub.SignalRHub.Hubs;
 using Kwetter.Services.Tweet.Events.Notifications;
-using Kwetter.Services.Tweet.Hub.EventHandlers;
-using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 
-namespace Kwetter.Services.Tweet.Hub
+namespace Kwetter.Services.SignalRHub.SignalRHub
 {
     public class Startup
     {
@@ -42,7 +42,6 @@ namespace Kwetter.Services.Tweet.Hub
             services.AddTransient<TweetLikedEventHandler>();
 
             services.AddHttpContextAccessor();
-            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.ConfigureKwetterLogger(Configuration);
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddEventBus(eventBusConfig);

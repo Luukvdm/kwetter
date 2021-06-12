@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Kwetter.Services.Tweet.Hub
+namespace Kwetter.Services.SignalRHub.SignalRHub.Hubs
 {
     [Authorize]
     public class TweetHub : Microsoft.AspNetCore.SignalR.Hub

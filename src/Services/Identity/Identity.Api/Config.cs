@@ -58,12 +58,10 @@ namespace Kwetter.Services.Identity.Api
                         IdentityKeys.MediaApiScope, IdentityKeys.HubResource, IdentityKeys.IdentityLocalApiScope
                     }
                 },
-                /* new(IdentityKeys.HubResource, "Kweeter tweet Hub")
+                new(IdentityKeys.HubResource, "SignalR Hubs")
                 {
-                    Scopes = new[] { IdentityKeys.}
-                } */
-                // new(IdentityKeys.TweetSignalRHubResource, "Kwetter tweet signalr hub")
-                // new(MediaApiScope, "Kwetter media API")
+                    Scopes = new[] { IdentityKeys.HubResource}
+                } 
             };
 
         public static IEnumerable<Client> Clients(UrlConfig uris) =>

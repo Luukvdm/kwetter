@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Kwetter.ApiGateways.WebSpa.Aggregator.Models;
-using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.KwetterGrpc;
 using Kwetter.Services.UserRelations.GrpcContracts;
 using ProtoBuf.Grpc.Client;

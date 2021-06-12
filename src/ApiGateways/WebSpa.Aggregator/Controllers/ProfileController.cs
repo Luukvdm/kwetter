@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using Kwetter.ApiGateways.WebSpa.Aggregator.Models;

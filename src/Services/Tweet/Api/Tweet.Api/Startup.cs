@@ -10,7 +10,7 @@ using Kwetter.BuildingBlocks.KwetterLogger;
 using Kwetter.BuildingBlocks.KwetterSwagger;
 using Kwetter.Services.Core.Tweet.Application;
 using Kwetter.Services.Tweet.Api.Filters;
-using Kwetter.Services.Tweet.Api.Services;
+using Kwetter.Services.Tweet.Api.GrpcServices;
 using Kwetter.Services.Tweet.Infrastructure;
 using Kwetter.Services.Tweet.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;

@@ -1,14 +1,6 @@
 ﻿{
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:4694",
-      "sslPort": 44353
-    }
-  },
   "profiles": {
-    "Tweet.Hub": {
+    "SignalRHub": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": false,

@@ -1,7 +1,7 @@
+using GeneralEvents.Notifications;
 using Kwetter.BuildingBlocks.CQRS.Exceptions;
 using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
-using Kwetter.Services.Tweet.Events.Notifications;
 
 namespace Kwetter.Services.Tweet.Infrastructure.Services
 {

@@ -1,10 +1,11 @@
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
+using Kwetter.Services.SignalRHub.SignalRHub.Hubs;
 using Kwetter.Services.Tweet.Events.Notifications;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
-namespace Kwetter.Services.Tweet.Hub.EventHandlers
+namespace Kwetter.Services.SignalRHub.SignalRHub.EventHandlers
 {
     public class TweetLikedEventHandler : IIntegrationEventHandler<TweetLikedNotification>
     {

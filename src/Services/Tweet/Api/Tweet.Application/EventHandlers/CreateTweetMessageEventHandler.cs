@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.CQRS.Exceptions;
+using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.Services.Core.Tweet.Application.Commands.CreateTweetMessage;
 using Kwetter.Services.Tweet.Events.Events;
@@ -14,14 +15,16 @@ namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
     {
         private readonly ISender _mediator;
         private readonly IEventBus _eventBus;
+        private readonly IExceptionHandler _exceptionHandler;
         private readonly ILogger<CreateTweetMessageEventHandler> _logger;
 
         public CreateTweetMessageEventHandler(ISender mediator, IEventBus eventBus,
-            ILogger<CreateTweetMessageEventHandler> logger)
+            ILogger<CreateTweetMessageEventHandler> logger, IExceptionHandler exceptionHandler)
         {
             _mediator = mediator;
             _eventBus = eventBus;
             _logger = logger;
+            _exceptionHandler = exceptionHandler;
         }
 
         public async Task Handle(CreateTweetMessageEvent @event)
@@ -36,18 +39,12 @@ namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
             }
             catch (ValidationException validationException)
             {
-                // This looks dramatic but most of the time its just one notification
-                foreach (var error in validationException.Errors)
-                {
-                    foreach (string message in error.Value)
-                    {
-                        _eventBus.Publish(new FailureNotification(message, @event.CreatorId));
-                    }
-                }
+                _exceptionHandler?.HandleValidationException(validationException, @event.CreatorId);
             }
             catch (Exception miscException)
             {
-                _eventBus.Publish(new FailureNotification(miscException.Message, @event.CreatorId));
+                // _eventBus.Publish(new FailureNotification(miscException.Message, @event.CreatorId));
+                throw;
             }
         }
     }

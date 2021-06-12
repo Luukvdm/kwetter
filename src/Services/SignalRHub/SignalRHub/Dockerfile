@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 ENV ASPNETCORE_URLS=http://+:80
 WORKDIR /app
 EXPOSE 80
@@ -27,7 +27,6 @@ COPY "Services/Tweet/Api/Tweet.Api/Tweet.Api.csproj" "Services/Tweet/Api/Tweet.A
 
 COPY "Services/Tweet/Tweet.Events/Tweet.Events.csproj" "Services/Tweet/Tweet.Events/Tweet.Events.csproj"
 COPY "Services/Tweet/Tweet.GrpcContracts/Tweet.GrpcContracts.csproj" "Services/Tweet/Tweet.GrpcContracts/Tweet.GrpcContracts.csproj"
-COPY "Services/Tweet/Tweet.Hub/Tweet.Hub.csproj" "Services/Tweet/Tweet.Hub/Tweet.Hub.csproj"
 
 COPY "Services/UserRelations/Api/UserRelations.Api/UserRelations.Api.csproj" "Services/UserRelations/Api/UserRelations.Api/UserRelations.Api.csproj"
 COPY "Services/UserRelations/Api/UserRelations.Application/UserRelations.Application.csproj" "Services/UserRelations/Api/UserRelations.Application/UserRelations.Application.csproj"

@@ -6,7 +6,7 @@ using Kwetter.Services.Tweet.GrpcContracts;
 using Kwetter.Services.Tweet.GrpcContracts.Models;
 using MediatR;
 
-namespace Kwetter.Services.Tweet.Api.Services
+namespace Kwetter.Services.Tweet.Api.GrpcServices
 {
     public class TimelineService : ITimelineService
     {
