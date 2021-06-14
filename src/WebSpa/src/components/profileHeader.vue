@@ -9,7 +9,7 @@ export default {
     profilePicture: String,
     bannerImage: String,
     isCurrentUser: Boolean,
-    isFollowing: Boolean,
+    isFollowing: Boolean
   },
   methods: {
     ...mapActions("userRelation", ["unFollowUser", "followUser"]),
@@ -18,8 +18,8 @@ export default {
     },
     unFollow() {
       this.unFollowUser(this.id);
-    },
-  },
+    }
+  }
 };
 </script>
 

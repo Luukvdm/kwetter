@@ -34,7 +34,7 @@ namespace Kwetter.Services.Tweet.Infrastructure
                         configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
             }
-
+            
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddTransient<IExceptionHandler, ExceptionHandler>();

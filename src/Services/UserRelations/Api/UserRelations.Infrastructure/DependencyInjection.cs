@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
+using IExceptionHandler = Kwetter.BuildingBlocks.CQRS.Services.IExceptionHandler;
 
 namespace Kwetter.Services.UserRelations.Infrastucture
 {
@@ -36,6 +37,7 @@ namespace Kwetter.Services.UserRelations.Infrastucture
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
             services.AddTransient<IDateTime, DateTimeService>();
+            services.AddTransient<IExceptionHandler, ExceptionHandler>();
 
             return services;
         }

@@ -17,7 +17,7 @@ export default {
           content: "Test Person",
           category: "a person",
         },*/
-      ],
+      ]
     };
   },
   methods: {
@@ -50,12 +50,12 @@ export default {
       const searchTerm = event.target.value;
       const result = await this.searchUsers(searchTerm);
       this.results = [];
-      result.forEach((user) => {
+      result.forEach(user => {
         this.results.push({
           content: user.displayName,
           descriptor: "A user",
           category: "user",
-          routerLink: "/profile/" + user.username,
+          routerLink: "/profile/" + user.username
         });
       });
     },
@@ -63,16 +63,16 @@ export default {
       const searchTerm = event.target.value;
       const result = await this.searchUsers(searchTerm);
       this.results = [];
-      result.forEach((user) => {
+      result.forEach(user => {
         this.results.push({
           content: user.displayName,
           descriptor: "A user",
           category: "user",
-          routerLink: "/profile/" + user.username,
+          routerLink: "/profile/" + user.username
         });
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

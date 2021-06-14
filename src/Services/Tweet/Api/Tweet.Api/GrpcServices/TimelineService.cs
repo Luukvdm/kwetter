@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace Kwetter.Services.Tweet.Api.GrpcServices
 
         public async ValueTask<IList<ContractTweetMessage>> GetTimeline(GetTimeline getTimeline)
         {
+            getTimeline.FollowedUserIds ??= Array.Empty<string>();
             var tweets = await _mediator.Send(new GetTimelineQuery(getTimeline.UserId, getTimeline.FollowedUserIds));
             return tweets.Select(e => new ContractTweetMessage
             {

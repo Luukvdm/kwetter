@@ -6,6 +6,7 @@ using Kwetter.BuildingBlocks.Configurations.Extensions;
 using Kwetter.BuildingBlocks.Configurations.Models;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.IdentityBlocks;
+using Kwetter.BuildingBlocks.IdentityBlocks.Constants;
 using Kwetter.BuildingBlocks.KwetterLogger;
 using Kwetter.BuildingBlocks.KwetterSwagger;
 using Kwetter.Services.Core.Tweet.Application;
@@ -49,6 +50,17 @@ namespace Kwetter.Services.Tweet.Api
             services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddEventBus(eventBusConfig);
             services.AddKwetterIdentity(Environment, identityConfig);
+            
+            // Token management for the api
+            services.AddKwetterAccessTokenManagement(identityConfig,
+                new[]
+                {
+                    IdentityKeys.UserRelationsApiScope
+                });
+
+            // Default client
+            services.AddClientAccessTokenClient("default-client", "default-client")
+                .AddClientAccessTokenHandler();
             
             services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
             services.AddKwetterSwagger(Assembly.GetExecutingAssembly(), identityConfig);
