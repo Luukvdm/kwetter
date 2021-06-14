@@ -11,7 +11,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=@Welkom1
 
   main-gateway:
-    image: ${REGISTRY:-luukvdm}/kwetter-main-gateway:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-luukvdm}/kwetter-main-gateway:${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateways/MainGateway/Dockerfile
@@ -25,7 +25,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
 
   webspa-agg:
-    image: ${REGISTRY:-luukvdm}/kwetter-webspa-agg:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-luukvdm}/kwetter-webspa-agg:${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateways/WebSpa.Aggregator/Dockerfile
@@ -38,7 +38,7 @@ services:
       - Identity__authority=http://identity-api
 
   identity-api:
-    image: ${REGISTRY:-luukvdm}/kwetter-identity-api:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-luukvdm}/kwetter-identity-api:${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Identity/Identity.Api/Dockerfile
@@ -72,7 +72,7 @@ services:
       #- ./db-data/identity/:/var/lib/postgresql/data/
 
   tweet-api:
-    image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Tweet/Api/Tweet.Api/Dockerfile
@@ -109,7 +109,7 @@ services:
       #- ./db-data/identity/:/var/lib/postgresql/data/
 
   tweet-hub:
-    image: ${REGISTRY:-luukvdm}/kwetter-tweet-hub:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-luukvdm}/kwetter-tweet-hub:${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Tweet/Tweet.Hub/Dockerfile
@@ -124,7 +124,7 @@ services:
       - Identity__authority=http://identity-api
 
   webspa:
-    image: ${REGISTRY:-luukvdm}/kwetter-webspa:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-luukvdm}/kwetter-webspa:${TAG:-latest}
     build:
       context: .
       dockerfile: WebSpa/Dockerfile
