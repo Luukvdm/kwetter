@@ -21,9 +21,11 @@ namespace Kwetter.Services.SignalRHub.SignalRHub.EventHandlers
         public async Task Handle(TweetLikedNotification notification)
         {
             _logger.LogInformation("Sending tweet liked event to the client");
+
+            string[] receivers = { notification.UserId, notification.TweetMessageCreatorId };
             
             await _tweetHub.Clients
-                .Group(notification.UserId)
+                .Groups(receivers)
                 .SendAsync("TweetMessageLiked", notification);
         }
     }

@@ -2,7 +2,7 @@ using FluentValidation;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.Services.Tweet.Domain.Entities;
 
-namespace Kwetter.Services.Core.Tweet.Application.Commands.CreateTweetMessage
+namespace Kwetter.Services.Tweet.Application.Commands.CreateTweetMessage
 {
     public class CreateTweetMessageValidator : AbstractValidator<CreateTweetMessageCommand>
     {

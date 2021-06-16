@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
+using Kwetter.Services.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Domain.Entities;
 using MediatR;
 
-namespace Kwetter.Services.Core.Tweet.Application.Commands.CreateLike
+namespace Kwetter.Services.Tweet.Application.Commands.CreateLike
 {
     public class CreateLikeCommand : IRequest<Like>
     {

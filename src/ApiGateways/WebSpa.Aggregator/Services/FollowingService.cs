@@ -21,32 +21,28 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
 
         public async Task CreateFollowing(string followingUserId, string followedUserId)
         {
-            var userRelationsChannel = await _grpcChannelService.CreateUserRelationsChannel();
-            var followingService = userRelationsChannel.CreateGrpcService<IFollowingService>();
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
 
             await followingService.CreateFollowing(new CreateFollowing(followingUserId, followedUserId));
         }
         
         public async Task RemoveFollowing(string followingUserId, string followedUserId)
         {
-            var userRelationsChannel = await _grpcChannelService.CreateUserRelationsChannel();
-            var followingService = userRelationsChannel.CreateGrpcService<IFollowingService>();
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
 
             await followingService.RemoveFollowing(new RemoveFollowing(followingUserId, followedUserId));
         }
         
         public async Task<IList<string>> GetFollowed(string userId)
         {
-            var userRelationsChannel = await _grpcChannelService.CreateUserRelationsChannel();
-            var followingService = userRelationsChannel.CreateGrpcService<IFollowingService>();
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
 
             return await followingService.GetFollowed(userId);
         }
 
         public async Task<IList<User>> GetFollowedUsers(string userId)
         {
-            var userRelationsChannel = await _grpcChannelService.CreateUserRelationsChannel();
-            var followingService = userRelationsChannel.CreateGrpcService<IFollowingService>();
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
 
             var userIds = await followingService.GetFollowed(userId);
             var users = await _userService.GetUsers(userIds.ToArray());
@@ -56,16 +52,14 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
 
         public async Task<IList<string>> GetFollowers(string userId)
         {
-            var userRelationsChannel = await _grpcChannelService.CreateUserRelationsChannel();
-            var followingService = userRelationsChannel.CreateGrpcService<IFollowingService>();
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
 
             return await followingService.GetFollowers(userId);
         }
 
         public async Task<IList<User>> GetFollowersUsers(string userId)
         {
-            var userRelationsChannel = await _grpcChannelService.CreateUserRelationsChannel();
-            var followingService = userRelationsChannel.CreateGrpcService<IFollowingService>();
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
 
             var userIds = await followingService.GetFollowers(userId);
             var users = await _userService.GetUsers(userIds.ToArray());

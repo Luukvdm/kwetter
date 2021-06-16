@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTweetMessageQuery
+namespace Kwetter.Services.Tweet.Application.Queries.GetTweetMessageQuery
 {
     public class GetTweetMessageValidator : AbstractValidator<GetTweetMessageQuery>
     {

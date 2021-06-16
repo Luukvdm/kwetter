@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline
+namespace Kwetter.Services.Tweet.Application.Queries.GetTimeline
 {
     public class GetTimelineValidator : AbstractValidator<GetTimelineQuery>
     {

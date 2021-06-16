@@ -27,6 +27,8 @@ export const mutations = {
     const tl = state.cachedTimelines.find(
       e => e.username === tweet.poster.username
     );
+    console.log("Found this timeline to add created tweet to:");
+    console.log(tl);
     if (tl) state.cachedTimelines[0].tweets.unshift(tweet);
   }
 };

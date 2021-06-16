@@ -7,11 +7,12 @@ using Kwetter.BuildingBlocks.Configurations.Models;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.IdentityBlocks;
 using Kwetter.BuildingBlocks.IdentityBlocks.Constants;
+using Kwetter.BuildingBlocks.KwetterGrpc;
 using Kwetter.BuildingBlocks.KwetterLogger;
 using Kwetter.BuildingBlocks.KwetterSwagger;
-using Kwetter.Services.Core.Tweet.Application;
 using Kwetter.Services.Tweet.Api.Filters;
 using Kwetter.Services.Tweet.Api.GrpcServices;
+using Kwetter.Services.Tweet.Application;
 using Kwetter.Services.Tweet.Infrastructure;
 using Kwetter.Services.Tweet.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
@@ -51,17 +52,6 @@ namespace Kwetter.Services.Tweet.Api
             services.AddEventBus(eventBusConfig);
             services.AddKwetterIdentity(Environment, identityConfig);
             
-            // Token management for the api
-            services.AddKwetterAccessTokenManagement(identityConfig,
-                new[]
-                {
-                    IdentityKeys.UserRelationsApiScope
-                });
-
-            // Default client
-            services.AddClientAccessTokenClient("default-client", "default-client")
-                .AddClientAccessTokenHandler();
-            
             services.AddHealthChecks().AddDbContextCheck<ApplicationDbContext>();
             services.AddKwetterSwagger(Assembly.GetExecutingAssembly(), identityConfig);
             services.Configure<ApiBehaviorOptions>(options =>
@@ -70,10 +60,23 @@ namespace Kwetter.Services.Tweet.Api
                 options.SuppressModelStateInvalidFilter = true;
             });
 
+            // Http client setup with access token
+            const string accessTokenClientName = "default-toke-client";
+            const string httpClientName = "default-client";
+            services.AddKwetterAccessTokenManagement(accessTokenClientName, identityConfig,
+                new[]
+                {
+                    IdentityKeys.UserRelationsApiScope
+                });
+            services.AddKwetterAuthorizedHttpClients(httpClientName, accessTokenClientName, false, httpOptions => { });
+            
+            // Grpc service
             services.AddCodeFirstGrpc(config =>
             {
                 config.ResponseCompressionLevel = CompressionLevel.Optimal;
             });
+            // Grpc client
+            services.AddGrpcClientServices(accessTokenClientName, httpClientName);
             
             services.AddCors(options =>
             {

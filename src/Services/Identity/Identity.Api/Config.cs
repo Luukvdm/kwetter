@@ -107,6 +107,26 @@ namespace Kwetter.Services.Identity.Api
                         IdentityKeys.MediaApiScope
                     }
                 },
+                new()
+                {
+                    ClientId = "tweet.api",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        IdentityKeys.UserRelationsApiScope
+                    }
+                },
+                new()
+                {
+                    ClientId = "signalrhub",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        IdentityKeys.UserRelationsApiScope
+                    }
+                },
                 /* new()
                 {
                     ClientId = "Kwetter.TweetApi",

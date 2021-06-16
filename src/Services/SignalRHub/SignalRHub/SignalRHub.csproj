@@ -16,5 +16,7 @@
         <ProjectReference Include="../../Tweet/Tweet.Events/Tweet.Events.csproj" />
         <ProjectReference Include="../GeneralEvents/GeneralEvents.csproj" />
         <ProjectReference Include="../../Tweet/Tweet.Events/Tweet.Events.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\KwetterGrpc\KwetterGrpc.csproj" />
+        <ProjectReference Include="..\..\UserRelations\UserRelations.GrpcContracts\UserRelations.GrpcContracts.csproj" />
     </ItemGroup>
 </Project>

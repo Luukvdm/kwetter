@@ -3,23 +3,23 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
+using Kwetter.Services.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline
+namespace Kwetter.Services.Tweet.Application.Queries.GetTimeline
 {
     public class GetTimelineQuery : IRequest<IList<TweetMessage>>
     {
-        public GetTimelineQuery(string userId, string[] followedUserIds)
+        public GetTimelineQuery(string userId, IEnumerable<string> followedUserIds)
         {
             UserId = userId;
             FollowedUserIds = followedUserIds;
         }
 
         public string UserId { get; set; }
-        public string[] FollowedUserIds { get; set; }
+        public IEnumerable<string> FollowedUserIds { get; set; }
     }
 
     public class GetTimelineQueryHandler : IRequestHandler<GetTimelineQuery, IList<TweetMessage>>

@@ -1,27 +1,33 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline;
+using Kwetter.BuildingBlocks.KwetterGrpc;
+using Kwetter.Services.Tweet.Application.Queries.GetTimeline;
 using Kwetter.Services.Tweet.GrpcContracts;
 using Kwetter.Services.Tweet.GrpcContracts.Models;
+using Kwetter.Services.UserRelations.GrpcContracts;
 using MediatR;
+using ProtoBuf.Grpc.Client;
 
 namespace Kwetter.Services.Tweet.Api.GrpcServices
 {
     public class TimelineService : ITimelineService
     {
         private readonly ISender _mediator;
+        private readonly GrpcChannelService _grpcChannelService;
 
-        public TimelineService(ISender mediator)
+        public TimelineService(ISender mediator, GrpcChannelService grpcChannelService)
         {
             _mediator = mediator;
+            _grpcChannelService = grpcChannelService;
         }
 
-        public async ValueTask<IList<ContractTweetMessage>> GetTimeline(GetTimeline getTimeline)
+        public async ValueTask<IList<ContractTweetMessage>> GetTimeline(string userId)
         {
-            getTimeline.FollowedUserIds ??= Array.Empty<string>();
-            var tweets = await _mediator.Send(new GetTimelineQuery(getTimeline.UserId, getTimeline.FollowedUserIds));
+            var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
+            var followers = await followingService.GetFollowers(userId);
+
+            var tweets = await _mediator.Send(new GetTimelineQuery(userId, followers));
             return tweets.Select(e => new ContractTweetMessage
             {
                 Id = e.Id,

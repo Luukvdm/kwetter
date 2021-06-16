@@ -1,9 +1,9 @@
 using System.Linq;
 using FluentValidation;
-using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
+using Kwetter.Services.Tweet.Application.Common.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kwetter.Services.Core.Tweet.Application.Commands.CreateLike
+namespace Kwetter.Services.Tweet.Application.Commands.CreateLike
 {
     public class LikeTweetMessageValidator : AbstractValidator<CreateLikeCommand>
     {

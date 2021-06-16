@@ -14,15 +14,13 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
         private readonly GrpcChannelService _grpcChannelService;
 
         private readonly UserService _userService;
-        private readonly FollowingService _followingService;
         private readonly IDateTime _dateTime;
 
-        public TimeLineService(GrpcChannelService grpcChannelService, IDateTime dateTime, UserService userService, FollowingService followingService)
+        public TimeLineService(GrpcChannelService grpcChannelService, IDateTime dateTime, UserService userService)
         {
             _grpcChannelService = grpcChannelService;
             _dateTime = dateTime;
             _userService = userService;
-            _followingService = followingService;
         }
 
         public async Task<Timeline> GetTimeLine(string username)
@@ -33,8 +31,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
             var tweetChannel = await _grpcChannelService.CreateTweetChannel();
             var timelineService = tweetChannel.CreateGrpcService<ITimelineService>();
 
-            var followedUsers = await _followingService.GetFollowed(owner.Id);
-            var tweets = await timelineService.GetTimeline(new GetTimeline(owner.Id, followedUsers.ToArray()));
+            var tweets = await timelineService.GetTimeline(owner.Id);
             string[] userIds = tweets.Select(e => e.CreatorId).Distinct().ToArray();
 
             var users = await _userService.GetUsers(userIds);

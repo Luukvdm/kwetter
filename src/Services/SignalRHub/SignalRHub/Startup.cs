@@ -6,12 +6,15 @@ using Kwetter.BuildingBlocks.EventBus.EventBus;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.EventBus.EventBusRabbitMQ;
 using Kwetter.BuildingBlocks.IdentityBlocks;
+using Kwetter.BuildingBlocks.IdentityBlocks.Constants;
+using Kwetter.BuildingBlocks.KwetterGrpc;
 using Kwetter.BuildingBlocks.KwetterLogger;
 using Kwetter.Services.SignalRHub.SignalRHub.EventHandlers;
 using Kwetter.Services.SignalRHub.SignalRHub.Hubs;
 using Kwetter.Services.Tweet.Events.Notifications;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,6 +50,18 @@ namespace Kwetter.Services.SignalRHub.SignalRHub
             services.AddEventBus(eventBusConfig);
             services.AddKwetterIdentity(Environment, identityConfig);
             services.AddSignalR();
+            
+            // Http client setup with access token
+            const string accessTokenClientName = "default-token-client";
+            const string httpClientName = "default-client";
+            services.AddKwetterAccessTokenManagement(accessTokenClientName, identityConfig,
+                new[]
+                {
+                    IdentityKeys.UserRelationsApiScope
+                });
+            services.AddKwetterAuthorizedHttpClients(httpClientName, accessTokenClientName, false, httpOptions => { });
+            
+            services.AddGrpcClientServices(accessTokenClientName, httpClientName);
 
             services.AddHealthChecks();
 

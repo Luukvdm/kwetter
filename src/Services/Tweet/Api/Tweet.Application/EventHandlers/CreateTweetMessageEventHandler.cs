@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.CQRS.Exceptions;
 using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
-using Kwetter.Services.Core.Tweet.Application.Commands.CreateTweetMessage;
+using Kwetter.Services.Tweet.Application.Commands.CreateTweetMessage;
 using Kwetter.Services.Tweet.Events.Events;
 using Kwetter.Services.Tweet.Events.Notifications;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Kwetter.Services.Core.Tweet.Application.EventHandlers
+namespace Kwetter.Services.Tweet.Application.EventHandlers
 {
     public class CreateTweetMessageEventHandler : IIntegrationEventHandler<CreateTweetMessageEvent>
     {

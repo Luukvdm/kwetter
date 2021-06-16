@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
-using Kwetter.Services.Core.Tweet.Application.Queries.GetTweetMessageQuery;
+using Kwetter.Services.Tweet.Application.Queries.GetTweetMessageQuery;
 using Kwetter.Services.Tweet.Events.Events;
 using Kwetter.Services.Tweet.GrpcContracts;
 using Kwetter.Services.Tweet.GrpcContracts.Models;

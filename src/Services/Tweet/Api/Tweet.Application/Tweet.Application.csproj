@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>Kwetter.Services.Core.Tweet.Application</RootNamespace>
-        <AssemblyName>Kwetter.Services.Core.Tweet.Application</AssemblyName>
+        <RootNamespace>Kwetter.Services.Tweet.Application</RootNamespace>
+        <AssemblyName>Kwetter.Services.Tweet.Application</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

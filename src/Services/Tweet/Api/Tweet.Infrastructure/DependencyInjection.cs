@@ -5,7 +5,7 @@ using Kwetter.BuildingBlocks.CQRS.Services;
 using Kwetter.BuildingBlocks.EventBus.EventBus;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
 using Kwetter.BuildingBlocks.EventBus.EventBusRabbitMQ;
-using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
+using Kwetter.Services.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Infrastructure.Persistence;
 using Kwetter.Services.Tweet.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;

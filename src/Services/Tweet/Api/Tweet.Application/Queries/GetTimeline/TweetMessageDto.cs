@@ -2,7 +2,7 @@ using System;
 using Kwetter.BuildingBlocks.CQRS.Mappings;
 using Kwetter.Services.Tweet.Domain.Entities;
 
-namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline
+namespace Kwetter.Services.Tweet.Application.Queries.GetTimeline
 {
     public class TweetMessageDto : IMapFrom<TweetMessage>
     {
