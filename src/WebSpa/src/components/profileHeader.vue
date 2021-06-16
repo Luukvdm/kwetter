@@ -1,4 +1,6 @@
 <script>
+import { mapActions } from "vuex";
+
 export default {
   props: {
     id: String,
@@ -8,6 +10,15 @@ export default {
     bannerImage: String,
     isCurrentUser: Boolean,
     isFollowing: Boolean
+  },
+  methods: {
+    ...mapActions("userRelation", ["unFollowUser", "followUser"]),
+    follow() {
+      this.followUser(this.id);
+    },
+    unFollow() {
+      this.unFollowUser(this.id);
+    }
   }
 };
 </script>
@@ -25,8 +36,12 @@ export default {
           </div>
         </div>
         <div v-if="!isCurrentUser" class="profile-buttons">
-          <button v-if="isFollowing" class="following-button">Unfollow</button>
-          <button v-else class="following-button">Follow</button>
+          <button @click="unFollow" v-if="isFollowing" class="following-button">
+            Unfollow
+          </button>
+          <button @click="follow" v-else class="following-button">
+            Follow
+          </button>
         </div>
       </div>
       <div class="name-row row">

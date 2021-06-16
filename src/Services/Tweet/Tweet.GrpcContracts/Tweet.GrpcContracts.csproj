@@ -9,5 +9,4 @@
     <ItemGroup>
         <PackageReference Include="protobuf-net.Grpc" Version="1.0.152" />
     </ItemGroup>
-    
 </Project>

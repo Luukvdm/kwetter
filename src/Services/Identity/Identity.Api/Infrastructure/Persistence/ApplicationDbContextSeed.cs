@@ -53,11 +53,18 @@ namespace Kwetter.Services.Identity.Api.Infrastructure.Persistence
 
             // Add a admin user to test with
             var defaultAdmin = new ApplicationUser {UserName = "admin", DisplayName = "Je Favoriete Admin", Email = "admin@kwetter.com"};
+            var testUser1 = new ApplicationUser { UserName = "user1", DisplayName = "User #1", Email = "user1@kwetter.com" };
+            var testUser2 = new ApplicationUser { UserName = "user2", DisplayName = "User #2", Email = "user2@kwetter.com" };
+            var testUser3 = new ApplicationUser { UserName = "user3", DisplayName = "User #3", Email = "user3@kwetter.com" };
 
             if (userManager.Users.All(u => u.UserName != defaultAdmin.UserName))
             {
                 await userManager.CreateAsync(defaultAdmin, "@Welkom1");
                 await userManager.AddToRoleAsync(defaultAdmin, Roles.Admin);
+
+                await userManager.CreateAsync(testUser1, "@Welkom1");
+                await userManager.CreateAsync(testUser2, "@Welkom1");
+                await userManager.CreateAsync(testUser3, "@Welkom1");
 
                 Console.WriteLine("User id: " + defaultAdmin.Id);
             }

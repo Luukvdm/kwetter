@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.Services.UserRelations.Infrastucture</RootNamespace>
+        <AssemblyName>Kwetter.Services.UserRelations.Infrastructure</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.7" />
+        <PackageReference Include="Npgsql" Version="5.0.5" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.6" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../UserRelations.Application/UserRelations.Application.csproj" />
+        <ProjectReference Include="../../../../BuildingBlocks/EventBus/EventBusRabbitMQ/EventBusRabbitMQ.csproj" />
+        <ProjectReference Include="../../../../BuildingBlocks/Abstractions/Abstractions.csproj" />
+        <ProjectReference Include="../../../../BuildingBlocks/Configurations/Configurations.csproj" />
+        <ProjectReference Include="..\..\..\SignalRHub\GeneralEvents\GeneralEvents.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Persistence\Migrations" />
+    </ItemGroup>
+</Project>

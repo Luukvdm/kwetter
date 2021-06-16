@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 ENV ASPNETCORE_URLS=http://+:80
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 
 # Keeping the the first lines the same for every Dockerfile takes advantage of Dockers caching mechanism
@@ -27,10 +27,20 @@ COPY "Services/Tweet/Api/Tweet.Api/Tweet.Api.csproj" "Services/Tweet/Api/Tweet.A
 
 COPY "Services/Tweet/Tweet.Events/Tweet.Events.csproj" "Services/Tweet/Tweet.Events/Tweet.Events.csproj"
 COPY "Services/Tweet/Tweet.GrpcContracts/Tweet.GrpcContracts.csproj" "Services/Tweet/Tweet.GrpcContracts/Tweet.GrpcContracts.csproj"
-COPY "Services/Tweet/Tweet.Hub/Tweet.Hub.csproj" "Services/Tweet/Tweet.Hub/Tweet.Hub.csproj"
+
+COPY "Services/UserRelations/Api/UserRelations.Api/UserRelations.Api.csproj" "Services/UserRelations/Api/UserRelations.Api/UserRelations.Api.csproj"
+COPY "Services/UserRelations/Api/UserRelations.Application/UserRelations.Application.csproj" "Services/UserRelations/Api/UserRelations.Application/UserRelations.Application.csproj"
+COPY "Services/UserRelations/Api/UserRelations.Domain/UserRelations.Domain.csproj" "Services/UserRelations/Api/UserRelations.Domain/UserRelations.Domain.csproj"
+COPY "Services/UserRelations/Api/UserRelations.Infrastructure/UserRelations.Infrastructure.csproj" "Services/UserRelations/Api/UserRelations.Infrastructure/UserRelations.Infrastructure.csproj"
+
+COPY "Services/UserRelations/UserRelations.Events/UserRelations.Events.csproj" "Services/UserRelations/UserRelations.Events/UserRelations.Events.csproj"
+COPY "Services/UserRelations/UserRelations.GrpcContracts/UserRelations.GrpcContracts.csproj" "Services/UserRelations/UserRelations.GrpcContracts/UserRelations.GrpcContracts.csproj"
 
 COPY "Services/Identity/Identity.Api/Identity.Api.csproj" "Services/Identity/Identity.Api/Identity.Api.csproj"
 COPY "Services/Identity/Identity.GrpcContracts/Identity.GrpcContracts.csproj" "Services/Identity/Identity.GrpcContracts/Identity.GrpcContracts.csproj"
+
+COPY "Services/SignalRHub/SignalRHub/SignalRHub.csproj" "Services/SignalRHub/SignalRHub/SignalRHub.csproj"
+COPY "Services/SignalRHub/GeneralEvents/GeneralEvents.csproj" "Services/SignalRHub/GeneralEvents/GeneralEvents.csproj"
 
 COPY "ApiGateways/MainGateway/MainGateway.csproj" "ApiGateways/MainGateway/MainGateway.csproj"
 COPY "ApiGateways/WebSpa.Aggregator/WebSpa.Aggregator.csproj" "ApiGateways/WebSpa.Aggregator/WebSpa.Aggregator.csproj"

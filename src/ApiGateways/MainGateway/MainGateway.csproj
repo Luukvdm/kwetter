@@ -4,6 +4,7 @@
         <TargetFramework>net5.0</TargetFramework>
         <RootNamespace>Kwetter.ApiGateways.MainGateway</RootNamespace>
         <AssemblyName>Kwetter.ApiGateways.MainGateway</AssemblyName>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>

@@ -30,6 +30,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Services
             
             var tweetChannel = await _grpcChannelService.CreateTweetChannel();
             var timelineService = tweetChannel.CreateGrpcService<ITimelineService>();
+
             var tweets = await timelineService.GetTimeline(owner.Id);
             string[] userIds = tweets.Select(e => e.CreatorId).Distinct().ToArray();
 

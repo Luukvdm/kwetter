@@ -2,6 +2,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
+using IdentityModel.AspNetCore.AccessTokenManagement;
 using Kwetter.BuildingBlocks.Configurations.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -12,20 +13,27 @@ namespace Kwetter.BuildingBlocks.KwetterGrpc
     public class GrpcClientCreatorService
     {
         private readonly UrlConfig _urlConfig;
-        private readonly IHttpContextAccessor _httpContext;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IClientAccessTokenManagementService _tokenManagementService;
 
-        public GrpcClientCreatorService(UrlConfig urlConfig, IHttpContextAccessor httpContext,
-            IHttpClientFactory httpClientFactory)
+        private readonly string _accessManagementClientName;
+        private readonly string _httpClientName;
+
+        public GrpcClientCreatorService(UrlConfig urlConfig,
+            IHttpClientFactory httpClientFactory, IClientAccessTokenManagementService tokenManagementService,
+            string accessManagementClientName = "default-token-client", string httpClientName = "default-client")
         {
             _urlConfig = urlConfig;
-            _httpContext = httpContext;
             _httpClientFactory = httpClientFactory;
+            _tokenManagementService = tokenManagementService;
+
+            _accessManagementClientName = accessManagementClientName;
+            _httpClientName = httpClientName;
         }
 
         private async Task<CallCredentials> CreateCallCredentials()
         {
-            string token = await _httpContext.HttpContext.GetClientAccessTokenAsync();
+            string token = await _tokenManagementService.GetClientAccessTokenAsync(_accessManagementClientName);
 
             var credentials = CallCredentials.FromInterceptor((_, metadata) =>
             {
@@ -57,11 +65,10 @@ namespace Kwetter.BuildingBlocks.KwetterGrpc
             bool useSsl = url.StartsWith("https");
 
             if (!useSsl) GrpcClientFactory.AllowUnencryptedHttp2 = true;
-            
-            var httpClient = _httpClientFactory.CreateClient("default-client");
-            
-            string token = await _httpContext.HttpContext.GetClientAccessTokenAsync("default-client");
-            // string token = httpClient.DefaultRequestHeaders.Authorization?.Parameter;
+
+            var httpClient = _httpClientFactory.CreateClient(_httpClientName);
+
+            string token = await _tokenManagementService.GetClientAccessTokenAsync(_accessManagementClientName);
             var callCreds = CallCredentials.FromInterceptor((_, metadata) =>
             {
                 metadata.Add("Authorization", $"Bearer {token}");
@@ -90,6 +97,12 @@ namespace Kwetter.BuildingBlocks.KwetterGrpc
         public async Task<GrpcChannel> CreateTweetChannel()
         {
             string url = _urlConfig.TweetGrpc;
+            return await CreateChannel(url);
+        }
+
+        public async Task<GrpcChannel> CreateUserRelationsChannel()
+        {
+            string url = _urlConfig.UserRelationsGrpc;
             return await CreateChannel(url);
         }
     }

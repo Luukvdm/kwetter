@@ -2,12 +2,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
+using Kwetter.Services.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTweetMessageQuery
+namespace Kwetter.Services.Tweet.Application.Queries.GetTweetMessageQuery
 {
     public class GetTweetMessageQuery : IRequest<TweetMessage>
     {

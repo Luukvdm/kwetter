@@ -25,28 +25,43 @@ namespace Kwetter.Services.Identity.Api
         public static IEnumerable<ApiScope> ApiScopes => new ApiScope[]
         {
             new(IdentityKeys.IdentityLocalApiScope),
+            new(IdentityKeys.HubResource),
+            new(IdentityKeys.TweetResource),
             new(IdentityKeys.TweetApiScope),
-            new(IdentityKeys.MediaApiScope)
+            new(IdentityKeys.UserRelationsResource),
+            new(IdentityKeys.UserRelationsApiScope),
+            new(IdentityKeys.MediaResource),
+            new(IdentityKeys.MediaApiScope),
         };
 
         public static IEnumerable<ApiResource> ApiResources =>
             new ApiResource[]
             {
                 new(IdentityServerConstants.LocalApi.ScopeName),
-                new(IdentityKeys.TweetApiResource, "Kwetter tweet API")
+                new(IdentityKeys.TweetResource, "Kwetter tweet domain")
                 {
-                    Scopes = new[] {JwtClaimTypes.Role, IdentityKeys.TweetApiScope}
+                    Scopes = new[] {IdentityKeys.TweetApiScope}
+                },
+                new(IdentityKeys.UserRelationsResource, "Kwetter user relations domain")
+                {
+                    Scopes = new[] {IdentityKeys.UserRelationsApiScope}
+                },
+                new(IdentityKeys.MediaResource, "Kwetter media domain")
+                {
+                    Scopes = new[] {IdentityKeys.MediaApiScope}
                 },
                 new(IdentityKeys.WebSpaGatewayResource, "Kwetter WebSpa API")
                 {
-                    Scopes = new[] {IdentityKeys.TweetApiScope, IdentityKeys.IdentityLocalApiScope}
+                    Scopes = new[]
+                    {
+                        IdentityKeys.TweetApiScope, IdentityKeys.UserRelationsApiScope,
+                        IdentityKeys.MediaApiScope, IdentityKeys.HubResource, IdentityKeys.IdentityLocalApiScope
+                    }
                 },
-                new(IdentityKeys.TweetHubResource, "Kweeter tweet Hub")
+                new(IdentityKeys.HubResource, "SignalR Hubs")
                 {
-                    Scopes = new[] {JwtClaimTypes.Role, IdentityKeys.TweetApiScope}
-                }
-                // new(IdentityKeys.TweetSignalRHubResource, "Kwetter tweet signalr hub")
-                // new(MediaApiScope, "Kwetter media API")
+                    Scopes = new[] { IdentityKeys.HubResource}
+                } 
             };
 
         public static IEnumerable<Client> Clients(UrlConfig uris) =>
@@ -74,8 +89,9 @@ namespace Kwetter.Services.Identity.Api
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.LocalApi.ScopeName,
                         IdentityKeys.TweetApiScope,
-                        IdentityKeys.TweetSignalRHubResource,
-                        IdentityKeys.MediaApiScope
+                        IdentityKeys.UserRelationsApiScope,
+                        IdentityKeys.MediaApiScope,
+                        IdentityKeys.HubResource
                     }
                 },
                 new()
@@ -85,8 +101,30 @@ namespace Kwetter.Services.Identity.Api
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes =
                     {
-                        IdentityServerConstants.LocalApi.ScopeName,
+                        IdentityKeys.IdentityLocalApiScope,
                         IdentityKeys.TweetApiScope,
+                        IdentityKeys.UserRelationsApiScope,
+                        IdentityKeys.MediaApiScope
+                    }
+                },
+                new()
+                {
+                    ClientId = "tweet.api",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        IdentityKeys.UserRelationsApiScope
+                    }
+                },
+                new()
+                {
+                    ClientId = "signalrhub",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        IdentityKeys.UserRelationsApiScope
                     }
                 },
                 /* new()

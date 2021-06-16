@@ -18,6 +18,7 @@ export default {
         message: this.message
       };
       this.createTweet(tweet);
+      this.message = "";
     }
   }
 };

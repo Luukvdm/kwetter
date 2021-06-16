@@ -5,6 +5,7 @@
         <RootNamespace>Kwetter.ApiGateways.WebSpa.Aggregator</RootNamespace>
         <AssemblyName>Kwetter.ApiGateways.WebSpa.Aggregator</AssemblyName>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,6 +16,7 @@
       <ProjectReference Include="..\..\BuildingBlocks\KwetterSwagger\KwetterSwagger.csproj" />
       <ProjectReference Include="..\..\Services\Identity\Identity.GrpcContracts\Identity.GrpcContracts.csproj" />
       <ProjectReference Include="..\..\Services\Tweet\Tweet.GrpcContracts\Tweet.GrpcContracts.csproj" />
+      <ProjectReference Include="..\..\Services\UserRelations\UserRelations.GrpcContracts\UserRelations.GrpcContracts.csproj" />
     </ItemGroup>
 
     <ItemGroup>

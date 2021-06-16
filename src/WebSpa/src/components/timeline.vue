@@ -1,6 +1,6 @@
 <script>
 import TweetList from "./tweetList.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -15,10 +15,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions("tweet", ["getTimeline"])
+    ...mapActions("tweet", ["getTimeline"]),
+    ...mapGetters("oidcStore", ["oidcUser"])
   },
   async mounted() {
-    this.timeline = await this.getTimeline(this.username);
+    let username = this.username;
+    if (!username) username = this.oidcUser().preferred_username;
+    this.timeline = await this.getTimeline(username);
   }
 };
 </script>

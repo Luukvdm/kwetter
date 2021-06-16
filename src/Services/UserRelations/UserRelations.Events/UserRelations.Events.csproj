@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Kwetter.Services.UserRelations.Events</RootNamespace>
+        <AssemblyName>Kwetter.Services.UserRelations.Events</AssemblyName>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../../../BuildingBlocks/EventBus/EventBus/EventBus.csproj" />
+    </ItemGroup>
+</Project>

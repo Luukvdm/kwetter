@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using Kwetter.BuildingBlocks.CQRS;
 using Kwetter.BuildingBlocks.EventBus.EventBus.Interfaces;
-using Kwetter.Services.Core.Tweet.Application.EventHandlers;
+using Kwetter.Services.Tweet.Application.EventHandlers;
 using Kwetter.Services.Tweet.Events.Events;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Kwetter.Services.Core.Tweet.Application
+namespace Kwetter.Services.Tweet.Application
 {
     public static class DependencyInjection
     {

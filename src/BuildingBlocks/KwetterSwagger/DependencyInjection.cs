@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using Kwetter.BuildingBlocks.Configurations.Models;
@@ -48,7 +49,7 @@ namespace Kwetter.BuildingBlocks.KwetterSwagger
                             {
                                 Reference = new OpenApiReference {Type = ReferenceType.SecurityScheme, Id = "oauth2"}
                             },
-                            configIdentity.RequiredPolicies
+                            new List<string>()
                         }
                     });
                 }

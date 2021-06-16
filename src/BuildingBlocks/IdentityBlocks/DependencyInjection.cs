@@ -8,6 +8,7 @@ using IdentityModel.AspNetCore.AccessTokenValidation;
 using IdentityModel.Client;
 using Kwetter.BuildingBlocks.Configurations.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +30,7 @@ namespace Kwetter.BuildingBlocks.IdentityBlocks
                                                    identityConfig.Authority.StartsWith("https");
 
                     // options.TokenValidationParameters.ValidateAudience = false;
-                    options.Audience = identityConfig.ClientId;
+                    options.Audience = identityConfig.RequiredAudience;
 
                     options.TokenValidationParameters.ValidTypes = new[] {"at+jwt"};
 
@@ -72,28 +73,33 @@ namespace Kwetter.BuildingBlocks.IdentityBlocks
 
             services.AddAuthorization(config =>
             {
-                config.AddPolicy("AuthStuff", policy =>
+                config.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                /* config.AddPolicy("AuthStuff", policy =>
                 {
                     policy.RequireAuthenticatedUser();
-                    policy.RequireClaim(ClaimTypes.Role);
-                    /* foreach (string scope in requiredScopes)
+                    // policy.RequireClaim(ClaimTypes.Role);
+                    foreach (string scope in requiredScopes)
                     {
                         policy.RequireClaim(scope);
-                    } */
-                });
+                    }
+                }); */
             });
 
             return services;
         }
 
         public static IServiceCollection AddKwetterAccessTokenManagement(this IServiceCollection services,
+            string clientName,
             IdentityConfig identityConfig, string[] scopes)
         {
+            services.AddScopeTransformation();
             services.AddAccessTokenManagement(options =>
             {
                 string strScopes = string.Join(' ', scopes);
 
-                options.Client.Clients.Add("default-client",
+                options.Client.Clients.Add(clientName,
                     new ClientCredentialsTokenRequest
                     {
                         Address = identityConfig.Authority + "/connect/token",
@@ -109,7 +115,7 @@ namespace Kwetter.BuildingBlocks.IdentityBlocks
         }
 
         public static IServiceCollection AddKwetterAuthorizedHttpClients(this IServiceCollection services, string name,
-            bool reuseClientToken, Action<HttpClient> configureClient)
+            string tokenClientName, bool reuseClientToken, Action<HttpClient> configureClient)
         {
             if (reuseClientToken)
             {
@@ -117,7 +123,7 @@ namespace Kwetter.BuildingBlocks.IdentityBlocks
             }
             else
             {
-                services.AddClientAccessTokenClient(name, configureClient: configureClient)
+                services.AddClientAccessTokenClient(name, tokenClientName, configureClient: configureClient)
                     .AddClientAccessTokenHandler();
             }
 

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Kwetter.ApiGateways.WebSpa.Aggregator.Models
 {
     public class Profile
@@ -20,6 +22,8 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Models
         public string BannerImage { get; set; } =
             "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Foptimizedude.com%2Fwp-content%2Fuploads%2F2015%2F02%2FCool-Twitter-Headers-5.jpg";
         public bool IsCurrentUser { get; set; }
+        public IList<User> Following { get; set; }
+        public IList<User> Followers { get; set; }
         public bool IsFollowing { get; set; }
     }
 }

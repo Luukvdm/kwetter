@@ -1,4 +1,4 @@
-import { get, me } from "@/api/profile.js";
+import { get, me, search } from "@/api/profile.js";
 
 export const state = {
   cachedProfiles: [],
@@ -33,6 +33,10 @@ export const actions = {
 
     const { data } = await me();
     commit("CACHE_MY_PROFILE", data);
+    return data;
+  },
+  async searchUsers(_, searchTerm) {
+    const { data } = await search(searchTerm);
     return data;
   }
 };

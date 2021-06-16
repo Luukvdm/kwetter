@@ -5,6 +5,7 @@
         <RootNamespace>Kwetter.Services.Tweet.Api</RootNamespace>
         <AssemblyName>Kwetter.Services.Tweet.Api</AssemblyName>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,5 +28,7 @@
         <ProjectReference Include="../../../../BuildingBlocks/KwetterLogger/KwetterLogger.csproj" />
         <ProjectReference Include="../../../../BuildingBlocks/KwetterSwagger/KwetterSwagger.csproj" />
         <ProjectReference Include="../../Tweet.GrpcContracts/Tweet.GrpcContracts.csproj" />
+        <ProjectReference Include="..\..\..\..\BuildingBlocks\KwetterGrpc\KwetterGrpc.csproj" />
+        <ProjectReference Include="..\..\..\UserRelations\UserRelations.GrpcContracts\UserRelations.GrpcContracts.csproj" />
     </ItemGroup>
 </Project>

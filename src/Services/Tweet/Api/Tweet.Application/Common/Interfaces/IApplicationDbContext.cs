@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Kwetter.Services.Tweet.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kwetter.Services.Core.Tweet.Application.Common.Interfaces
+namespace Kwetter.Services.Tweet.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {

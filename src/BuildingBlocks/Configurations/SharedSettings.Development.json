@@ -1,5 +1,6 @@
 {
   "Urls": {
+    "WebSpaClient": "http://localhost:8080",
     "ApiGateway": "http://localhost:5000",
     "WebSpaAggregator": "http://localhost:5002",
     "IdentityServerApi": "http://localhost:5001",
@@ -7,6 +8,7 @@
     "TweetApi": "http://localhost:5003",
     "TweetGrpc": "http://localhost:10043",
     "TweetHub": "http://localhost:5004",
-    "WebSpaClient": "http://localhost:8080"
+    "UserRelationsApi": "http://localhost:5005",
+    "UserRelationsGrpc": "http://localhost:10045"
   }
 }

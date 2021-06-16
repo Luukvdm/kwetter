@@ -6,7 +6,7 @@ using Kwetter.BuildingBlocks.Abstractions.Services;
 using Kwetter.Services.Tweet.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 
-namespace Kwetter.Services.Core.Tweet.Application.Commands.CreateTweetMessage
+namespace Kwetter.Services.Tweet.Application.Commands.CreateTweetMessage
 {
     public class CreateTweetMessageValidator : AbstractValidator<CreateTweetMessageCommand>
     {

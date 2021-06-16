@@ -7,6 +7,6 @@
     </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\BuildingBlocks\KwetterDomain\KwetterDomain.csproj" />
+    <ProjectReference Include="../../../../BuildingBlocks/KwetterDomain/KwetterDomain.csproj" />
   </ItemGroup>
 </Project>

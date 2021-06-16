@@ -80,7 +80,6 @@ services:
       - tweet-db
     depends_on:
       - rabbitmq
-      - tweet-hub
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - UseInMemoryDatabase=false
@@ -108,11 +107,47 @@ services:
       - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
       #- ./db-data/identity/:/var/lib/postgresql/data/
 
-  tweet-hub:
-    image: ${REGISTRY:-luukvdm}/kwetter-tweet-hub:${TAG:-latest}
+  userrelations-api:
+    image: ${REGISTRY:-luukvdm}/kwetter-userrelations-api:${TAG:-latest}
     build:
       context: .
-      dockerfile: Services/Tweet/Tweet.Hub/Dockerfile
+      dockerfile: Services/UserRelations/Api/UserRelations.Api/Dockerfile
+    depends_on:
+      - userrelations-db
+    depends_on:
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - UseInMemoryDatabase=false
+      - ConnectionStrings__DefaultConnection=Server=userrelations-db;Port=5432;Database=userrelations_db;Username=admin;Password=@Welkom1;
+      - EventBus__Username=admin
+      - EventBus__Password=@Welkom1
+      - EventBus__HostName=rabbitmq
+      - Identity__authority=http://identity-api
+
+  userrelations-db:
+    image: postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=userrelations_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
+
+  hub:
+    image: ${REGISTRY:-luukvdm}/kwetter-hub:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/SignalRHub/SignalRHub/Dockerfile
     depends_on:
       - rabbitmq
     environment:

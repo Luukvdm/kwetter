@@ -1,10 +1,11 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Kwetter" type="CompoundRunConfigurationType">
     <toRun name="Tweet.Api" type="LaunchSettings" />
+    <toRun name="UserRelations.Api" type="LaunchSettings" />
+    <toRun name="WebSpa.Aggregator" type="LaunchSettings" />
     <toRun name="Ocelotte" type="LaunchSettings" />
     <toRun name="Identity.Api" type="LaunchSettings" />
-    <toRun name="WebSpa.Aggregator" type="LaunchSettings" />
-    <toRun name="Tweet.Hub" type="LaunchSettings" />
+    <toRun name="SignalRHub" type="LaunchSettings" />
     <method v="2" />
   </configuration>
 </component>

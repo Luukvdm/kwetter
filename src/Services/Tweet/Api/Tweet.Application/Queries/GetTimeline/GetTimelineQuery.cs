@@ -3,17 +3,23 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using Kwetter.Services.Core.Tweet.Application.Common.Interfaces;
+using Kwetter.Services.Tweet.Application.Common.Interfaces;
 using Kwetter.Services.Tweet.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline
+namespace Kwetter.Services.Tweet.Application.Queries.GetTimeline
 {
     public class GetTimelineQuery : IRequest<IList<TweetMessage>>
     {
-        public GetTimelineQuery(string userId) => UserId = userId;
+        public GetTimelineQuery(string userId, IEnumerable<string> followedUserIds)
+        {
+            UserId = userId;
+            FollowedUserIds = followedUserIds;
+        }
+
         public string UserId { get; set; }
+        public IEnumerable<string> FollowedUserIds { get; set; }
     }
 
     public class GetTimelineQueryHandler : IRequestHandler<GetTimelineQuery, IList<TweetMessage>>
@@ -31,8 +37,7 @@ namespace Kwetter.Services.Core.Tweet.Application.Queries.GetTimeline
         {
             var tweets = await _context.TweetMessages
                 .Include(e => e.Likes)
-                // TODO also search for following persons tweets
-                .Where(e => e.CreatorId == request.UserId)
+                .Where(e => e.CreatorId == request.UserId || request.FollowedUserIds.Contains(e.CreatorId))
                 .OrderByDescending(e => e.PostTime)
                 .ToListAsync(cancellationToken);
 
