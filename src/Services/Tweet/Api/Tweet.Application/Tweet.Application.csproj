@@ -12,4 +12,8 @@
         <ProjectReference Include="..\..\..\..\BuildingBlocks\CQRS\CQRS.csproj" />
         <ProjectReference Include="../../Tweet.Events/Tweet.Events.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
+    </ItemGroup>
 </Project>
