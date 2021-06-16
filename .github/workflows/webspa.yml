@@ -46,13 +46,6 @@ jobs:
         registry: ${{ secrets.REGISTRY_HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-
-    - name: Set branch name as env variable
-      run: |
-        currentbranch=$(echo ${GITHUB_REF##*/})
-        echo "running on $currentbranch"
-        echo "BRANCH=$currentbranch" >> $GITHUB_ENV
-      shell: bash
       
     - name: Create env file
       working-directory: ./src/WebSpa
@@ -67,7 +60,6 @@ jobs:
       working-directory: ./src
       shell: bash
       env:
-        TAG: ${{ env.BRANCH }}
         REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
 
     - name: Compose push ${{ env.SERVICE }}
@@ -75,5 +67,4 @@ jobs:
       working-directory: ./src
       shell: bash
       env:
-        TAG: ${{ env.BRANCH }}
         REGISTRY: ${{ secrets.REGISTRY_ENDPOINT }}
