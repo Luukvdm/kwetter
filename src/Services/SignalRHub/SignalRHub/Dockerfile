@@ -39,6 +39,9 @@ COPY "Services/UserRelations/UserRelations.GrpcContracts/UserRelations.GrpcContr
 COPY "Services/Identity/Identity.Api/Identity.Api.csproj" "Services/Identity/Identity.Api/Identity.Api.csproj"
 COPY "Services/Identity/Identity.GrpcContracts/Identity.GrpcContracts.csproj" "Services/Identity/Identity.GrpcContracts/Identity.GrpcContracts.csproj"
 
+COPY "Services/SignalRHub/SignalRHub/SignalRHub.csproj" "Services/SignalRHub/SignalRHub/SignalRHub.csproj"
+COPY "Services/SignalRHub/GeneralEvents/GeneralEvents.csproj" "Services/SignalRHub/GeneralEvents/GeneralEvents.csproj"
+
 COPY "ApiGateways/MainGateway/MainGateway.csproj" "ApiGateways/MainGateway/MainGateway.csproj"
 COPY "ApiGateways/WebSpa.Aggregator/WebSpa.Aggregator.csproj" "ApiGateways/WebSpa.Aggregator/WebSpa.Aggregator.csproj"
 
@@ -47,7 +50,7 @@ COPY "docker-compose.dcproj" "docker-compose.dcproj"
 RUN dotnet restore "Kwetter.sln"
 
 COPY . .
-WORKDIR /src/Services/Tweet/Tweet.Hub
+WORKDIR /src/Services/SignalRHub/SignalRHub
 RUN dotnet build -c Release -o /app/build
 
 FROM build AS publish
@@ -56,4 +59,4 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Kwetter.Services.Tweet.Hub.dll"] 
+ENTRYPOINT ["dotnet", "Kwetter.Services.SignalRHub.SignalRHub.dll"] 
