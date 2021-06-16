@@ -19,7 +19,7 @@ namespace Kwetter.Services.Core.Tweet.Application.Commands.CreateTweetMessage
             RuleFor(e => e.Message).MustAsync(async (command, message, cancellationToken) =>
             {
                 var enabledSection = configuration.GetSection("ContentChecker:Enabled");
-                if (!enabledSection.Exists() || enabledSection.Value.ToLower() != "true") return true;
+                if (!enabledSection.Exists() && enabledSection.Value.ToLower() != "true") return true;
                 string url = configuration["ContentChecker:Url"];
                 var client = new HttpClient
                 {
