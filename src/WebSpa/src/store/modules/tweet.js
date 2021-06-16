@@ -1,6 +1,8 @@
 import { get, getTimeline, create, like } from "@/api/tweet.js";
 import { useToast } from "vue-toastification";
 
+import store from "@/store";
+
 const toast = useToast();
 
 export const state = {
@@ -24,12 +26,18 @@ export const mutations = {
     state.cachedTimelines.push(timeline);
   },
   CREATE_TWEET(state, tweet) {
-    const tl = state.cachedTimelines.find(
-      e => e.username === tweet.poster.username
-    );
+    const currentUser = store.getters["oidcStore/oidcUser"].preferred_username;
+    const myTl = state.cachedTimelines.find(e => e.username === currentUser);
+    if (myTl) myTl.tweets.unshift(tweet);
+
+    if (tweet.poster.username !== currentUser) {
+      const tl = state.cachedTimelines.find(
+        e => e.username === tweet.poster.username
+      );
+      if (tl) tl.tweets.unshift(tweet);
+    }
     console.log("Found this timeline to add created tweet to:");
-    console.log(tl);
-    if (tl) state.cachedTimelines[0].tweets.unshift(tweet);
+    console.log(myTl);
   }
 };
 

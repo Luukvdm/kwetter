@@ -25,9 +25,9 @@ namespace Kwetter.Services.Tweet.Api.GrpcServices
         public async ValueTask<IList<ContractTweetMessage>> GetTimeline(string userId)
         {
             var followingService = (await _grpcChannelService.CreateUserRelationsChannel()).CreateGrpcService<IFollowingService>();
-            var followers = await followingService.GetFollowers(userId);
+            var followed = await followingService.GetFollowed(userId);
 
-            var tweets = await _mediator.Send(new GetTimelineQuery(userId, followers));
+            var tweets = await _mediator.Send(new GetTimelineQuery(userId, followed));
             return tweets.Select(e => new ContractTweetMessage
             {
                 Id = e.Id,
