@@ -10,6 +10,8 @@ namespace Kwetter.Services.Tweet.Domain.Entities
 
         private TweetMessage()
         {
+            Likes = new List<Like>();
+            Tags = new List<Tag>();
         }
 
         public TweetMessage(string message, string creatorId, DateTime postTime) : this(message, creatorId, postTime,
@@ -32,10 +34,10 @@ namespace Kwetter.Services.Tweet.Domain.Entities
             Likes = likes;
         }
 
-        public string Message { get; }
-        public string CreatorId { get; set; }
-        public DateTime PostTime { get; }
-        public IList<Like> Likes { get; set; }
+        public string Message { get; private set; }
+        public string CreatorId { get; private set; }
+        public DateTime PostTime { get; private set; }
+        public IList<Like> Likes { get; private set; }
         public IList<Tag> Tags { get; private set; }
     }
 }

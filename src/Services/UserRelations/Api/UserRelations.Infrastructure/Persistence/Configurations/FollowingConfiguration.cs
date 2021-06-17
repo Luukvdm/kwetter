@@ -9,6 +9,10 @@ namespace Kwetter.Services.UserRelations.Infrastucture.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Following> builder)
         {
             builder.HasKey(e => e.Id);
+            builder.HasAlternateKey(e => new {e.FollowedUserId, e.FollowingUserId});
+
+            builder.HasIndex(e => e.FollowedUserId);
+            builder.HasIndex(e => e.FollowingUserId);
 
             builder.Ignore(e => e.DomainEvents);
         }
