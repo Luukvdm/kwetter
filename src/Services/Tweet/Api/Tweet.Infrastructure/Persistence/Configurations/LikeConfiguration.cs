@@ -9,6 +9,7 @@ namespace Kwetter.Services.Tweet.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Like> builder)
         {
             builder.HasKey(e => e.Id);
+            builder.HasIndex(e => e.UserId);
 
             builder.HasOne(e => e.TweetMessage)
                 .WithMany(m => m.Likes);

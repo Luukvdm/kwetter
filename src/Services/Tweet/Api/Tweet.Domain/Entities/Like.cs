@@ -5,6 +5,8 @@ namespace Kwetter.Services.Tweet.Domain.Entities
 {
     public class Like : BaseEntity
     {
+        private Like() { }
+
         public Like(string userId, DateTime postTime, int tweetMessageId)
         {
             UserId = userId;
@@ -19,9 +21,9 @@ namespace Kwetter.Services.Tweet.Domain.Entities
             TweetMessage = tweetMessage;
         }
 
-        public string UserId { get; set; }
-        public DateTime PostTime { get; set; }
-        public int TweetMessageId { get; set; }
-        public TweetMessage TweetMessage { get; set; }
+        public string UserId { get; private set; }
+        public DateTime PostTime { get; private set; }
+        public int TweetMessageId { get; private set; }
+        public TweetMessage TweetMessage { get; private set; }
     }
 }

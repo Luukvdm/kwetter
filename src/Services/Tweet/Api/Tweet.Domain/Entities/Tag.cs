@@ -18,7 +18,7 @@ namespace Kwetter.Services.Tweet.Domain.Entities
             Tweets = new List<TweetMessage>();
         }
 
-        public string Name { get; }
+        public string Name { get; private set; }
         public IList<TweetMessage> Tweets { get; private set; }
     }
 }

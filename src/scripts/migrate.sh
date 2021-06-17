@@ -15,6 +15,15 @@ migrate_tweet() {
 	--output-dir Persistence/Migrations
 }
 
+migrate_userrelations() {
+    local name="$1"
+
+    dotnet ef migrations add "$name" \
+	--project Services/UserRelations/Api/UserRelations.Infrastructure \
+	--startup-project Services/UserRelations/Api/UserRelations.Api \
+	--output-dir Persistence/Migrations
+}
+
 migrate_identity() {
     dotnet ef migrations add "$1" \
 	--context PersistedGrantDbContext  \
@@ -35,6 +44,6 @@ migrate_identity() {
 	--output-dir Infrastructure/Persistence/Migrations
 }
 
-migrate_identity "init-migration"
-# migrate_tweet "init-migration"
-
+# migrate_identity "init-migration"
+migrate_tweet "improvements"
+migrate_userrelations "init-migration"
