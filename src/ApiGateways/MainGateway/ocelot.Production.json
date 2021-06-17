@@ -5,7 +5,7 @@
       "DownstreamScheme": "ws",
       "DownstreamHostAndPorts": [
         {
-          "Host": "tweet-hub",
+          "Host": "hub",
           "Port": 80
         }
       ],
