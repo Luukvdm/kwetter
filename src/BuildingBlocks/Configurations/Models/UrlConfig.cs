@@ -13,5 +13,6 @@ namespace Kwetter.BuildingBlocks.Configurations.Models
         public string UserRelationsGrpc { get; set; }
         public string IdentityServerApi { get; set; }
         public string IdentityServerGrpc { get; set; }
+        public string Hub { get; set; }
     }
 }

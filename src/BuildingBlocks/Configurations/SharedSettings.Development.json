@@ -7,7 +7,7 @@
     "IdentityServerGrpc": "http://localhost:10041",
     "TweetApi": "http://localhost:5003",
     "TweetGrpc": "http://localhost:10043",
-    "TweetHub": "http://localhost:5004",
+    "Hub": "http://localhost:5004",
     "UserRelationsApi": "http://localhost:5005",
     "UserRelationsGrpc": "http://localhost:10045"
   }

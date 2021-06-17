@@ -6,7 +6,9 @@
     "IdentityServerGrpc": "http://identity-api:10041",
     "TweetApi": "http://tweet-api",
     "TweetGrpc": "http://tweet-api:10041",
-    "TweetHub": "http://tweet-hub",
-    "WebSpaClient": "http://localhost:8080"
+    "WebSpaClient": "http://localhost:8080",
+    "Hub": "http://hub",
+    "UserRelationsApi": "http://userrelations-api",
+    "UserRelationsGrpc": "http://userrelations-api:10045"
   }
 }
