@@ -9,7 +9,15 @@ export default {
     profilePicture: String,
     bannerImage: String,
     isCurrentUser: Boolean,
-    isFollowing: Boolean
+    isFollowing: Boolean,
+    followers: {
+      type: Array,
+      default: () => []
+    },
+    following: {
+      type: Array,
+      default: () => []
+    }
   },
   methods: {
     ...mapActions("userRelation", ["unFollowUser", "followUser"]),
@@ -47,6 +55,18 @@ export default {
       <div class="name-row row">
         <span class="display-name">{{ displayName }}</span>
         <span class="username">@{{ username }}</span>
+      </div>
+      <div class="follow-row row">
+        <div class="follow-box">
+          <span class="follow-amount">{{ following.length }}</span>
+          &nbsp;
+          <span class="follow-desc">Following</span>
+        </div>
+        <div class="follow-box">
+          <span class="follow-amount">{{ followers.length }}</span>
+          &nbsp;
+          <span class="follow-desc">Followers</span>
+        </div>
       </div>
     </div>
   </div>
@@ -88,12 +108,12 @@ export default {
 }
 
 .name-row .display-name {
-  color: var(--text-bright);
+  color: var(--text-color-bright);
   font-weight: 800;
   line-height: 24px;
 }
 .name-row .username {
-  color: var(--text-faded);
+  color: var(--text-color-faded);
   font-weight: 400;
   font-size: 15px;
   line-height: 20px;
@@ -124,5 +144,18 @@ export default {
 
   font-size: 15px;
   font-weight: 700;
+}
+
+.follow-box {
+  margin-right: 20px;
+}
+
+.follow-box .follow-amount {
+  font-weight: 700;
+  color: var(--text-color-bright);
+}
+
+.follow-box .follow-desc {
+  color: var(--text-color-faded);
 }
 </style>
