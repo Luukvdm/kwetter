@@ -44,6 +44,8 @@ export default {
       :bannerImage="profile.bannerImage"
       :isCurrentUser="profile.isCurrentUser"
       :isFollowing="profile.isFollowing"
+      :followers="profile.followers"
+      :following="profile.following"
     >
     </ProfileHeader>
     <Timeline :username="username" class="tweet-timeline" />
