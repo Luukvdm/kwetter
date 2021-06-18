@@ -1,0 +1,68 @@
+version: '3.4'
+
+services:
+  identity-api:
+    depends_on:
+      - db-follower
+    environment:
+      - ApplicationDb__UseInMemoryDatabase=false
+      - ConnectionStrings__ApplicationDbConnection=Server=db-follower;Port=5433;Database=identity_db;Username=yagubyte;Password=yagubyte;
+
+  tweet-api:
+    depends_on:
+      - db-follower
+    environment:
+      - UseInMemoryDatabase=false
+      - ConnectionStrings__DefaultConnection=Server=db-follower;Port=5433;Database=tweet_db;Username=yagubyte;Password=yagubyte;
+
+  userrelations-api:
+    depends_on:
+      - db-follower
+    environment:
+      - UseInMemoryDatabase=false
+      - ConnectionStrings__DefaultConnection=Server=db-follower;Port=5433;Database=userrelations_db;Username=yagubyte;Password=yagubyte;
+
+  db-leader:
+    image: yugabytedb/yugabyte:latest
+    container_name: kwetter_db_leader
+    #volumes:
+    #  - yb-master-data-1:/mnt/master
+    command: [ "/home/yugabyte/bin/yb-master",
+               "--fs_data_dirs=/mnt/master",
+               "--master_addresses=db-leader:7100",
+               "--rpc_bind_addresses=db-leader:7100",
+               "--server_broadcast_addresses=db-leader:7100",
+               "--leader_failure_max_missed_heartbeat_periods=10",
+               "--placement_region=luuk-desktop",
+               "--placement_cloud=cloud2"
+               "--placement_zone=desktop-1",
+               "--replication_factor=1", # Match with leaders 
+              ]
+    ports:
+      - "7000:7000"
+    environment:
+      - SERVICE_7000_NAME=db-leader
+
+  db-follower:
+    image: yugabytedb/yugabyte:latest
+    container_name: kwetter_db_follower
+    #volumes:
+    #  - yb-tserver-data-1:/mnt/tserver
+    command: [ "/home/yugabyte/bin/yb-tserver",
+                "--fs_data_dirs=/mnt/tserver",
+                "--start_pgsql_proxy",
+                "--rpc_bind_addresses=db-follower:9100",
+                "--tserver_master_addrs=db-leader:7100",
+                "--leader_failure_max_missed_heartbeat_periods=10",
+                "--placement_region=luuk-desktop",
+                "--placement_cloud=cloud2",
+                "--placement_zone=desktop-1" ]
+    ports:
+      - "9000:9000"
+    environment:
+      - SERVICE_5433_NAME=ysql
+      - SERVICE_9042_NAME=ycql
+      - SERVICE_6379_NAME=yedis
+      - SERVICE_9000_NAME=db-follower
+    depends_on:
+      - db-leader

@@ -1,24 +1,44 @@
 version: '3.4'
 
-# services:
+services:
+  rabbitmq:
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=@Welkom1
+    ports:
+      - 5672:5672
+      - 15672:15672
 
-    
+  main-gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+  
+  webspa-agg:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - Identity__authority=http://identity-api
 
-  # webui:
-  #   environment:
-  #     - "ASPNETCORE_ENVIRONMENT=Development"
-  #     - "SpaBaseUrl=http://clientapp:4200"
+  identity-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - URL_BASE=http://localhost:5001
+      - Urls__WebSpaClient=http://localhost:8080
 
-  # clientapp:
-  #   image: ${DOCKER_REGISTRY-}clientapp
-  #   build:
-  #     context: src/WebUI/ClientApp
-  #     dockerfile: Dockerfile
-  #   depends_on:
-  #     - webui
-  #   restart: on-failure
+  tweet-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Identity__authority=http://identity-api
 
-  # db:
-  #   ports:
-  #     - "1433:1433"
+  userrelations-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Identity__authority=http://identity-api
+
+  hub:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - Identity__authority=http://identity-api
 

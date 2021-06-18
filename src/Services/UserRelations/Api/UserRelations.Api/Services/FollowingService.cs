@@ -8,9 +8,11 @@ using Kwetter.Services.UserRelations.Application.Queries.GetFollowers;
 using Kwetter.Services.UserRelations.Events.Events;
 using Kwetter.Services.UserRelations.GrpcContracts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Kwetter.Services.UserRelations.Api.Services
 {
+    [Authorize]
     public class FollowingService : IFollowingService
     {
         private readonly IEventBus _eventBus;
