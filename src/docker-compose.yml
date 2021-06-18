@@ -3,168 +3,86 @@ version: '3.4'
 services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    ports:
-      - 5672:5672
-      - 15672:15672
+    container_name: kwetter_rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=@Welkom1
-
-  main-gateway:
-    image: ${REGISTRY:-luukvdm}/kwetter-main-gateway:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: ApiGateways/MainGateway/Dockerfile
-    depends_on:
-      - webspa-agg
-      - identity-api
-    ports:
-      - "5000:80"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://0.0.0.0:80
-
-  webspa-agg:
-    image: ${REGISTRY:-luukvdm}/kwetter-webspa-agg:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: ApiGateways/WebSpa.Aggregator/Dockerfile
-    depends_on:
-      - identity-api
-      - tweet-api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://0.0.0.0:80
-      - Identity__authority=http://identity-api
-
-  identity-api:
-    image: ${REGISTRY:-luukvdm}/kwetter-identity-api:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: Services/Identity/Identity.Api/Dockerfile
-    depends_on:
-      - identity-db
-    ports:
-      - "5001:80"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ApplicationDb__UseInMemoryDatabase=false
-      - ConnectionStrings__ApplicationDbConnection=Server=identity-db;Port=5432;Database=identity_db;Username=admin;Password=@Welkom1;
-      - URL_BASE=http://localhost:5001
-      - Urls__WebSpaClient=http://localhost:8080
-
-  identity-db:
-    image: postgres
-    restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=@Welkom1
-      - APP_DB_USER=admin
-      - APP_DB_PASS=@Welkom1
-      - APP_DB_NAME=identity_db
-    volumes:
-      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
-      #- ./db-data/identity/:/var/lib/postgresql/data/
-
-  tweet-api:
-    image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: Services/Tweet/Api/Tweet.Api/Dockerfile
-    depends_on:
-      - tweet-db
-    depends_on:
-      - rabbitmq
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - UseInMemoryDatabase=false
-      - ConnectionStrings__DefaultConnection=Server=tweet-db;Port=5432;Database=tweet_db;Username=admin;Password=@Welkom1;
-      - EventBus__Username=admin
-      - EventBus__Password=@Welkom1
-      - EventBus__HostName=rabbitmq
-      - Identity__authority=http://identity-api
-
-  tweet-db:
-    image: postgres
-    restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=@Welkom1
-      - APP_DB_USER=admin
-      - APP_DB_PASS=@Welkom1
-      - APP_DB_NAME=tweet_db
-    volumes:
-      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
-      #- ./db-data/identity/:/var/lib/postgresql/data/
-
-  userrelations-api:
-    image: ${REGISTRY:-luukvdm}/kwetter-userrelations-api:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: Services/UserRelations/Api/UserRelations.Api/Dockerfile
-    depends_on:
-      - userrelations-db
-    depends_on:
-      - rabbitmq
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - UseInMemoryDatabase=false
-      - ConnectionStrings__DefaultConnection=Server=userrelations-db;Port=5432;Database=userrelations_db;Username=admin;Password=@Welkom1;
-      - EventBus__Username=admin
-      - EventBus__Password=@Welkom1
-      - EventBus__HostName=rabbitmq
-      - Identity__authority=http://identity-api
-
-  userrelations-db:
-    image: postgres
-    restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
-      timeout: 45s
-      interval: 10s
-      retries: 10
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=@Welkom1
-      - APP_DB_USER=admin
-      - APP_DB_PASS=@Welkom1
-      - APP_DB_NAME=userrelations_db
-    volumes:
-      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
-      #- ./db-data/identity/:/var/lib/postgresql/data/
 
   hub:
     image: ${REGISTRY:-luukvdm}/kwetter-hub:${TAG:-latest}
     build:
       context: .
       dockerfile: Services/SignalRHub/SignalRHub/Dockerfile
+    container_name: kwetter_hub
     depends_on:
       - rabbitmq
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://0.0.0.0:80
-      - EventBus__Username=admin
-      - EventBus__Password=@Welkom1
-      - EventBus__HostName=rabbitmq
-      - Identity__authority=http://identity-api
 
   webspa:
     image: ${REGISTRY:-luukvdm}/kwetter-webspa:${TAG:-latest}
     build:
       context: .
       dockerfile: WebSpa/Dockerfile
+    container_name: kwetter_webspa
     depends_on:
       - webspa-agg
       - main-gateway
+        #ports:
+        #- "8080:80"
+
+  main-gateway:
+    image: ${REGISTRY:-luukvdm}/kwetter-main-gateway:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/MainGateway/Dockerfile
+    container_name: kwetter_gateway
+    depends_on:
+      - webspa-agg
+      - identity-api
     ports:
-      - "8080:80"
+      - "5000:80"
+
+  webspa-agg:
+    image: ${REGISTRY:-luukvdm}/kwetter-webspa-agg:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/WebSpa.Aggregator/Dockerfile
+    container_name: kwetter_webspa_agg
+    depends_on:
+      - identity-api
+      - tweet-api
+
+  identity-api:
+    image: ${REGISTRY:-luukvdm}/kwetter-identity-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Identity/Identity.Api/Dockerfile
+    container_name: kwetter_identity_api
+    ports:
+      - "5001:80"
+
+  tweet-api:
+    image: ${REGISTRY:-luukvdm}/kwetter-tweet-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Tweet/Api/Tweet.Api/Dockerfile
+    container_name: kwetter_tweet_api
+    depends_on:
+      - rabbitmq
+    environment:
+      - EventBus__Username=admin
+      - EventBus__Password=@Welkom1
+      - EventBus__HostName=rabbitmq
+
+  userrelations-api:
+    image: ${REGISTRY:-luukvdm}/kwetter-userrelations-api:${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/UserRelations/Api/UserRelations.Api/Dockerfile
+    container_name: kwetter_userrelations_api
+    depends_on:
+      - rabbitmq
+    environment:
+      - EventBus__Username=admin
+      - EventBus__Password=@Welkom1
+      - EventBus__HostName=rabbitmq
+

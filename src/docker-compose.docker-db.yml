@@ -1,0 +1,81 @@
+version: '3.4'
+
+services:
+  identity-api:
+    depends_on:
+      - identity-db
+    environment:
+      - ApplicationDb__UseInMemoryDatabase=false
+      - ConnectionStrings__ApplicationDbConnection=Server=identity-db;Port=5432;Database=identity_db;Username=admin;Password=@Welkom1;
+
+  identity-db:
+    image: postgres
+    container_name: kwetter_identity_db
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=identity_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
+
+  tweet-api:
+    depends_on:
+      - tweet-db
+    environment:
+      - UseInMemoryDatabase=false
+      - ConnectionStrings__DefaultConnection=Server=tweet-db;Port=5432;Database=tweet_db;Username=admin;Password=@Welkom1;
+
+  tweet-db:
+    image: postgres
+    container_name: kwetter_tweet_db
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=tweet_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
+
+  userrelations-api:
+    depends_on:
+      - userrelations-db
+    environment:
+      - UseInMemoryDatabase=false
+      - ConnectionStrings__DefaultConnection=Server=userrelations-db;Port=5432;Database=userrelations_db;Username=admin;Password=@Welkom1;
+
+  userrelations-db:
+    image: postgres
+    container_name: kwetter_userrelations_db
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=@Welkom1
+      - APP_DB_USER=admin
+      - APP_DB_PASS=@Welkom1
+      - APP_DB_NAME=userrelations_db
+    volumes:
+      - ./scripts/postgres-init.sh:/docker-entrypoint-initdb.d/01-init.sh
+      #- ./db-data/identity/:/var/lib/postgresql/data/
+

@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Include="docker-compose.yml" />
     <None Include="docker-compose.override.yml" />
+    <None Include="docker-compose.dist-db.yml" />
+    <None Include="docker-compose.docker-db.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
 </Project>
