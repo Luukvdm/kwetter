@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-hub
+  namespace: kwetter
+  labels:
+    app: hub
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: hub
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hub
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: hub
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hub
+    spec:
+      containers:
+        - name: hub
+          image: luukvdm/kwetter-hub
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: EventBus__HostName
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: eventbus_hostname
+            - name: Urls__ApiGateway
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_apigateway
+            - name: Urls__WebSpaAggregator
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_aggregator
+            - name: Urls__WebSpaClient
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_client
+            - name: Urls__IdentityServerApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_api
+            - name: Urls__IdentityServerGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_grpc
+            - name: Urls__TweetApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_api
+            - name: Urls__TweetGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_grpc
+            - name: Urls__Hub
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_hub
+            - name: Urls__UserRelationsApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_api
+            - name: Urls__UserRelationsGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_grpc

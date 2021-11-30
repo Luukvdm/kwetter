@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-webspa-agg
+  namespace: kwetter
+  labels:
+    app: webspa-agg
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: webspa-agg
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webspa-agg
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: webspa-agg
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webspa-agg
+    spec:
+      containers:
+        - name: webspa-agg
+          image: luukvdm/kwetter-webspa-agg
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: Urls__ApiGateway
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_apigateway
+            - name: Urls__WebSpaAggregator
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_aggregator
+            - name: Urls__WebSpaClient
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_client
+            - name: Urls__IdentityServerApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_api
+            - name: Urls__IdentityServerGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_grpc
+            - name: Urls__TweetApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_api
+            - name: Urls__TweetGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_grpc
+            - name: Urls__Hub
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_hub
+            - name: Urls__UserRelationsApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_api
+            - name: Urls__UserRelationsGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_grpc
+

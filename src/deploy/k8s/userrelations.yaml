@@ -1,0 +1,152 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-urelations-api
+  namespace: kwetter
+  labels:
+    app: urelations-api
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: urelations-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urelations-api
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: urelations-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: urelations-api
+    spec:
+      containers:
+        - name: urelations-api
+          image: luukvdm/kwetter-userrelations-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: ApplicationDb__UseInMemoryDatabase
+              value: "false"
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=svc-urelations-db;Port=5432;Database=urelations_db;Username=admin;Password=@Welkom1;"
+            - name: EventBus__HostName
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: eventbus_hostname
+            - name: Urls__ApiGateway
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_apigateway
+            - name: Urls__WebSpaAggregator
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_aggregator
+            - name: Urls__WebSpaClient
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_client
+            - name: Urls__IdentityServerApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_api
+            - name: Urls__IdentityServerGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_grpc
+            - name: Urls__TweetApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_api
+            - name: Urls__TweetGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_grpc
+            - name: Urls__Hub
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_hub
+            - name: Urls__UserRelationsApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_api
+            - name: Urls__UserRelationsGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_grpc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urelations-db
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: urelations-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: urelations-db
+    spec:
+      containers:
+        - name: urelations-db
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "root"
+            - name: POSTGRES_PASSWORD
+              value: "@Welkom1"
+            - name: APP_DB_USER
+              value: "admin"
+            - name: APP_DB_PASS
+              value: "@Welkom1"
+            - name: APP_DB_NAME
+              value: "urelations_db"
+          volumeMounts:
+            - name: sqlscript
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: sqlscript
+          configMap:
+            name: pg-init-script
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-urelations-db
+  namespace: kwetter
+  labels:
+    app: urelations-db
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+  selector:
+    app: urelations-db
+
