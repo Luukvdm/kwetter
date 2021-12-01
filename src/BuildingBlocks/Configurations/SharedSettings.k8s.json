@@ -8,7 +8,7 @@
     "TweetGrpc": "http://svc-tweet-api:10041",
     "WebSpaClient": "http://kwetter.test",
     "Hub": "http://svc-hub",
-    "UserRelationsApi": "http://svc-userrelations-api",
-    "UserRelationsGrpc": "http://svc-userrelations-api:10041"
+    "UserRelationsApi": "http://svc-urelations-api",
+    "UserRelationsGrpc": "http://svc-urelations-api:10041"
   }
 }
