@@ -1,0 +1,125 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: kwetter
+---
+apiVersion: v1
+data:
+  01-init.sh: |-
+    #!/bin/bash
+    set -e
+    export PGPASSWORD=$POSTGRES_PASSWORD;
+    psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+      CREATE USER $APP_DB_USER WITH PASSWORD '$APP_DB_PASS';
+      CREATE DATABASE $APP_DB_NAME;
+      GRANT ALL PRIVILEGES ON DATABASE $APP_DB_NAME TO $APP_DB_USER;
+    EOSQL
+kind: ConfigMap
+metadata:
+  name: pg-init-script
+  namespace: kwetter
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shared-settings
+  namespace: kwetter
+data:
+  urls_apigateway: "http://svc-main-gateway"
+  urls_webspa_aggregator: "http://svc-webspa-agg"
+  urls_webspa_client: "https://kwetter.test"
+  urls_ids_api: "http://svc-identity-api"
+  urls_ids_grpc: "http://svc-identity-api:10041"
+  urls_tweet_api: "http://svc-tweet-api"
+  urls_tweet_grpc: "http://svc-tweet-api:10041"
+  urls_hub: "http://svc-hub"
+  urls_userrelations_api: "http://svc-urelations-api"
+  urls_userrelations_grpc: "http://svc-urelations-api:10041"
+  eventbus_hostname: "svc-eventbus"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kwetter-ingress
+  namespace: kwetter
+spec:
+  rules:
+  - host: ids.kwetter.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: svc-identity-api
+            port:
+              number: 80
+  - host: api.kwetter.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: svc-main-gateway
+            port:
+              number: 80
+  - host: kwetter.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: svc-webspa
+            port:
+              number: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-eventbus
+  namespace: kwetter
+  labels:
+    app: rabbitmq
+spec:
+  type: NodePort
+  ports:
+    - name: client-port
+      port: 5672
+      protocol: TCP
+      targetPort: 5672
+    - name: man-port
+      port: 15672
+      protocol: TCP
+      targetPort: 15672
+  selector:
+    app: rabbitmq
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: rabbitmq
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+        - name: rabbitmq
+          image: rabbitmq:3-management-alpine
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5672
+          env:
+            - name: "RABBITMQ_DEFAULT_USER"
+              value: "admin"
+            - name: "RABBITMQ_DEFAULT_PASS"
+              value: "@Welkom1"
+

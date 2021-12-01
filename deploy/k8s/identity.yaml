@@ -1,0 +1,189 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-identity-api
+  namespace: kwetter
+  labels:
+    app: identity-api
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    - name: grpc
+      port: 10041
+      protocol: TCP
+      targetPort: 10041
+  selector:
+    app: identity-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-api
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: identity-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: identity-api
+    spec:
+      containers:
+        - name: identity-api
+          image: luukvdm/kwetter-identity-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "k8s"
+            - name: "URL_BASE"
+              value: "http://ids.kwetter.test"
+            - name: ApplicationDb__UseInMemoryDatabase
+              value: "false"
+            - name: ConnectionStrings__ApplicationDbConnection
+              value: "Server=svc-identity-db;Port=5432;Database=identity_db;Username=admin;Password=@Welkom1;"
+            - name: Urls__ApiGateway
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_apigateway
+            - name: Urls__WebSpaAggregator
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_aggregator
+            - name: Urls__WebSpaClient
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_webspa_client
+            - name: Urls__IdentityServerApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_api
+            - name: Urls__IdentityServerGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_ids_grpc
+            - name: Urls__TweetApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_api
+            - name: Urls__TweetGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_tweet_grpc
+            - name: Urls__Hub
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_hub
+            - name: Urls__UserRelationsApi
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_api
+            - name: Urls__UserRelationsGrpc
+              valueFrom:
+                configMapKeyRef:
+                  name: shared-settings
+                  key: urls_userrelations_grpc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-db
+  namespace: kwetter
+spec:
+  selector:
+    matchLabels:
+      app: identity-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: identity-db
+    spec:
+      containers:
+        - name: identity-db
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "root"
+            - name: POSTGRES_PASSWORD
+              value: "@Welkom1"
+            - name: APP_DB_USER
+              value: "admin"
+            - name: APP_DB_PASS
+              value: "@Welkom1"
+            - name: APP_DB_NAME
+              value: "identity_db"
+          volumeMounts:
+            - name: sqlscript
+              mountPath: /docker-entrypoint-initdb.d
+            #- name: identity-db-storage
+            #  mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: sqlscript
+          configMap:
+            name: pg-init-script
+        #- name: identity-db-storage
+        #  persistentVolumeClaim:
+        #    claimName: postgres-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-identity-db
+  namespace: kwetter
+  labels:
+    app: identity-db
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+  selector:
+    app: identity-db
+---
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: postgres-pv-volume
+#  namespace: kwetter
+#  labels:
+#    type: local
+#spec:
+#  storageClassName: manual
+#  capacity:
+#    storage: 1Gi
+#  accessModes:
+#    - ReadWriteOnce
+#  hostPath:
+#    path: "/mnt/data"
+---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: postgres-pv-claim
+#  namespace: kwetter
+#spec:
+#  storageClassName: manual
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi
+
