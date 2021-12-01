@@ -54,7 +54,7 @@
         {
           "Name": "WebSpa",
           "Version": "v1",
-          "Url": "http://webspa-agg/swagger/v1/swagger.json"
+          "Url": "http://svc-webspa-agg/swagger/v1/swagger.json"
         }
       ]
     }
