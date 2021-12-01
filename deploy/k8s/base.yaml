@@ -25,16 +25,16 @@ metadata:
   name: shared-settings
   namespace: kwetter
 data:
-  urls_apigateway: "http://main-gateway"
-  urls_webspa_aggregator: "http://webspa-agg"
-  urls_webspa_client: "https://kwetter.local"
-  urls_ids_api: "http://identity-api"
-  urls_ids_grpc: "http://identity-api:10041"
-  urls_tweet_api: "http://tweet-api"
-  urls_tweet_grpc: "http://tweet-api:10041"
-  urls_hub: "http://hub"
-  urls_userrelations_api: "http://userrelations-api"
-  urls_userrelations_grpc: "http://userrelations-api:10041"
+  urls_apigateway: "http://svc-main-gateway"
+  urls_webspa_aggregator: "http://svc-webspa-agg"
+  urls_webspa_client: "https://kwetter.test"
+  urls_ids_api: "http://svc-identity-api"
+  urls_ids_grpc: "http://svc-identity-api:10041"
+  urls_tweet_api: "http://svc-tweet-api"
+  urls_tweet_grpc: "http://svc-tweet-api:10041"
+  urls_hub: "http://svc-hub"
+  urls_userrelations_api: "http://svc-urelations-api"
+  urls_userrelations_grpc: "http://svc-urelations-api:10041"
   eventbus_hostname: "svc-eventbus"
 ---
 apiVersion: networking.k8s.io/v1
@@ -44,7 +44,7 @@ metadata:
   namespace: kwetter
 spec:
   rules:
-  - host: ids.kwetter.local
+  - host: ids.kwetter.test
     http:
       paths:
       - pathType: Prefix
@@ -54,7 +54,7 @@ spec:
             name: svc-identity-api
             port:
               number: 80
-  - host: api.kwetter.local
+  - host: api.kwetter.test
     http:
       paths:
       - pathType: Prefix
@@ -64,7 +64,7 @@ spec:
             name: svc-main-gateway
             port:
               number: 80
-  - host: kwetter.local
+  - host: kwetter.test
     http:
       paths:
       - pathType: Prefix

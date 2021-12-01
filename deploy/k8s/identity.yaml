@@ -6,12 +6,16 @@ metadata:
   labels:
     app: identity-api
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: http
       port: 80
       protocol: TCP
       targetPort: 80
+    - name: grpc
+      port: 10041
+      protocol: TCP
+      targetPort: 10041
   selector:
     app: identity-api
 ---
@@ -37,6 +41,10 @@ spec:
           ports:
             - containerPort: 80
           env:
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "k8s"
+            - name: "URL_BASE"
+              value: "http://ids.kwetter.test"
             - name: ApplicationDb__UseInMemoryDatabase
               value: "false"
             - name: ConnectionStrings__ApplicationDbConnection

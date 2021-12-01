@@ -1,47 +1,47 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-hub
+  name: svc-main-gateway
   namespace: kwetter
   labels:
-    app: hub
+    app: main-gateway
+      # oapi_doc: "/swagger/docs/v1/WebSpa"
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: http
       port: 80
       protocol: TCP
       targetPort: 80
   selector:
-    app: hub
+    app: main-gateway
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hub
+  name: main-gateway
   namespace: kwetter
 spec:
   selector:
     matchLabels:
-      app: hub
+      app: main-gateway
   replicas: 1
   template:
     metadata:
       labels:
-        app: hub
+        app: main-gateway
     spec:
       containers:
-        - name: hub
-          image: luukvdm/kwetter-hub
+        - name: main-gateway
+          image: luukvdm/kwetter-main-gateway
           imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
-            - name: EventBus__HostName
-              valueFrom:
-                configMapKeyRef:
-                  name: shared-settings
-                  key: eventbus_hostname
+            - name: "ASPNETCORE_ENVIRONMENT"
+              value: "k8s"
+            - name: "ASPNETCORE_URLS"
+              value: "http://0.0.0.0:80"
             - name: Urls__ApiGateway
               valueFrom:
                 configMapKeyRef:
@@ -92,3 +92,4 @@ spec:
                 configMapKeyRef:
                   name: shared-settings
                   key: urls_userrelations_grpc
+

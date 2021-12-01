@@ -6,12 +6,16 @@ metadata:
   labels:
     app: urelations-api
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: http
       port: 80
       protocol: TCP
       targetPort: 80
+    - name: grpc
+      port: 10041
+      protocol: TCP
+      targetPort: 10041
   selector:
     app: urelations-api
 ---
@@ -36,7 +40,14 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
+            - containerPort: 10041
           env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "k8s"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: Identity__authority
+              value: "http://ids.kwetter.test"
             - name: ApplicationDb__UseInMemoryDatabase
               value: "false"
             - name: ConnectionStrings__DefaultConnection

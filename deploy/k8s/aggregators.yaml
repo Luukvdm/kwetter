@@ -1,51 +1,48 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-tweet-api
+  name: svc-webspa-agg
   namespace: kwetter
   labels:
-    app: tweet-api
+    app: webspa-agg
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: http
       port: 80
       protocol: TCP
       targetPort: 80
   selector:
-    app: tweet-api
+    app: webspa-agg
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tweet-api
+  name: webspa-agg
   namespace: kwetter
 spec:
   selector:
     matchLabels:
-      app: tweet-api
+      app: webspa-agg
   replicas: 1
   template:
     metadata:
       labels:
-        app: tweet-api
+        app: webspa-agg
     spec:
       containers:
-        - name: tweet-api
-          image: luukvdm/kwetter-tweet-api
+        - name: webspa-agg
+          image: luukvdm/kwetter-webspa-agg
           imagePullPolicy: Always
           ports:
             - containerPort: 80
           env:
-            - name: ApplicationDb__UseInMemoryDatabase
-              value: "false"
-            - name: ConnectionStrings__DefaultConnection
-              value: "Server=svc-tweet-db;Port=5432;Database=tweet_db;Username=admin;Password=@Welkom1;"
-            - name: EventBus__HostName
-              valueFrom:
-                configMapKeyRef:
-                  name: shared-settings
-                  key: eventbus_hostname
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "k8s"
+            - name: ASPNETCORE_URLS
+              value: "http://0.0.0.0:80"
+            - name: Identity__authority
+              value: "http://ids.kwetter.test"
             - name: Urls__ApiGateway
               valueFrom:
                 configMapKeyRef:
@@ -96,56 +93,4 @@ spec:
                 configMapKeyRef:
                   name: shared-settings
                   key: urls_userrelations_grpc
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: tweet-db
-  namespace: kwetter
-spec:
-  selector:
-    matchLabels:
-      app: tweet-db
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: tweet-db
-    spec:
-      containers:
-        - name: tweet-db
-          image: postgres
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: "root"
-            - name: POSTGRES_PASSWORD
-              value: "@Welkom1"
-            - name: APP_DB_USER
-              value: "admin"
-            - name: APP_DB_PASS
-              value: "@Welkom1"
-            - name: APP_DB_NAME
-              value: "tweet_db"
-          volumeMounts:
-            - name: sqlscript
-              mountPath: /docker-entrypoint-initdb.d
-      volumes:
-        - name: sqlscript
-          configMap:
-            name: pg-init-script
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: svc-tweet-db
-  namespace: kwetter
-  labels:
-    app: tweet-db
-spec:
-  type: ClusterIP
-  ports:
-  - port: 5432
-  selector:
-    app: tweet-db
+
