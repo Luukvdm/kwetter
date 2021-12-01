@@ -9,6 +9,6 @@
     "WebSpaClient": "http://localhost:8080",
     "Hub": "http://hub",
     "UserRelationsApi": "http://userrelations-api",
-    "UserRelationsGrpc": "http://userrelations-api:10045"
+    "UserRelationsGrpc": "http://userrelations-api:10041"
   }
 }
