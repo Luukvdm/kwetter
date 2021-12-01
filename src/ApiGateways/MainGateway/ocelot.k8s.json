@@ -1,0 +1,62 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/hub/{catchAll}",
+      "DownstreamScheme": "ws",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "svc-hub",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/hub/tweet/{catchAll}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 10
+    },
+    {
+      "DownstreamPathTemplate": "/identity/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "svc-identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/identity/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 10
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "svc-webspa-agg",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/web/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "SwaggerKey": "WebSpa",
+      "Priority": 1
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "WebSpa",
+      "Config": [
+        {
+          "Name": "WebSpa",
+          "Version": "v1",
+          "Url": "http://webspa-agg/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
