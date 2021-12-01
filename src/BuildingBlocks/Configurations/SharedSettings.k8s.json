@@ -1,0 +1,14 @@
+{
+  "Urls": {
+    "ApiGateway": "http://svc-main-gateway",
+    "WebSpaAggregator": "http://svc-webspa-agg",
+    "IdentityServerApi": "http://svc-identity-api",
+    "IdentityServerGrpc": "http://svc-identity-api:10041",
+    "TweetApi": "http://svc-tweet-api",
+    "TweetGrpc": "http://svc-tweet-api:10041",
+    "WebSpaClient": "http://kwetter.local",
+    "Hub": "http://svc-hub",
+    "UserRelationsApi": "http://svc-userrelations-api",
+    "UserRelationsGrpc": "http://svc-userrelations-api:10041"
+  }
+}
