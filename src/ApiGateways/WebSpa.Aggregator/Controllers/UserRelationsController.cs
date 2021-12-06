@@ -26,7 +26,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Controllers
         /// </summary>
         /// <param name="userId">The user you want to follow</param>
         [HttpPost("follow/{userId}")]
-        [ProducesResponseType(Status201Created)]
+        [ProducesResponseType(Status200OK)]
         public async Task Follow([FromRoute] string userId)
         {
             await _followingService.CreateFollowing(_currentUser.UserId, userId);
@@ -37,7 +37,7 @@ namespace Kwetter.ApiGateways.WebSpa.Aggregator.Controllers
         /// </summary>
         /// <param name="userId">The user you want to unfollow</param>
         [HttpPost("unfollow/{userId}")]
-        [ProducesResponseType(Status201Created)]
+        [ProducesResponseType(Status200OK)]
         public async Task UnFollow([FromRoute] string userId)
         {
             await _followingService.RemoveFollowing(_currentUser.UserId, userId);
