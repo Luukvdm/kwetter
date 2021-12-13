@@ -33,11 +33,11 @@ namespace Kwetter.BuildingBlocks.KwetterSwagger
                         Type = SecuritySchemeType.OAuth2,
                         Flows = new OpenApiOAuthFlows
                         {
-                            AuthorizationCode = new OpenApiOAuthFlow
+                            ClientCredentials = new OpenApiOAuthFlow
                             {
                                 AuthorizationUrl = new Uri($"{configIdentity.Authority}/connect/authorize"),
                                 TokenUrl = new Uri($"{configIdentity.Authority}/connect/token"),
-                                Scopes = configIdentity.Scopes
+                                Scopes = new Dictionary<string, string> { {"IdentityServerApi", ""}, {"tweet.api", ""}, {"userrelations.api", ""}, {"media.api",""} , {"hub", ""} }
                             }
                         }
                     });

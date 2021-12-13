@@ -142,6 +142,21 @@ namespace Kwetter.Services.Identity.Api
                         IdentityServerConstants.StandardScopes.Profile,
                     }
                 }, */
+                new()
+                {
+                    ClientId = "fuzz-client",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes =
+                    {
+                        // IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.LocalApi.ScopeName,
+                        IdentityKeys.TweetApiScope,
+                        IdentityKeys.UserRelationsApiScope,
+                        IdentityKeys.MediaApiScope,
+                        IdentityKeys.HubResource
+                    }
+                }
             };
     }
 }
